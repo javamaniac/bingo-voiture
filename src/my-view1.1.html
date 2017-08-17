@@ -1,0 +1,145 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view1">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      label {
+        font-size: 2em;
+      }
+      input[type=checkbox]:checked ~ label {
+        opacity: 0.2;
+        /* background: red; */
+      }
+
+      .case {
+        /* padding: 10px; */
+        border: 1px solid black;
+    display: block;
+    /* width: 25%; */
+    /* margin: auto; */
+    height: inherit;      
+        background: #9cbfb3;      
+      }
+
+.parent {
+  display: flex;
+  height: 300px; /* Or whatever */
+  flex-flow: row wrap;
+}
+
+.child {
+  width: 18%;  /* Or whatever */
+  height: 100px; /* Or whatever */
+  margin: auto;  /* Magic! */
+  border: 1px solid black;
+}      
+
+      
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+   /* For mobile, it's typically better to position checkbox on top of clickable
+      area and turn opacity to 0 instead. */
+}      
+
+iron-icon {
+    --iron-icon-height: 100px;
+    --iron-icon-width: 100px;
+}
+
+*.unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}      
+    </style>
+
+    <div class="card unselectable">
+       <!-- <div class="circle">1</div>  -->
+      <!-- <h1>Bingo voiture</h1> -->
+
+      <div class="parent">
+        <span class="child">
+          <label class="case">B</label>
+        </span>
+        <span class="child">
+          <label class="case">I</label>
+        </span>
+        <span class="child">
+          <label class="case">N</label>
+        </span>
+        <span class="child">
+          <label class="case">G</label>
+        </span>
+        <span class="child">
+          <label class="case">O</label>
+        </span>
+      <template is="dom-repeat" items="{{cases}}">            
+        <span class="child">
+          <input id="case-[[index]]" type="checkbox">
+          <label class="case" for$="case-[[index]]" >
+            <iron-icon icon="maps:directions-car" style="color: [[item]]"></iron-icon>
+          </label>
+        </span>
+    </template>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class MyView1 extends Polymer.Element {
+      static get is() { return 'my-view1'; }
+      static get properties() {
+        return {
+          cases: {
+            type: Array,
+            value: function() {
+              let cases = [];
+              let couleur = [ 'red', 'blue', 'green', 'black', 'yellow', 'pink', 'white'];
+              let getRandomInt = function(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+              };
+              let couleurAuHazard = function() {
+                return couleur[getRandomInt(0, couleur.length)];
+              };
+              for (var i = 0; i < 25; i++) {
+                cases.push(couleurAuHazard());                
+              }
+              return cases;
+            }
+          }
+        };
+      }
+    }
+
+    window.customElements.define(MyView1.is, MyView1);
+  </script>
+</dom-module>

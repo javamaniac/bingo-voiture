@@ -1,0 +1,208 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view3">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      .plaque-cont {
+        padding: 20px 0;
+      }
+      .plaque {
+        border: 1px solid black;
+            margin: 10px;
+    border-radius: 4px;
+    background: white;
+      }
+  .plaque2 {
+    border: 2px solid #278aa9;
+    margin: 3px;
+    -webkit-text-fill-color: #a9afca;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #435256;
+    font-size: 1.5em;
+    line-height: 1.2em;
+  }
+    </style>
+
+    <div class="unselectable">
+      <!-- <div class="circle">1</div>  -->
+      <!-- <h1>Bingo voiture</h1> -->
+
+      <div class="" style="position: absolute; width: 98%;">
+        <!-- <h1>Titre</h1> -->
+        <div class="grid titre">
+          <div class="box">B</div>
+          <div class="box">I</div>
+          <div class="box">N</div>
+          <div class="box">G</div>
+          <div class="box">O</div>
+        </div>
+      </div>
+
+      <form>
+        <div class="grid bingo">
+
+          <template is="dom-repeat" items="{{cases}}">
+            <div class="box">
+              <input id="case-[[index]]" type="checkbox">
+              <label class="case" for$="case-[[index]]">
+             <iron-icon icon="icons:clear" class="x"></iron-icon> 
+             <div class="plaque-cont car">
+             <div class="plaque">
+               <div class="plaque2">[[item.immatriculation]]</div>
+              </div>
+             </div>
+            <!-- <iron-icon icon="maps:directions-car" class="car" style="color: [[item.couleur]]"></iron-icon> -->
+            
+          </label>
+            </div>
+
+          </template>
+        </div>
+      </form>
+    </div>
+  </template>
+
+  <script>
+    class MyView3 extends Polymer.Element {
+      static get is() { return 'my-view3'; }
+
+      static get properties() {
+        return {
+          cases: {
+            type: Array,
+            value: function () {
+              return this.createCases()
+            }
+          }
+        }
+      }
+
+      reset() {
+        this.set('cases', this.createCases())
+        this.shadowRoot.querySelector('form').reset()
+      }
+
+      createCases() {
+        let cases = this.getTypes()
+
+        cases.sort((caseX, caseY) => {
+          return caseX.random > caseY.random
+        })
+
+        // let couleurAuHazard = function () {
+        //   return couleur[getRandomInt(0, couleur.length)]
+        // }
+        // for (var i = 0; i < 25; i++) {
+        //   cases.push(couleurAuHazard())
+        // }
+        return cases
+      }
+
+      getRandomInt(min, max) {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
+
+      }
+      getTypes() {
+        let types = [
+          {
+            immatriculation: 'J',
+            nombre: 2
+          },
+          {
+            immatriculation: 'K',
+            nombre: 2
+          },
+          {
+            immatriculation: 'M',
+            nombre: 2
+          },
+          {
+            immatriculation: 'Y',
+            nombre: 2
+          },
+          {
+            immatriculation: 'N',
+            nombre: 2
+          },
+          {
+            immatriculation: 'A',
+            nombre: 2
+          },
+          {
+            immatriculation: 'B',
+            nombre: 2
+          },
+          {
+            immatriculation: 'J',
+            nombre: 2
+          },
+          {
+            immatriculation: 'S',
+            nombre: 2
+          },
+          {
+            immatriculation: 'G',
+            nombre: 2
+          },
+
+          {
+            immatriculation: '1',
+            nombre: 1
+          },
+          {
+            immatriculation: '2',
+            nombre: 1
+          },
+          {
+            immatriculation: '3',
+            nombre: 1
+          },
+          {
+            immatriculation: '4',
+            nombre: 1
+          },
+          {
+            immatriculation: '5',
+            nombre: 1
+          }
+        ]
+
+        let liste = []
+
+        types.forEach(function (type) {
+          if (type.nombre == undefined) {
+            type.nombre = 1;
+          }
+          for (var index = 0; index < type.nombre; index++) {
+            liste.push(Object.assign({ random: Math.random() }, type))
+          }
+        }, this)
+
+        return liste
+      }
+      
+    }
+
+    window.customElements.define(MyView3.is, MyView3);
+  </script>
+</dom-module>
