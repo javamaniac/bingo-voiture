@@ -16,68 +16,73 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="my-view3">
   <template>
     <style include="shared-styles">
-      :host {
+       :host {
         display: block;
+        height: 100vh;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
 
-        padding: 10px;
-      }
       .plaque-cont {
-        padding: 20px 0;
+        padding-top: 10px;
       }
+
       .plaque {
         border: 1px solid black;
-            margin: 10px;
-    border-radius: 4px;
-    background: white;
+        margin: 10px;
+        border-radius: 4px;
+        background: white;
       }
-  .plaque2 {
-    border: 2px solid #278aa9;
-    margin: 3px;
-    -webkit-text-fill-color: #a9afca;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #435256;
-    font-size: 1.5em;
-    line-height: 1.2em;
-  }
+
+      .plaque2 {
+        border: 2px solid #278aa9;
+        margin: 3px;
+        -webkit-text-fill-color: #a9afca;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #435256;
+        font-size: 1.5em;
+        line-height: 1.2em;
+      }
+
+      .x,
+      .x2 {
+        /* patch pour la position du x puisque le prochain contenu est un div. */
+        margin-left: -7.5vw;
+      }
     </style>
 
-    <div class="unselectable">
-      <!-- <div class="circle">1</div>  -->
-      <!-- <h1>Bingo voiture</h1> -->
+    <app-toolbar>
+      <div main-title>Immatriculations</div>
+      <paper-icon-button on-tap="reset" icon="my-icons:refresh"></paper-icon-button>
+      <paper-icon-button on-tap="accueil" icon="my-icons:home"></paper-icon-button>
+    </app-toolbar>
 
-      <div class="" style="position: absolute; width: 98%;">
-        <!-- <h1>Titre</h1> -->
-        <div class="grid titre">
-          <div class="box">B</div>
-          <div class="box">I</div>
-          <div class="box">N</div>
-          <div class="box">G</div>
-          <div class="box">O</div>
-        </div>
-      </div>
+    <form>
+      <div class="grid-box unselectable">
 
-      <form>
-        <div class="grid bingo">
+        <template is="dom-repeat" items="[[lignes]]" as="ligne">
+          <div class="grid-row">
+            <template is="dom-repeat" items="[[colonnes]]" as="colonne">
+              <div class="grid-item">
+                <input id="case-[[ligne]]-[[colonne]]" type="checkbox">
+                <label class="case" for$="case-[[ligne]]-[[colonne]]">
+                  <iron-icon icon="icons:clear" class="x2"></iron-icon>
+                  <iron-icon icon="icons:clear" class="x"></iron-icon>
+                  
+                  <div class="plaque-cont car">
+                  <div class="plaque">
+                    <div class="plaque2">[[_getCase(ligne, colonne)]]</div>
+                   </div>
+                  </div>              
 
-          <template is="dom-repeat" items="{{cases}}">
-            <div class="box">
-              <input id="case-[[index]]" type="checkbox">
-              <label class="case" for$="case-[[index]]">
-             <iron-icon icon="icons:clear" class="x"></iron-icon> 
-             <div class="plaque-cont car">
-             <div class="plaque">
-               <div class="plaque2">[[item.immatriculation]]</div>
+               </label>
               </div>
-             </div>
-            <!-- <iron-icon icon="maps:directions-car" class="car" style="color: [[item.couleur]]"></iron-icon> -->
-            
-          </label>
-            </div>
+            </template>
+          </div>
+        </template>
 
-          </template>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </template>
 
   <script>
@@ -91,13 +96,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             value: function () {
               return this.createCases()
             }
+          },
+          lignes: {
+            value: [1, 2, 3, 4, 5]
+          },
+          colonnes: {
+            value: [1, 2, 3, 4, 5]//['b', 'i', 'n', 'g', 'o']
           }
+
         }
+      }
+
+      _getCase(ligne, colonne) {
+        let index = (ligne * 5) - 5 + colonne - 1;
+        return this.cases[index].immatriculation
+        // return ligne + ',' + colonne;
       }
 
       reset() {
         this.set('cases', this.createCases())
         this.shadowRoot.querySelector('form').reset()
+      }
+
+      accueil() {
+        window.location = '/view1'
       }
 
       createCases() {
@@ -107,12 +129,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           return caseX.random > caseY.random
         })
 
-        // let couleurAuHazard = function () {
-        //   return couleur[getRandomInt(0, couleur.length)]
-        // }
-        // for (var i = 0; i < 25; i++) {
-        //   cases.push(couleurAuHazard())
-        // }
         return cases
       }
 
@@ -200,7 +216,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         return liste
       }
-      
+
     }
 
     window.customElements.define(MyView3.is, MyView3);
