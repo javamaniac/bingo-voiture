@@ -11,11 +11,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="bingo-styles.html">
 
-<dom-module id="my-view3">
+<dom-module id="bingo-immatriculations">
   <template>
-    <style include="shared-styles">
+    <style include="bingo-styles">
        :host {
         display: block;
         height: 100vh;
@@ -53,8 +55,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-toolbar>
       <div main-title>Immatriculations</div>
-      <paper-icon-button on-tap="reset" icon="my-icons:refresh"></paper-icon-button>
-      <paper-icon-button on-tap="accueil" icon="my-icons:home"></paper-icon-button>
+      <paper-icon-button on-tap="reset" icon="bingo-icons:refresh"></paper-icon-button>
+      <paper-icon-button on-tap="accueil" icon="bingo-icons:home"></paper-icon-button>
     </app-toolbar>
 
     <form>
@@ -86,8 +88,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class MyView3 extends Polymer.Element {
-      static get is() { return 'my-view3'; }
+    class BingoImmatriculations extends Polymer.Element {
+      static get is() { return 'bingo-immatriculations'; }
 
       static get properties() {
         return {
@@ -119,7 +121,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       accueil() {
-        window.location = '/view1'
+        window.location = '/menu'
       }
 
       createCases() {
@@ -219,6 +221,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     }
 
-    window.customElements.define(MyView3.is, MyView3);
+    window.customElements.define(BingoImmatriculations.is, BingoImmatriculations);
   </script>
 </dom-module>

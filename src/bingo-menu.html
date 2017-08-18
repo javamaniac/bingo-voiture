@@ -11,11 +11,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="bingo-styles.html">
 
-<dom-module id="my-view1">
+<dom-module id="bingo-menu">
   <template>
-    <style include="shared-styles">
+    <style include="bingo-styles">
       :host {
         display: block;
 
@@ -56,20 +56,20 @@ paper-button {
   </template>
 
   <script>
-    class MyView1 extends Polymer.Element {
-      static get is() { return 'my-view1'; }
+    class BingoMenu extends Polymer.Element {
+      static get is() { return 'bingo-menu'; }
       static get properties() {
         return {
         };
       }
       couleurs() {
-window.location = '/view2';
+window.location = '/couleurs';
       }
       immatriculation() {
-window.location = '/view3';
+window.location = '/immatriculations';
       }
     }
 
-    window.customElements.define(MyView1.is, MyView1);
+    window.customElements.define(BingoMenu.is, BingoMenu);
   </script>
 </dom-module>
