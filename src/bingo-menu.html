@@ -49,8 +49,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div style="margin-bottom: 20px;">
         <paper-button on-tap="immatriculation">Immatriculations</paper-button>
       </div>
-      <div>
+      <div style="margin-bottom: 20px;">
         <paper-button on-tap="signalisation">Signalisation</paper-button>
+      </div>
+      <div style="margin-bottom: 20px;">
+        <paper-button on-tap="fabricants">Fabricants de voiture</paper-button>
       </div>
     </div>
   </template>
@@ -70,6 +73,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       signalisation() {
         window.location = '/signalisation';
+      }
+      fabricants() {
+        window.location = '/fabricants';
       }
     }
 
