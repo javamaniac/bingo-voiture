@@ -82,13 +82,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           });
         });
       }
+
+      function loadScript(scriptSrc, onLoadCallback) {
+        var script = document.createElement('script');
+        // script.async = true;
+        script.src = scriptSrc;
+        script.onload = onLoadCallback;
+        document.head.appendChild(script);
+    }
+    function loadHtml(htmlSrc, onLoadCallback) {
+        var link = document.createElement('link');
+        // script.async = true;
+        link.rel = "import";
+        link.href = htmlSrc;
+        link.onload = onLoadCallback;
+        document.head.appendChild(link);
+    }
+
+      window.onload = function() {
+        loadScript('bower_components/webcomponentsjs/webcomponents-loader.js', function() {
+          loadHtml('src/bingo-app.html')
+        });        
+      }      
     </script>
 
     <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <!-- <script src="bower_components/webcomponentsjs/webcomponents-loader.js" async></script> -->
 
     <!-- Load your application shell -->
-    <link rel="import" href="src/bingo-app.html">
+    <!-- <link rel="import" href="src/bingo-app.html" async> -->
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
