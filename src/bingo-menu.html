@@ -16,42 +16,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="bingo-menu">
   <template>
     <style include="bingo-styles">
-      :host {
+       :host {
         display: block;
 
         padding: 10px;
       }
 
-paper-button {
-    background: #2f415f;
-    color: aliceblue;
-}
+      paper-button {
+        background: #2f415f;
+        color: aliceblue;
+      }
 
-*.unselectable {
-   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
+      *.unselectable {
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
 
-   /*
+        /*
      Introduced in IE 10.
      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
    */
-   -ms-user-select: none;
-   user-select: none;
-}      
+        -ms-user-select: none;
+        user-select: none;
+      }
     </style>
 
     <div class="card unselectable">
-       <!-- <div class="circle">1</div>  -->
-       <h1>Bingo voiture</h1> 
-    <div style="margin-bottom: 20px;">
-      <paper-button on-tap="couleurs">Couleurs</paper-button>
-    </div>
-      <div>
-      <paper-button on-tap="immatriculation">Immatriculations</paper-button>
+      <h1>Bingo voiture</h1>
+      <div style="margin-bottom: 20px;">
+        <paper-button on-tap="couleurs">Couleurs</paper-button>
       </div>
-      <!-- <h2>aaaa</h2> -->
-
+      <div style="margin-bottom: 20px;">
+        <paper-button on-tap="immatriculation">Immatriculations</paper-button>
+      </div>
+      <div>
+        <paper-button on-tap="signalisation">Signalisation</paper-button>
+      </div>
     </div>
   </template>
 
@@ -63,10 +63,13 @@ paper-button {
         };
       }
       couleurs() {
-window.location = '/couleurs';
+        window.location = '/couleurs';
       }
       immatriculation() {
-window.location = '/immatriculations';
+        window.location = '/immatriculations';
+      }
+      signalisation() {
+        window.location = '/signalisation';
       }
     }
 

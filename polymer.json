@@ -5,6 +5,7 @@
     "src/bingo-menu.html",
     "src/bingo-couleurs.html",
     "src/bingo-immatriculations.html",
+    "src/bingo-signalisation.html",
     "src/bingo-view404.html"
   ],
   "sources": [
