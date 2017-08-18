@@ -1,18 +1,9 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="bingo-modele.html">
 <link rel="import" href="bingo-styles.html">
 
 <dom-module id="bingo-immatriculations">
@@ -62,18 +53,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <form>
       <div class="grid-box unselectable">
 
-        <template is="dom-repeat" items="[[lignes]]" as="ligne">
+        <template is="dom-repeat" items="[[lignes]]" as="ligne" index-as="l">
           <div class="grid-row">
-            <template is="dom-repeat" items="[[colonnes]]" as="colonne">
+            <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
               <div class="grid-item">
-                <input id="case-[[ligne]]-[[colonne]]" type="checkbox">
-                <label class="case" for$="case-[[ligne]]-[[colonne]]">
+                <input id="case-[[l]]-[[c]]" type="checkbox">
+                <label class="case" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="icons:clear" class="x"></iron-icon>
                   
                   <div class="plaque-cont car">
                   <div class="plaque">
-                    <div class="plaque2">[[_getCase(ligne, colonne)]]</div>
+                    <div class="plaque2">[[_getImmatriculation(l, c, cases)]]</div>
                    </div>
                   </div>              
 
@@ -88,58 +79,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class BingoImmatriculations extends Polymer.Element {
+    class BingoImmatriculations extends BingoModele {
       static get is() { return 'bingo-immatriculations'; }
 
-      static get properties() {
-        return {
-          cases: {
-            type: Array,
-            value: function () {
-              return this.createCases()
-            }
-          },
-          lignes: {
-            value: [1, 2, 3, 4, 5]
-          },
-          colonnes: {
-            value: [1, 2, 3, 4, 5]//['b', 'i', 'n', 'g', 'o']
-          }
-
-        }
+      _getImmatriculation(ligne, colonne, cases) {
+        return this._getCase(ligne, colonne, cases).immatriculation
       }
 
-      _getCase(ligne, colonne) {
-        let index = (ligne * 5) - 5 + colonne - 1;
-        return this.cases[index].immatriculation
-        // return ligne + ',' + colonne;
-      }
-
-      reset() {
-        this.set('cases', this.createCases())
-        this.shadowRoot.querySelector('form').reset()
-      }
-
-      accueil() {
-        window.location = '/menu'
-      }
-
-      createCases() {
-        let cases = this.getTypes()
-
-        cases.sort((caseX, caseY) => {
-          return caseX.random > caseY.random
-        })
-
-        return cases
-      }
-
-      getRandomInt(min, max) {
-        min = Math.ceil(min)
-        max = Math.floor(max)
-        return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
-
-      }
       getTypes() {
         let types = [
           {

@@ -1,18 +1,9 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="bingo-modele.html">
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="bingo-icons.html">
 
@@ -54,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <label class="case" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="icons:clear" class="x"></iron-icon>
-                  <img src="[[_getCase(l, c, cases)]]">
+                  <img src="[[_getImage(l, c, cases)]]">
                 </label>
               </div>
             </template>
@@ -66,172 +57,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class BingoSignalisation extends Polymer.Element {
+    class BingoSignalisation extends BingoModele {
       static get is() { return 'bingo-signalisation' }
-      static get properties() {
-        return {
-          cases: {
-            type: Array,
-            value: function () {
-              return this.createCases()
-            }
-          },
-          lignes: {
-            value: [1, 2, 3, 4, 5]
-          },
-          colonnes: {
-            value: ['b', 'i', 'n', 'g', 'o']
-          }
-        }
+
+      _getImage(ligne, colonne, cases) {
+        return this._getCase(ligne, colonne, cases).image
       }
 
-      connectedCallback() {
-        super.connectedCallback()
-      }
-
-      _getCase(ligne, colonne, cases) {
-        let index = ligne * 5 + colonne;
-        return this.cases[index].image
-      }
-
-      reset() {
-        this.shadowRoot.querySelector('form').reset()
-        this.set('cases', this.createCases())
-      }
-
-      accueil() {
-        window.location = '/menu'
-      }
-
-      createCases() {
-        let cases = this.getTypes()
-
-        cases.sort((caseX, caseY) => {
-          return caseX.random - caseY.random;
-        })
-
-        return cases
-      }
-
-      getRandomInt(min, max) {
-        min = Math.ceil(min)
-        max = Math.floor(max)
-        return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
-
-      }
       getTypes() {
         let dossier = 'images/signalisation/115x115/';
         let types = [
-          {
-            nom: '4 stops',
-            image: dossier + '4Stops.png',
-            nombre: 1
-          },
-          {
-            image: dossier + '65kmh.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Autoroute.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'BaliseDeDanger.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'BorneFontaine.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Camion.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Construction.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Courbe.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Courbe2.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'CourbeDroite.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'CourbeGauche.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'DoubleSens.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Est.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'FinDeRoute.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'FlecheDroiteGauche.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Hebergement.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Hopital.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Information.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Jonction.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Max60kmh.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Max90.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Max100.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Ouest.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Parc.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'PassagePieton.png',
-            nombre: 1
-          },
-          // {
-          //   couleur: 'orange',
-          //   nombre: 2
-          // }
+          { image: dossier + '4Stops.png' },
+          { image: dossier + '65kmh.png' },
+          { image: dossier + 'Autoroute.png' },
+          { image: dossier + 'BaliseDeDanger.png' },
+          { image: dossier + 'BorneFontaine.png' },
+          { image: dossier + 'Camion.png' },
+          { image: dossier + 'Construction.png' },
+          { image: dossier + 'Courbe.png' },
+          { image: dossier + 'Courbe2.png' },
+          { image: dossier + 'CourbeDroite.png' },
+          { image: dossier + 'CourbeGauche.png' },
+          { image: dossier + 'DoubleSens.png' },
+          { image: dossier + 'Est.png' },
+          { image: dossier + 'FinDeRoute.png' },
+          { image: dossier + 'FlecheDroiteGauche.png' },
+          { image: dossier + 'Hebergement.png' },
+          { image: dossier + 'Hopital.png' },
+          { image: dossier + 'Information.png' },
+          { image: dossier + 'Jonction.png' },
+          { image: dossier + 'Max60kmh.png' },
+          { image: dossier + 'Max90.png' },
+          { image: dossier + 'Max100.png' },
+          { image: dossier + 'Ouest.png' },
+          { image: dossier + 'Parc.png' },
+          { image: dossier + 'PassagePieton.png' }
         ]
 
         let liste = []
 
         types.forEach(function (type) {
+          type.nombre = type.nombre || 1;
           for (var index = 0; index < type.nombre; index++) {
             liste.push(Object.assign({ random: Math.random() }, type))
           }
