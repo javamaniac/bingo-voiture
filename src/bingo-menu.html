@@ -39,20 +39,75 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         -ms-user-select: none;
         user-select: none;
       }
+
+      .bouton-droit {
+        animation-name: bouton-droit;
+        animation-duration: 0.5s;
+      }
+      .bouton-gauche {
+        animation-name: bouton-gauche;
+        animation-duration: 0.5s;
+      }
+      .bouton-quitter-droit {
+        animation-name: bouton-quitter-droit;
+        animation-duration: 0.5s;
+      }
+      .bouton-quitter-gauche {
+        animation-name: bouton-quitter-gauche;
+        animation-duration: 0.5s;
+      }
+
+      @keyframes bouton-droit {
+        from {
+          margin-left: 100vw;
+        }
+        to {
+          margin-left: 0;
+        }
+      }
+      @keyframes bouton-gauche {
+        from {
+          margin-left: -100vw;
+        }
+        to {
+          margin-left: 0;
+        }
+      }
+      @keyframes bouton-quitter-droit {
+        from {
+          margin-left: 0;
+        }
+        to {
+          margin-left: 100vw;
+        }
+      }
+      @keyframes bouton-quitter-gauche {
+        from {
+          margin-left: 0;
+        }
+        to {
+          margin-left: -100vw;
+        }
+      }
+
     </style>
+
+<audio autoplay loop>
+    <source src="../sounds/beat.mp3" type="audio/mpeg">
+  </audio>
 
     <div class="card unselectable">
       <h1>Bingo voiture</h1>
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;" class="bouton bouton-droit">
         <paper-button on-tap="couleurs">Couleurs</paper-button>
       </div>
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;" class="bouton bouton-gauche">
         <paper-button on-tap="immatriculation">Immatriculations</paper-button>
       </div>
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;" class="bouton bouton-droit">
         <paper-button on-tap="signalisation">Signalisation</paper-button>
       </div>
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;" class="bouton bouton-gauche">
         <paper-button on-tap="fabricants">Fabricants de voiture</paper-button>
       </div>
     </div>
@@ -66,7 +121,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
       }
       couleurs() {
-        window.location = '/couleurs';
+        this.quitterMenu('/couleurs')
+        
       }
       immatriculation() {
         window.location = '/immatriculations';
@@ -76,6 +132,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       fabricants() {
         window.location = '/fabricants';
+      }
+      quitterMenu(destination) {
+        this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {          
+          let isPair = index % 2
+          bouton.classList.remove('bouton-droit')
+          bouton.classList.remove('bouton-gauche')
+          if (isPair) {
+            bouton.classList.add('bouton-quitter-droit')
+          } else {
+            bouton.classList.add('bouton-quitter-gauche')
+          }
+        })
+        setTimeout(() => {
+          window.location = destination;
+        }, 500)
+        
       }
     }
 

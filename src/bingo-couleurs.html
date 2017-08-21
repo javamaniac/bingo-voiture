@@ -16,7 +16,40 @@
         overflow: hidden;
         box-sizing: border-box;
       }
+
+      .car-anim {
+        animation-name: car;
+        animation-duration: 0.5s;
+      }
+
+      @keyframes car {
+        from {
+          margin-left: -200%;
+        }
+        to {
+          margin-left: 0;
+        }
+      }
+
+      .car-anim2 {
+        animation-name: car2;
+        animation-duration: 0.5s;
+      }
+
+      @keyframes car2 {
+        from {
+          margin-left: -200%;
+        }
+        to {
+          margin-left: 0;
+        }
+      }
     </style>
+
+
+    <audio id="vroum">
+      <source src="../sounds/vroom2.mp3" type="audio/mpeg">
+    </audio>
 
     <app-toolbar>
       <div main-title>Couleurs</div>
@@ -35,7 +68,7 @@
                 <label class="case" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="icons:clear" class="x"></iron-icon>
-                  <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car" style="color: [[_getCouleur(l, c, cases)]]"></iron-icon>
+                  <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style="color: [[_getCouleur(l, c, cases)]]"></iron-icon>
                 </label>
               </div>
             </template>
@@ -53,6 +86,30 @@
 
       _getCouleur(ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).couleur
+      }
+
+      connectedCallback() {
+        super.connectedCallback()
+        this.$.vroum.play()
+      }
+
+      reset() {
+        this.$.vroum.play()
+
+        let cars = this.shadowRoot.querySelectorAll('.car')
+        let nouvClsAnim, ancienneClsAnim
+        if (cars[0].classList.contains('car-anim')) {
+          nouvClsAnim = 'car-anim2'
+          ancienneClsAnim = 'car-anim'
+        } else {
+          nouvClsAnim = 'car-anim'
+          ancienneClsAnim = 'car-anim2'
+        }
+        cars.forEach((car) => {
+          car.classList.remove(ancienneClsAnim)
+          car.classList.add(nouvClsAnim)
+        })
+        super.reset();
       }
 
       getTypes() {
@@ -116,6 +173,7 @@
         if (liste.length !== 25) {
           throw "Il n'y a pas 25 voitures! (" + liste.length + ")"
         }
+
         return liste
       }
     }

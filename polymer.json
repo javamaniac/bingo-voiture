@@ -12,6 +12,7 @@
   "sources": [
     "src/**/*",
     "images/**/*",
+    "sounds/**/*",
     "bower.json"
   ],
   "extraDependencies": [
