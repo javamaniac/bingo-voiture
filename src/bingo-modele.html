@@ -46,8 +46,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         //car-anim
       }
 
+      goto(route) {
+        history.pushState({}, '', route)
+        window.dispatchEvent(new CustomEvent('location-changed'));
+      }
+
       accueil() {
-        window.location = '/menu'
+        this.goto('menu')
       }
 
       createCases() {

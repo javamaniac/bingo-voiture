@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <!-- <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html"> -->
- <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html"> 
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
@@ -32,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="bingo-app">
   <template>
     <style>
-      :host {
+       :host {
         --app-primary-color: #2f415f;
         --app-secondary-color: black;
 
@@ -54,9 +54,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       app-toolbar {
         color: #dadada;
-        z-index: 200; /* Devant bingo-view */
+        z-index: 200;
+        /* Devant bingo-view */
       }
-      
+
       .drawer-list {
         margin: 0 20px;
       }
@@ -75,16 +76,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
-    <app-route
-        route="{{route}}"
-        pattern="[[rootPath]]:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+    <!-- url-space-regex="^[[rootPath]]" -->
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-      <!-- <app-drawer-layout fullbleed narrow="{{narrow}}">   -->
-      <!-- Drawer content -->
-      <!-- <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+    <!-- <app-drawer-layout fullbleed narrow="{{narrow}}">   -->
+    <!-- Drawer content -->
+    <!-- <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a on-tap="regenerer">Regénérer</a>
@@ -94,27 +92,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-selector>
       </app-drawer> -->
 
-      <!-- Main content -->
-      <!-- <app-header-layout has-scrolling-region> -->
+    <!-- Main content -->
+    <!-- <app-header-layout has-scrolling-region> -->
 
-         <!-- <app-header slot="header" condenses reveals effects="waterfall"> -->
-        <!-- </app-header>  -->
+    <!-- <app-header slot="header" condenses reveals effects="waterfall"> -->
+    <!-- </app-header>  -->
 
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <bingo-menu name="menu"></bingo-menu>
-          <bingo-couleurs name="couleurs"></bingo-couleurs>
-          <bingo-immatriculations name="immatriculations"></bingo-immatriculations>
-          <bingo-signalisation name="signalisation"></bingo-signalisation>
-          <bingo-fabricants name="fabricants"></bingo-fabricants>
-          
-          <bingo-view404 name="view404"></bingo-view404>
-        </iron-pages>
-      <!-- </app-header-layout> -->
-      <!-- </app-drawer-layout>   -->
+    <!-- Contenu -->
+    <div id="contenu"></div>
+
+    <!-- <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
+      <bingo-menu name="menu"></bingo-menu>
+      <bingo-couleurs name="couleurs"></bingo-couleurs>
+      <bingo-immatriculations name="immatriculations"></bingo-immatriculations>
+      <bingo-signalisation name="signalisation"></bingo-signalisation>
+      <bingo-fabricants name="fabricants"></bingo-fabricants>
+
+      <bingo-view404 name="view404"></bingo-view404>
+    </iron-pages> -->
+    <!-- </app-header-layout> -->
+    <!-- </app-drawer-layout>   -->
   </template>
 
   <script>
@@ -136,31 +133,89 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
       }
 
+      ready() {
+        super.ready()
+      }
+
       static get observers() {
         return [
-          '_routePageChanged(routeData.page)',
+          '_routePageChanged(routeData.page)'
         ];
       }
 
       _routePageChanged(page) {
-        // If no page was found in the route data, page will be an empty string.
-        // Deault to 'view1' in that case.
         this.page = page || 'menu';
-
-        // Close a non-persistent drawer when the page & route are changed.
-        // if (!this.$.drawer.persistent) {
-        //   this.$.drawer.close();
-        // }
       }
 
       _pageChanged(page) {
+
+        // this.page2 = page;
+        // if (this.pageCourante) {
+        //   let cmpCourrant = this.shadowRoot.querySelector(this. pageCourante);
+        //   if (cmpCourrant.animConfig && cmpCourrant.animConfig.exit) {
+        //     cmpCourrant.animConfig.exit();
+        //   }
+        // }
+
+
+
+        // if elem courant a un animConfig exit, joue!
+        var pageCour = this.shadowRoot.querySelector('bingo-' + page);
+        var p = this.shadowRoot.querySelector('bingo-menu')
+
+
+        const cmp = 'bingo-' + page;
+
+
+
+
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('bingo-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl(cmp + '.html');
+
+
+        var me = this;
+        // Chargement du composant et de ses dépendances
         Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+          resolvedPageUrl,
+          // succès
+          function (e) {
+            // Ajouter le composant dans la page
+            me._insererElement(
+              '<' + cmp + ' route="' + history.state.page + '"></' + cmp +
+              '>');
+          },
+          // erreur
+          function (e) {
+            // En cas d'erreur de chargement
+            me._dLog("Erreur d'importation de " + resolvedPageUrl, e);
+
+            // Pour éviter une erreur de chargement circulaire
+            // if (application != 'page404') {
+            //   // Charger et afficher une page 404
+            //   me._chargerApplication('page404');
+            // }
+          }, // async
+          true);
+
+
+
+        // Polymer.importHref(
+        //   resolvedPageUrl,
+        //   null,
+        //   this._showPage404.bind(this),
+        //   true);
+
+        this.pageCourante = cmp;
+      }
+
+      _insererElement(element) {
+        var me = this;
+        Polymer.dom(me.$.contenu).innerHTML = element;
+
+        // Variante
+        // injection dynamique de l'élément qui remplace l'élément précédent
+        //        this.$.contenu.innerHTML = '<' + nomElement + '></' + nomElement + '>';
+        // c.$.contenu.appendChild(item);
       }
 
       _showPage404() {
