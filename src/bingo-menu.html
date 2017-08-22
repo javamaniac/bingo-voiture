@@ -44,14 +44,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         animation-name: bouton-droit;
         animation-duration: 0.5s;
       }
+
       .bouton-gauche {
         animation-name: bouton-gauche;
         animation-duration: 0.5s;
       }
+
       .bouton-quitter-droit {
         animation-name: bouton-quitter-droit;
         animation-duration: 0.5s;
       }
+
       .bouton-quitter-gauche {
         animation-name: bouton-quitter-gauche;
         animation-duration: 0.5s;
@@ -65,6 +68,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           margin-left: 0;
         }
       }
+
       @keyframes bouton-gauche {
         from {
           margin-left: -100vw;
@@ -73,6 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           margin-left: 0;
         }
       }
+
       @keyframes bouton-quitter-droit {
         from {
           margin-left: 0;
@@ -81,6 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           margin-left: 100vw;
         }
       }
+
       @keyframes bouton-quitter-gauche {
         from {
           margin-left: 0;
@@ -89,12 +95,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           margin-left: -100vw;
         }
       }
-
     </style>
 
-<audio autoplay loop>
-    <source src="../sounds/beat.mp3" type="audio/mpeg">
-  </audio>
+    <audio autoplay loop>
+      <source src="../sounds/beat.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card unselectable">
       <h1>Bingo voiture</h1>
@@ -118,23 +123,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get is() { return 'bingo-menu'; }
       static get properties() {
         return {
+          // animConfig: {
+          //   value: {
+          //     enter: () => {
+          //       debugger;
+          //     },
+          //     exit: () => {
+          //       debugger;
+          //       console.log("EXIT!!!");
+          //     }
+          //   }
+          // }
         };
       }
+
+      goto(route) {
+        history.pushState({}, '', route)
+        window.dispatchEvent(new CustomEvent('location-changed'));
+      }
+
       couleurs() {
-        this.quitterMenu('/couleurs')
-        
+        this.goto('couleurs')
       }
       immatriculation() {
-        window.location = '/immatriculations';
+        this.goto('immatriculations')
       }
       signalisation() {
-        window.location = '/signalisation';
+        this.goto('signalisation')
       }
       fabricants() {
-        window.location = '/fabricants';
+        this.goto('fabricants')
       }
+
       quitterMenu(destination) {
-        this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {          
+        this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {
           let isPair = index % 2
           bouton.classList.remove('bouton-droit')
           bouton.classList.remove('bouton-gauche')
@@ -147,7 +169,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         setTimeout(() => {
           window.location = destination;
         }, 500)
-        
+
       }
     }
 
