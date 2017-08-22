@@ -20,6 +20,7 @@
       .car-anim {
         animation-name: car;
         animation-duration: 0.5s;
+        margin: 0 9%;
       }
 
       @keyframes car {
@@ -29,11 +30,12 @@
         to {
           margin-left: 0;
         }
-      }
+      } 
 
       .car-anim2 {
         animation-name: car2;
         animation-duration: 0.5s;
+        margin: 0 9%;
       }
 
       @keyframes car2 {
@@ -65,7 +67,7 @@
             <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
               <div class="grid-item">
                 <input id="case-[[l]]-[[c]]" type="checkbox">
-                <label class="case" for$="case-[[l]]-[[c]]">
+                <label class="case iconSvg" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="icons:clear" class="x"></iron-icon>
                   <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style="color: [[_getCouleur(l, c, cases)]]"></iron-icon>
@@ -89,7 +91,7 @@
       }
 
       connectedCallback() {
-        super.connectedCallback()
+        super.connectedCallback();
         this.$.vroum.play()
       }
 
