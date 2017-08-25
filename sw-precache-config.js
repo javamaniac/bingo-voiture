@@ -15,6 +15,7 @@ module.exports = {
     'index.html',
     'src/*',
     'images/*',
+    'sounds/*',
     'manifest.json',
     'bower_components/webcomponentsjs/*',
   ],
