@@ -1,0 +1,95 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="bingo-carousel">
+  <template>
+    <style>
+       :host {
+
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        display: block;
+
+      }
+
+      div#carousel {
+/* width: 100%; */
+/* overflow: hidden; */
+/* transform: translateX(-50vw); */
+/* white-space: nowrap; */
+/* transform: translateX(-100vw); */
+transition: transform 500ms;
+/* word-spacing: unset; */
+/* word-wrap: normal; */
+/* word-break: unset; */
+/* font-size: 0; */
+
+/* TODO rendre dynamique selon le nombre d'élément dans slot */
+width: 200vw;
+height: 100vh;
+
+/* background: yellow; */
+
+display: inline-flex;
+    white-space: nowrap;
+/* display: table; */
+      }
+
+      ::slotted(*) {
+        width: 100vw; 
+        height: 100vh; 
+        display: block;
+        /* box-sizing: border-box; */
+        /* background-color: green; */
+        box-sizing: border-box;
+      }
+    </style>
+
+
+<div id="carousel" select="{{niveau}}" class="">
+
+    <!-- <div xstyle="width: 100vw; height 100vh; background-color: green;"> -->
+<slot></slot>
+    <!-- </div> -->
+
+</div>
+
+  </template>
+
+  <script>
+    class BingoCarousel extends Polymer.Element {
+      static get is() { return 'bingo-carousel'; }
+
+      static get properties() {
+        return {
+          niveau: {
+            value: 1,
+            observer: 'onChangeNiveau'
+          }
+        };
+      }
+
+      onChangeNiveau(niveau) {
+        let translateX = 0;
+        
+        if (niveau > 1) {
+          translateX = ((niveau - 1) * -100) + "vw";
+        }
+        this.$.carousel.style.transform = 'translateX(' + translateX + ')';
+
+        // this.$.carousel
+      }
+
+      ready() {
+        super.ready()
+      }
+
+
+    }
+
+    window.customElements.define(BingoCarousel.is, BingoCarousel);
+  </script>
+</dom-module>
+
