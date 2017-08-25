@@ -20,6 +20,7 @@
       .car-anim {
         animation-name: car;
         animation-duration: 0.5s;
+        /* animation-delay: 2.5s; */
         margin: 0 9%;
       }
 
@@ -35,6 +36,7 @@
       .car-anim2 {
         animation-name: car2;
         animation-duration: 0.5s;
+        /* animation-delay: 2.5s; */
         margin: 0 9%;
       }
 
@@ -86,13 +88,27 @@
     class BingoCouleurs extends BingoModele {
       static get is() { return 'bingo-couleurs' }
 
+      static get properties() {
+        return {
+          lignes: {
+            value: []
+          }
+        }
+      }
+
       _getCouleur(ligne, colonne, cases) {
-        return this._getCase(ligne, colonne, cases).couleur
+        // if (cases) {
+          return this._getCase(ligne, colonne, cases).couleur
+        // }
       }
 
       connectedCallback() {
         super.connectedCallback();
-        this.$.vroum.play()
+
+        setTimeout(x => {
+          this.set('lignes', [1, 2, 3, 4, 5]);
+          this.$.vroum.play()
+        }, 200)
       }
 
       reset() {
@@ -113,6 +129,12 @@
         })
         super.reset();
       }
+
+      // createCases() {
+      //   setTimeout(x => {
+      //     super.createCases()
+      //   }, 2000)
+      // }
 
       getTypes() {
         let types = [

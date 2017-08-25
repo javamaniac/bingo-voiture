@@ -36,8 +36,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _getCase(ligne, colonne, cases) {
-        let index = ligne * 5 + colonne;
-        return this.cases[index]
+        // if (this.cases) {
+          let index = ligne * 5 + colonne;
+          return this.cases[index]
+        // }
       }
 
       reset() {
@@ -52,7 +54,55 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       accueil() {
-        this.goto('menu')
+
+//         const animKeyframes = [
+//           { transform: 'translateX(0%)' },
+//           {  transform: 'translateX(150%)' }
+//           // { opacity: 1 },
+//           // { opacity: 0 }
+//           // { 'margin-left': -200 },
+//           // { 'margin-left': 0 }
+//         ]
+//         const animationTiming = {
+//           duration: 70000, //milliseconds
+//           easing: 'ease-in-out', //'linear', a bezier curve, etc.
+//           delay: 10, //milliseconds
+//           iterations: 1, // Infinity or a number
+//           direction: 'alternate', //'normal', 'reverse', etc.
+//           fill: 'forwards' //'backwards', 'both', 'none', 'auto'
+//         }
+//         this.shadowRoot.querySelectorAll('.car-anim').forEach((car) => {
+//           car.animate(animKeyframes, animationTiming)
+//         })
+
+//         function whichTransitionEvent(){
+//     var t;
+//     var el = document.createElement('fakeelement');
+//     var transitions = {
+//       'transition':'transitionend',
+//       'OTransition':'oTransitionEnd',
+//       'MozTransition':'transitionend',
+//       'WebkitTransition':'webkitTransitionEnd'
+//     }
+
+//     for(t in transitions){
+//         if( el.style[t] !== undefined ){
+//             return transitions[t];
+//         }
+//     }
+// }
+// /* Listen for a transition! */
+// var transitionEvent = whichTransitionEvent();
+// transitionEvent && e.addEventListener(transitionEvent, function() {
+// 	console.log('Transition complete!  This is the callback, no library needed!');
+// });
+
+        // var animations = document.getAnimations ? document.getAnimations() : document.timeline.getAnimations();
+        // animations[0].onfinish = function () {
+          this.goto('menu')
+        // };
+
+        // 
       }
 
       createCases() {

@@ -24,6 +24,12 @@
         width: auto;
         height: auto;
         margin: auto;
+        transition: all 1s;
+        opacity: 0;
+      }
+
+      .anim img {
+        opacity: 1;
       }
 
       .grid-item {
@@ -38,7 +44,7 @@
     </app-toolbar>
 
     <form>
-      <div class="grid-box unselectable">
+      <div id="gridBox" class="grid-box unselectable">
 
         <template is="dom-repeat" items="[[lignes]]" as="ligne" index-as="l">
           <div class="grid-row">
@@ -62,6 +68,15 @@
   <script>
     class BingoSignalisation extends BingoModele {
       static get is() { return 'bingo-signalisation' }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        setTimeout(x => {          
+          this.$.gridBox.classList.add('anim')
+          // this.$.vroum.play()
+        }, 300)
+      }
 
       _getImage(ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).image

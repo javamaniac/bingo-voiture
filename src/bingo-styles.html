@@ -79,14 +79,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .x, .x2 {
-        display: none;
+        /* display: none; */
         color: #842e2e;
         width: 20%;
+        transition: opacity 0.5s;
+        opacity: 0;
       }
 
       input[type=checkbox]:checked~label .x,
       input[type=checkbox]:checked~label .x2 {
-        display: inline-block;
+        /* display: inline-block; */
+        opacity: 1;
+      }
+
+      .car {
+        transition: opacity 0.5s;
       }
 
       input[type=checkbox]:checked~label .car {
