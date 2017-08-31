@@ -72,13 +72,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .case {
         display: flex;
-    width: 100%;
-    height: 100%;
+        width: 100%;
+        height: 100%;
         /* -webkit-perspective: 150px;
-    perspective: 80px; */
+           perspective: 80px; */
       }
 
-      .x, .x2 {
+      .x,
+      .x2 {
         /* display: none; */
         color: #842e2e;
         width: 20%;
@@ -108,14 +109,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         top: -9999px;
         left: -9999px;
         /* For mobile, it's typically better to position checkbox on top of clickable
-      area and turn opacity to 0 instead. */
+        area and turn opacity to 0 instead. */
       }
 
       iron-icon {
-         /* --iron-icon-height: 80%;
+        /* --iron-icon-height: 80%;
         --iron-icon-width: 80%;  */
-         --iron-icon-height: 15vh;
-        --iron-icon-width: 15vw; 
+        --iron-icon-height: 15vh;
+        --iron-icon-width: 15vw;
       }
 
       *.unselectable {
@@ -124,9 +125,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         -webkit-user-select: none;
 
         /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
+          Introduced in IE 10.
+          See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+        */
         -ms-user-select: none;
         user-select: none;
       }
@@ -197,8 +198,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         z-index: 200;
         /* Devant my-view */
       }
-      
-      
     </style>
   </template>
 </dom-module>
