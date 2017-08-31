@@ -11,35 +11,31 @@
         padding: 0;
         margin: 0;
         display: block;
-
       }
 
       div#carousel {
-/* width: 100%; */
-/* overflow: hidden; */
-/* transform: translateX(-50vw); */
-/* white-space: nowrap; */
-/* transform: translateX(-100vw); */
-transition: transform 500ms;
-/* word-spacing: unset; */
-/* word-wrap: normal; */
-/* word-break: unset; */
-/* font-size: 0; */
-
-/* TODO rendre dynamique selon le nombre d'élément dans slot */
-width: 200vw;
-height: 100vh;
-
-/* background: yellow; */
-
-display: inline-flex;
-    white-space: nowrap;
-/* display: table; */
+        /* width: 100%; */
+        /* overflow: hidden; */
+        /* transform: translateX(-50vw); */
+        /* white-space: nowrap; */
+        /* transform: translateX(-100vw); */
+        transition: transform 500ms;
+        /* word-spacing: unset; */
+        /* word-wrap: normal; */
+        /* word-break: unset; */
+        /* font-size: 0; */
+        /* TODO rendre dynamique selon le nombre d'élément dans slot */
+        width: 200vw;
+        height: 100vh;
+        /* background: yellow; */
+        display: inline-flex;
+        white-space: nowrap;
+        /* display: table; */
       }
 
-      ::slotted(*) {
-        width: 100vw; 
-        height: 100vh; 
+       ::slotted(*) {
+        width: 100vw;
+        height: 100vh;
         display: block;
         /* box-sizing: border-box; */
         /* background-color: green; */
@@ -47,14 +43,11 @@ display: inline-flex;
       }
     </style>
 
-
-<div id="carousel" select="{{niveau}}" class="">
-
-    <!-- <div xstyle="width: 100vw; height 100vh; background-color: green;"> -->
-<slot></slot>
-    <!-- </div> -->
-
-</div>
+    <div id="carousel" select="{{niveau}}" class="">
+      <!-- <div xstyle="width: 100vw; height 100vh; background-color: green;"> -->
+      <slot></slot>
+      <!-- </div> -->
+    </div>
 
   </template>
 
@@ -73,11 +66,17 @@ display: inline-flex;
 
       onChangeNiveau(niveau) {
         let translateX = 0;
-        
+
+        for (var i = 0; i < this.children.length; i++) {
+          this.children[i].removeAttribute('actif')
+        }
+
         if (niveau > 1) {
           translateX = ((niveau - 1) * -100) + "vw";
         }
         this.$.carousel.style.transform = 'translateX(' + translateX + ')';
+        const cmp = this.children[niveau - 1]
+        cmp.setAttribute('actif', true)
 
         // this.$.carousel
       }
@@ -92,4 +91,3 @@ display: inline-flex;
     window.customElements.define(BingoCarousel.is, BingoCarousel);
   </script>
 </dom-module>
-

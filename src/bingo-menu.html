@@ -32,10 +32,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         -khtml-user-select: none;
         -webkit-user-select: none;
 
-        /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
+        /* Introduced in IE 10.
+           See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+        */
         -ms-user-select: none;
         user-select: none;
       }
@@ -97,7 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <audio autoplay loop>
+    <audio id="musique" autoplay loop>
       <source src="../sounds/beat.mp3" type="audio/mpeg">
     </audio>
 
@@ -138,8 +137,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       goto(route) {
+        this.$.musique.pause()
+        this.$.musique.currentTime = 0
         history.pushState({}, '', route)
-        window.dispatchEvent(new CustomEvent('location-changed'));
+        window.dispatchEvent(new CustomEvent('location-changed'))
       }
 
       couleurs() {

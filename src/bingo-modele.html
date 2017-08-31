@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
 <dom-module id="bingo-modele">
@@ -119,130 +109,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         min = Math.ceil(min)
         max = Math.floor(max)
         return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
-
       }
+      
       getTypes() {
-        let dossier = 'images/signalisation/115x115/';
-        let types = [
-          {
-            nom: '4 stops',
-            image: dossier + '4Stops.png',
-            nombre: 1
-          },
-          {
-            image: dossier + '65kmh.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Autoroute.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'BaliseDeDanger.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'BorneFontaine.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Camion.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Construction.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Courbe.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Courbe2.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'CourbeDroite.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'CourbeGauche.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'DoubleSens.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Est.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'FinDeRoute.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'FlecheDroiteGauche.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Hebergement.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Hopital.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Information.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Jonction.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Max60kmh.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Max90.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Max100.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Ouest.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'Parc.png',
-            nombre: 1
-          },
-          {
-            image: dossier + 'PassagePieton.png',
-            nombre: 1
-          },
-          // {
-          //   couleur: 'orange',
-          //   nombre: 2
-          // }
-        ]
-
-        let liste = []
-
-        types.forEach(function (type) {
-          for (var index = 0; index < type.nombre; index++) {
-            liste.push(Object.assign({ random: Math.random() }, type))
-          }
-        }, this)
-
-        if (liste.length !== 25) {
-          throw "Il n'y a pas 25 voitures! (" + liste.length + ")"
-        }
-        return liste
+        return []
       }
     }
 

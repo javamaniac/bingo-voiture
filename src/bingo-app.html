@@ -1,25 +1,6 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<!-- <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html"> -->
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<!-- <link rel="import" href="../bower_components/iron-selector/iron-selector.html"> -->
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bingo-carousel.html">
 <link rel="import" href="bingo-menu.html">
 <link rel="import" href="bingo-icons.html">
@@ -77,88 +58,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       #xcontenu {
-    /* text-align:center; */
-    /* background-color: #eeeeee; */
-    /* display: block; */
-    /* height:0px; */
-    /* width:300px;     */
-    opacity: 0;
-    transition:all 0.5s ease-in;
-    /* overflow:hidden; */
-}
+        opacity: 0;
+        transition: all 0.5s ease-in;
+      }
 
-#xcontenu:not(:empty){    
-    /* height:100px; */
-    opacity: 1;
-}
+      #xcontenu:not(:empty) {
+        /* height:100px; */
+        opacity: 1;
+      }
 
-@keyframes fadeIn {
-    from {margin-left: -100%; opacity:0;}
-    to {margin-left:0; opacity:1;}
-}
-
-/* bingo-menu, */
-/*
-bingo-couleurs,
-bingo-immatriculations,
-bingo-signalisation,
-bingo-fabricants {
-    transition: all 500ms;
-    transform: translateX(100vw);
-}
-
-.slideIn {
-  transform: translateX(0);
-}
-.slideOut {
-
-}*/
+      @keyframes fadeIn {
+        from {
+          margin-left: -100%;
+          opacity: 0;
+        }
+        to {
+          margin-left: 0;
+          opacity: 1;
+        }
+      }
     </style>
 
-    <!-- url-space-regex="^[[rootPath]]" -->
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-    <!-- <app-drawer-layout fullbleed narrow="{{narrow}}">   -->
-    <!-- Drawer content -->
-    <!-- <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a on-tap="regenerer">Regénérer</a>
-          <a name="view1" href="[[rootPath]]view1">View One</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="view3" href="[[rootPath]]view3">View Three</a>
-        </iron-selector>
-      </app-drawer> -->
-
-    <!-- Main content -->
-    <!-- <app-header-layout has-scrolling-region> -->
-
-    <!-- <app-header slot="header" condenses reveals effects="waterfall"> -->
-    <!-- </app-header>  -->
-
-    <!-- Contenu -->
-    <!-- <div xstyle="width: 100vw; height 100vh; background-color: green;">
-        <div style="width: 100vw; height 100vh; background-color: green;">A</div>
-        <div style="width: 100vw; height 100vh; background-color: blue;">B</div>
-        <div style="width: 100vw; height 100vh; background-color: red;">C</div>
-    </div> -->
     <bingo-carousel id="carousel" niveau="1">
-        <bingo-menu></bingo-menu>
-        <div id="contenu"></div>
+      <bingo-menu></bingo-menu>
+      <div id="contenu"></div>
     </bingo-carousel>
 
-    <!-- <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-      <bingo-menu name="menu"></bingo-menu>
-      <bingo-couleurs name="couleurs"></bingo-couleurs>
-      <bingo-immatriculations name="immatriculations"></bingo-immatriculations>
-      <bingo-signalisation name="signalisation"></bingo-signalisation>
-      <bingo-fabricants name="fabricants"></bingo-fabricants>
-
-      <bingo-view404 name="view404"></bingo-view404>
-    </iron-pages> -->
-    <!-- </app-header-layout> -->
-    <!-- </app-drawer-layout>   -->
   </template>
 
   <script>
@@ -196,39 +124,15 @@ bingo-fabricants {
 
       _pageChanged(page) {
 
-        // this.page2 = page;
-        // if (this.pageCourante) {
-        //   let cmpCourrant = this.shadowRoot.querySelector(this. pageCourante);
-        //   if (cmpCourrant.animConfig && cmpCourrant.animConfig.exit) {
-        //     cmpCourrant.animConfig.exit();
-        //   }
-        // }
+        let me = this;
 
-
-let me = this;
-
-if (page == "menu" ) {
-  this.$.carousel.niveau = 1;
-  this._insererElement("");
-} else {
-  me.majDom(page)
-  this.$.carousel.niveau = 2;
-}
-
-// if (this.pageCourante) {
-//   let el = this.shadowRoot.querySelector(this.pageCourante)
-  
-//   el.classList.remove('slideIn')  
-//   el.addEventListener("transitionend", function(event) {
-//     console.log('!!!')
-//     me.majDom(page)
-
-//   }, false);  
-// } else {
-  // me.majDom(page)
-// }
-
-
+        if (page == "menu") {
+          this.$.carousel.niveau = 1;
+          this._insererElement("");
+        } else {
+          me.majDom(page)
+          this.$.carousel.niveau = 2;
+        }
       }
 
       majDom(page) {
@@ -236,15 +140,10 @@ if (page == "menu" ) {
         var pageCour = this.shadowRoot.querySelector('bingo-' + page);
         var p = this.shadowRoot.querySelector('bingo-menu')
 
-
         const cmp = 'bingo-' + page;
-
-
-
 
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl(cmp + '.html');
-
 
         var me = this;
         // Chargement du composant et de ses dépendances
@@ -252,17 +151,12 @@ if (page == "menu" ) {
           resolvedPageUrl,
           // succès
           function (e) {
-            // debugger;
-
             // Ajouter le composant dans la page
             me._insererElement(
-              '<' + cmp + ' route="' + page + '"></' + cmp +
-              '>');
+              '<' + cmp + ' route="' + page + '" actif></' + cmp + '>');
 
-              const elem = me.shadowRoot.querySelector(cmp)
-              elem.classList.add('slideIn');
-
-            
+            const elem = me.shadowRoot.querySelector(cmp)
+            elem.classList.add('slideIn');
           },
           // erreur
           function (e) {
@@ -277,21 +171,12 @@ if (page == "menu" ) {
           }, // async
           true);
 
-
-
-        // Polymer.importHref(
-        //   resolvedPageUrl,
-        //   null,
-        //   this._showPage404.bind(this),
-        //   true);
-
         this.pageCourante = cmp;
       }
 
       _insererElement(element) {
         var me = this;
         Polymer.dom(me.$.contenu).innerHTML = element;
-
 
         // Variante
         // injection dynamique de l'élément qui remplace l'élément précédent
