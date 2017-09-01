@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="bingo-styles.html">
 
@@ -35,6 +36,7 @@
         padding: 3px 20px;
         font-size: 1.2em;
         margin: 1px 0;
+        cursor: pointer;
       }
 
       *.unselectable {
@@ -117,25 +119,21 @@
       </h1>
       <div style="margin-bottom: 20px;" class="bouton bouton-droit">
         <div class="bouton-menu" on-tap="couleurs">Couleurs</div>
-        <!-- <paper-button on-tap="couleurs">Couleurs</paper-button> -->
       </div>
       <div style="margin-bottom: 20px;" class="bouton bouton-gauche">
           <div class="bouton-menu" on-tap="immatriculation">Immatriculations</div>
-        <!-- <paper-button on-tap="immatriculation">Immatriculations</paper-button> -->
       </div>
       <div style="margin-bottom: 20px;" class="bouton bouton-droit">
           <div class="bouton-menu" on-tap="signalisation">Signalisation</div>
-        <!-- <paper-button on-tap="signalisation">Signalisation</paper-button> -->
       </div>
       <div style="margin-bottom: 20px;" class="bouton bouton-gauche">
           <div class="bouton-menu" on-tap="fabricants">Fabricants de voiture</div>
-        <!-- <paper-button on-tap="fabricants">Fabricants de voiture</paper-button> -->
       </div>
     </div>
   </template>
 
   <script>
-    class BingoMenu extends Polymer.Element {
+    class BingoMenu extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() { return 'bingo-menu'; }
       static get properties() {
         return {
