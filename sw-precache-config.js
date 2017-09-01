@@ -12,8 +12,7 @@
 
 module.exports = {
   staticFileGlobs: [
-    'index.html',
-    'src/*',
+    '/index.html',
     'images/*',
     'sounds/*',
     'manifest.json',

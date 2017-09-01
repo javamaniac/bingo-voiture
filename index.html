@@ -99,18 +99,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         document.head.appendChild(link);
     }
 
-      window.onload = function() {
-        loadScript('bower_components/webcomponentsjs/webcomponents-loader.js', function() {
-          loadHtml('src/bingo-app.html')
-        });        
-      }      
+      // window.onload = function() {
+      //   loadScript('bower_components/webcomponentsjs/webcomponents-loader.js', function() {
+      //     loadHtml('src/bingo-app.html')
+      //   });        
+      // }      
     </script>
 
     <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <!-- <script src="bower_components/webcomponentsjs/webcomponents-loader.js" async></script> -->
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js" async></script>
 
     <!-- Load your application shell -->
-    <!-- <link rel="import" href="src/bingo-app.html" async> -->
+    
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
@@ -126,9 +126,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   <body>
     <bingo-app></bingo-app>
+    
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
     <!-- Built with love using Polymer Starter Kit -->
   </body>
-</html>
+
+  </html>
+  
+  <link rel="import" href="src/bingo-app.html" async>

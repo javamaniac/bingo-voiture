@@ -2,7 +2,7 @@
   "name": "Bingo voiture",
   "short_name": "Bingo",
   "description": "Jeu Bingo voiture",
-  "start_url": "/menu",
+  "start_url": "/index.html",
   "display": "standalone",
   "theme_color": "#2f415f",
   "background_color": "#2f415f",
