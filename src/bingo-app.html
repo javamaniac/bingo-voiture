@@ -76,6 +76,14 @@
           opacity: 1;
         }
       }
+
+      /* patch pour FF */
+      bingo-carousel > *,
+      bingo-menu,
+      #contenu {
+        width: 100vw;
+        box-sizing: border-box;
+      }
     </style>
 
     <audio id="pop">
