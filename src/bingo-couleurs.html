@@ -67,7 +67,7 @@
           <div class="grid-row">
             <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
               <div class="grid-item">
-                <input id="case-[[l]]-[[c]]" type="checkbox">
+                <input on-change="pop" id="case-[[l]]-[[c]]" type="checkbox">
                 <label class="case iconSvg" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="icons:clear" class="x"></iron-icon>
@@ -188,7 +188,7 @@
         let liste = []
 
         types.forEach(function (type) {
-          for (var index = 0; index < type.nombre; index++) {
+          for (let index = 0; index < type.nombre; index++) {
             liste.push(Object.assign({ random: Math.random() }, type))
           }
         }, this)

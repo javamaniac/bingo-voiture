@@ -79,6 +79,10 @@
       }
     </style>
 
+    <audio id="pop">
+      <source src="../sounds/pop.mp3" type="audio/mpeg">
+    </audio>
+
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
@@ -110,6 +114,8 @@
 
       ready() {
         super.ready()
+        this.addEventListener('bingo-pop', e => this._pop(e));
+
       }
 
       static get observers() {
@@ -120,6 +126,10 @@
 
       _routePageChanged(page) {
         this.page = page || 'menu';
+      }
+
+      _pop() {
+        this.$.pop.play()
       }
 
       _pageChanged(page) {
@@ -137,15 +147,15 @@
 
       majDom(page) {
         // if elem courant a un animConfig exit, joue!
-        var pageCour = this.shadowRoot.querySelector('bingo-' + page);
-        var p = this.shadowRoot.querySelector('bingo-menu')
+        // const pageCour = this.shadowRoot.querySelector('bingo-' + page);
+        // const p = this.shadowRoot.querySelector('bingo-menu')
 
         const cmp = 'bingo-' + page;
 
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl(cmp + '.html');
+        const resolvedPageUrl = this.resolveUrl(cmp + '.html');
 
-        var me = this;
+        const me = this;
         // Chargement du composant et de ses dépendances
         Polymer.importHref(
           resolvedPageUrl,
@@ -175,7 +185,7 @@
       }
 
       _insererElement(element) {
-        var me = this;
+        const me = this;
         Polymer.dom(me.$.contenu).innerHTML = element;
 
         // Variante

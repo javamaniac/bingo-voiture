@@ -44,7 +44,7 @@
           <div class="grid-row">
             <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
               <div class="grid-item">
-                <input id="case-[[l]]-[[c]]" type="checkbox">
+                <input on-change="pop" id="case-[[l]]-[[c]]" type="checkbox">
                 <label class="case" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="icons:clear" class="x"></iron-icon>

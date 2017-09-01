@@ -105,6 +105,10 @@
         return cases
       }
 
+      pop() {
+        this.dispatchEvent(new CustomEvent('bingo-pop', {bubbles: true, composed: true}))
+      }
+
       getRandomInt(min, max) {
         min = Math.ceil(min)
         max = Math.floor(max)
