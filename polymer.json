@@ -21,7 +21,7 @@
   "lint": {
     "rules": ["polymer-2"]
   },
-  "builds": [
+  "x-builds": [
     {
       "preset": "es5-bundled"
     },
@@ -32,9 +32,9 @@
       "preset": "es6-unbundled"
     }
   ],
-  "x-builds": [
+  "builds": [
     {
-      "preset": "es6-unbundled"
+      "preset": "es6-bundled"
     }
   ]  
 }
