@@ -123,6 +123,65 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #666d92;
       }
     </style>
+
+<script>
+  (function() {
+    'use strict';
+
+    // if (location.hostname === 'localhost') return;
+
+    // window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+    // ga('create', 'UA-105763285-1', 'auto');
+    //<!-- Global Site Tag (gtag.js) - Google Analytics -->
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-105763285-1');
+
+
+
+    window.addEventListener('location-changed', function(e) {
+      gtag('event', 'page', {
+        route: e.detail.route
+      });
+      gtag('config', 'UA-105763285-1', {
+        'page_title': e.detail.route,
+        'page_location': location.href,
+        'page_path': location.pathname
+      });      
+      // ga('set', 'page', location.pathname);
+      // ga('send', 'pageview');
+    });
+
+    window.addEventListener('error', function(e) {
+      // debugger;
+      gtag('event', 'exception', {
+        'description': e.message,
+        'fatal': false   // set to true if the error is fatal
+      });      
+      // ga('send', 'exception', {
+      //   'exDescription': e.message,
+      //   'exFatal': false
+      // });
+    });
+    window.addEventListener('WebComponentsReady', function(e) {
+      // debugger;
+      if (window.performance) {
+        gtag('event', 'timing_complete', {
+          'name': 'WebComponentsReady',
+          'value': Math.round(performance.now()),
+          'event_category': 'JS Dependencies'
+        });        
+        // ga('send', 'timing', 
+        // 'JS Dependencies', 
+        // 'WebComponentsReady', 
+        // Math.round(performance.now()));
+      }
+    });
+  })();
+</script>    
   </head>
   <body>
     <bingo-app></bingo-app>
@@ -136,3 +195,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </html>
   
   <link rel="import" href="src/bingo-app.html" async>
+  <!-- <script src="https://www.google-analytics.com/analytics.js" async></script> -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105763285-1"></script>
+  
