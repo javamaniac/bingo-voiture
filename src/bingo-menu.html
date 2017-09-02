@@ -154,7 +154,11 @@
         this.$.musique.pause()
         this.$.musique.currentTime = 0
         history.pushState({}, '', route)
-        window.dispatchEvent(new CustomEvent('location-changed'))
+        window.dispatchEvent(new CustomEvent('location-changed', {
+          detail: {
+            route: route
+          }
+        }))
       }
 
       couleurs() {

@@ -40,7 +40,11 @@
 
       goto(route) {
         history.pushState({}, '', route)
-        window.dispatchEvent(new CustomEvent('location-changed'));
+        window.dispatchEvent(new CustomEvent('location-changed', {
+          detail: {
+            route: route
+          }
+        }))
       }
 
       accueil() {

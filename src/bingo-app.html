@@ -133,6 +133,7 @@
 
       _routePageChanged(page) {
         this.page = page || 'menu';
+        this.dispatchEvent(new CustomEvent('change-page', {}))
       }
 
       _pop() {
