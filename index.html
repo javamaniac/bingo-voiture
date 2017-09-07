@@ -110,10 +110,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                     break;
                                 case "installed":
                                     if ( navigator.serviceWorker.controller ) {
-                                      alert("Une nouvelle version est disponible.\n"+
-                                        "L'application va se recharger pour être à jour.")
-                                        console.log( "[SW] New or updated content is available, refresh!" );
-                                        document.location.reload()
+                                      window.dispatchEvent(new CustomEvent('majApplication'))
+                                      // alert("Une nouvelle version est disponible.\n"+
+                                      //   "L'application va se recharger pour être à jour.")
+                                      //   console.log( "[SW] New or updated content is available, refresh!" );
+                                      //   document.location.reload()
 
                                         // <paper-toast text="Hello world!" opened></paper-toast>
                                         // refreshApp();

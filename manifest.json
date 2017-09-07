@@ -1,7 +1,7 @@
 {
   "name": "Bingo voiture",
   "short_name": "Bingo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Jeu Bingo voiture",
   "start_url": "/index.html",
   "display": "standalone",

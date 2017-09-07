@@ -4,6 +4,7 @@
 <link rel="import" href="bingo-carousel.html">
 <link rel="import" href="bingo-menu.html">
 <link rel="import" href="bingo-icons.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
 <dom-module id="bingo-app">
     <!-- <link rel="lazy-import" href="bingo-couleurs.html">
@@ -86,6 +87,11 @@
       }
     </style>
 
+<!-- <paper-toast id="toast" text="Hello world!" opened></paper-toast> -->
+<paper-toast id="toastMajApplication" text="Une nouvelle version est disponible." duration="0">
+  <a href="#" onclick="document.location.reload()">Recharger l'application</a>
+</paper-toast>
+
     <audio id="pop">
       <source src="../sounds/pop.mp3" type="audio/mpeg">
     </audio>
@@ -122,6 +128,10 @@
       ready() {
         super.ready()
         this.addEventListener('bingo-pop', e => this._pop(e));
+
+        window.addEventListener('majApplication', e => {
+          this.$.toastMajApplication.opened = true;
+        })
 
       }
 
