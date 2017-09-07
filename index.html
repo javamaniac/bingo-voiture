@@ -61,27 +61,91 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script>
       /**
-      * [polymer-root-path]
-      *
-      * By default, we set `Polymer.rootPath` to the server root path (`/`).
-      * Leave this line unchanged if you intend to serve your app from the root
-      * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
-      *
-      * If you intend to serve your app from a non-root path (e.g., with URLs
-      * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
-      * to indicate the path from which you'll be serving, including leading
-      * and trailing slashes (e.g., `/my-app/`).
-      */
-      window.Polymer = {rootPath: '/'};
+       * [polymer-root-path]
+       *
+       * By default, we set `Polymer.rootPath` to the server root path (`/`).
+       * Leave this line unchanged if you intend to serve your app from the root
+       * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
+       *
+       * If you intend to serve your app from a non-root path (e.g., with URLs
+       * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
+       * to indicate the path from which you'll be serving, including leading
+       * and trailing slashes (e.g., `/my-app/`).
+       */
+      window.Polymer = {
+          rootPath: document.querySelector( 'base' ).href
+      };
 
       // Load and register pre-caching Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('service-worker.js', {
-            scope: Polymer.rootPath,
-          });
-        });
-      }
+      if ( 'serviceWorker' in navigator ) {
+          window.addEventListener( 'load', () => {
+              navigator.serviceWorker.register( 'service-worker.js', {
+                  scope: Polymer.rootPath,
+              } ).then( ( registration ) => {
+                  console.log( '[SW] Scope', registration.scope );
+
+                  const refreshApp = () => {
+                    alert("L'application a été mise à jour.")
+                    document.location.reload()
+
+                      // let update = document.createElement( 'udes-sw-update' );
+                      // update.innerHTML = "L'application a été mise à jour.<br>" +
+                      //                    "Veuillez la <a href='#' style='cursor: pointer; color: #2D9D5F;' onclick='document.location.reload()'>rafraîchir</a>.";
+                      // document.body.appendChild( update );
+
+                      // let link = document.createElement( 'link' );
+                      // link.rel = 'import';
+                      // link.href = 'bower_components/udes-sw-update/udes-sw-update.html';
+                      // document.head.appendChild( link );
+                    };
+
+                    registration.onupdatefound = ( event ) => {
+                        //Source http://www.electrode.io/docs/service_workers.html
+                        const installingWorker = registration.installing;
+                        installingWorker.onstatechange = function () {
+                            switch ( installingWorker.state ) {
+                                case "installing":
+                                  alert("[SW] Installing a new service worker...")
+                                    console.log( "[SW] Installing a new service worker..." );
+                                    break;
+                                case "installed":
+                                    if ( navigator.serviceWorker.controller ) {
+                                      alert("Une nouvelle version est disponible.\n"+
+                                        "L'application va se recharger pour être à jour.")
+                                        console.log( "[SW] New or updated content is available, refresh!" );
+                                        document.location.reload()
+
+                                        // <paper-toast text="Hello world!" opened></paper-toast>
+                                        // refreshApp();
+                                    } else {
+                                      alert("[SW] Content is now available offline!")
+                                        console.log( "[SW] Content is now available offline!" );
+                                    }
+                                    break;
+                                case "activating":
+                                alert("[SW] Activating a service worker...")
+                                    console.log( "[SW] Activating a service worker..." );
+                                    break;
+                                case "activated":
+                                alert("[SW] Successfully activated service worker.")
+                                    console.log( "[SW] Successfully activated service worker." );
+                                    break;
+                                case "redundant":
+                                alert("[SW] Service worker has become redundant")
+                                    console.log( "[SW] Service worker has become redundant" );
+                                    break;
+                            }
+                        };
+                    };
+                } )
+                // Service worker registration failed
+                    .catch( function ( err ) {
+                      alert("[SW] Service worker registration failed: ")
+                        console.error( "[SW] Service worker registration failed: ", err );
+                    } );
+            } );
+        }
+        
 
       function loadScript(scriptSrc, onLoadCallback) {
         var script = document.createElement('script');
@@ -123,6 +187,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #666d92;
       }
     </style>
+
+<script src="../node_modules/redux/dist/redux.min.js"></script>
+
+<!--script>
+// Create a Redux store
+const store = Redux.createStore((state = {}, action) => state)
+
+// Create the PolymerRedux mixin
+const ReduxMixin = PolymerRedux(store)
+</script-->
+
+<script>
+
+</script>
 
 <script>
   (function() {
@@ -186,6 +264,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <body>
     <bingo-app></bingo-app>
     
+    
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
@@ -195,6 +274,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </html>
   
   <link rel="import" href="src/bingo-app.html" async>
+ 
   <!-- <script src="https://www.google-analytics.com/analytics.js" async></script> -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105763285-1"></script>
   
