@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer-redux/polymer-redux.html">
+
+<script>
+  initialState = {
+    musique: true,
+    effetsSonores: true,
+
+    // foo: 'foo',
+    // bar: 'bar',
+    // baz: 'baz',
+    // sub: {
+    //   path: {
+    //     qux: 'qux'
+    //   }
+    // }
+  };
+  const reducer = function (state, action) {
+    switch (action.type) {
+      case 'CHANGE_PREF_MUSIQUE':
+        const musique = (action.value !== undefined) ? action.value : !state.musique
+        return Object.assign({}, state, {
+          musique: musique
+        });
+      case 'CHANGE_PREF_EFFETSSONORES':
+        const effetsSonores = (action.value !== undefined) ? action.value : !state.effetsSonores
+        return Object.assign({}, state, {
+          effetsSonores: effetsSonores
+        });
+      // case 'FOO':
+      //       return Object.assign({}, state, {
+      //         foo: state.foo + ', foo'
+      //       });
+      //     case 'BAR':
+      //       return Object.assign({}, state, {
+      //         bar: state.bar + ', bar'
+      //       });
+      //     case 'BAZ':
+      //       return Object.assign({}, state, {
+      //         baz: state.baz + ', baz'
+      //       });
+      //     case 'QUX':
+      //       return Object.assign({}, state, {
+      //         sub: {
+      //           path: {
+      //             qux: state.sub.path.qux + ', qux'
+      //           }
+      //         }
+      //       });
+      default:
+        return state || initialState;
+    }
+  }
+  store = Redux.createStore(
+    reducer,
+    // Redux.applyMiddleware(ReduxThunk.default)
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+  // ReduxMixin = PolymerRedux(store);
+
+  // window.bingo = {};
+  // window.bingo.store = store;  
+  ReduxMixin = PolymerRedux(store);
+</script>

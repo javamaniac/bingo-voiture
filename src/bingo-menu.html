@@ -1,6 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="bingo-state.html">
 <link rel="import" href="bingo-styles.html">
+
 
 <dom-module id="bingo-menu">
   <template>
@@ -128,14 +130,18 @@
       <div style="margin-bottom: 20px;" class="bouton bouton-gauche">
           <div class="bouton-menu" on-tap="fabricants">Fabricants de voiture</div>
       </div>
+      <div>[[version]]</div>
     </div>
   </template>
 
   <script>
-    class BingoMenu extends Polymer.GestureEventListeners(Polymer.Element) {
+    class BingoMenu extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() { return 'bingo-menu'; }
       static get properties() {
         return {
+          version: {
+            value: ''
+          }
           // animConfig: {
           //   value: {
           //     enter: () => {
@@ -148,6 +154,13 @@
           //   }
           // }
         };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        const state = this.getState();
+
+        this.afficherVersion()
       }
 
       goto(route) {
@@ -189,6 +202,18 @@
           window.location = destination;
         }, 500)
 
+      }
+
+      afficherVersion() {
+        const me = this
+        const oReq = new XMLHttpRequest();
+        oReq.onload = function() {
+          const version = JSON.parse(this.responseText).version
+          me.set('version', 'Version ' + version)
+          // console.log(this.responseText);
+        };
+        oReq.open("GET", "../manifest.json");
+        oReq.send();
       }
     }
 
