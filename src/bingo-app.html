@@ -151,6 +151,9 @@
       }
 
       _pageChanged(page) {
+        if (page === 'index.html') {
+          return;
+        }
 
         let me = this;
 
@@ -185,11 +188,12 @@
 
             const elem = me.shadowRoot.querySelector(cmp)
             elem.classList.add('slideIn');
+            me.pageCourante = cmp;
           },
           // erreur
           function (e) {
             // En cas d'erreur de chargement
-            me._dLog("Erreur d'importation de " + resolvedPageUrl, e);
+            console.warn("Erreur d'importation de " + resolvedPageUrl, e);
 
             // Pour éviter une erreur de chargement circulaire
             // if (application != 'page404') {
@@ -199,7 +203,6 @@
           }, // async
           true);
 
-        this.pageCourante = cmp;
       }
 
       _insererElement(element) {
