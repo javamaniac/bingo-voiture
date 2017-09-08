@@ -96,14 +96,13 @@
           { image: dossier + 'Mazda.png' },
           { image: dossier + 'Nissan.png' },
           { image: dossier + 'Toyota.png' }
-
         ]
 
         let liste = []
 
         types.forEach(function (type) {
           type.nombre = type.nombre || 1;
-          for (var index = 0; index < type.nombre; index++) {
+          for (let index = 0; index < type.nombre; index++) {
             liste.push(Object.assign({ random: Math.random() }, type))
           }
         }, this)

@@ -68,8 +68,9 @@
 
       onChangeNiveau(niveau) {
         let translateX = 0;
-
-        for (var i = 0; i < this.children.length; i++) {
+          
+        for (let i = 0; i < this.children.length; i++) {
+        // for (let i in this.children) {
           this.children[i].removeAttribute('actif')
         }
 
