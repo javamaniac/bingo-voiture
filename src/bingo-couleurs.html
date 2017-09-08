@@ -6,6 +6,7 @@
 <link rel="import" href="bingo-modele.html">
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="bingo-icons.html">
+<link rel="import" href="bingo-state.html">
 
 <dom-module id="bingo-couleurs">
   <template>
@@ -84,7 +85,7 @@
   </template>
 
   <script>
-    class BingoCouleurs extends BingoModele {
+    class BingoCouleurs extends ReduxMixin(BingoModele) {
       static get is() { return 'bingo-couleurs' }
 
       static get properties() {
