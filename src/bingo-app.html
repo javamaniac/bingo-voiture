@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<script>Polymer.setPassiveTouchGestures(true)</script>
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="bingo-carousel.html">
@@ -89,6 +90,7 @@
 
 <!-- <paper-toast id="toast" text="Hello world!" opened></paper-toast> -->
 <paper-toast id="toastMajApplication" text="Une nouvelle version est disponible." duration="0">
+  &nbsp;
   <a href="#" onclick="document.location.reload()">Recharger l'application</a>
 </paper-toast>
 
