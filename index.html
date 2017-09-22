@@ -86,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 console.log( '[SW] Scope', registration.scope );
 
                 const refreshApp = () => {
-                  alert("L'application a été mise à jour.")
+                  // alert("L'application a été mise à jour.")
                   document.location.reload()
 
                     // let update = document.createElement( 'udes-sw-update' );
@@ -106,34 +106,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       installingWorker.onstatechange = function () {
                           switch ( installingWorker.state ) {
                               case "installing":
-                                alert("[SW] Installing a new service worker...")
                                   console.log( "[SW] Installing a new service worker..." );
                                   break;
                               case "installed":
                                   if ( navigator.serviceWorker.controller ) {
                                     window.dispatchEvent(new CustomEvent('majApplication'))
-                                    // alert("Une nouvelle version est disponible.\n"+
-                                    //   "L'application va se recharger pour être à jour.")
-                                    //   console.log( "[SW] New or updated content is available, refresh!" );
-                                    //   document.location.reload()
-
-                                      // <paper-toast text="Hello world!" opened></paper-toast>
-                                      // refreshApp();
                                   } else {
-                                    alert("[SW] Content is now available offline!")
                                       console.log( "[SW] Content is now available offline!" );
                                   }
                                   break;
                               case "activating":
-                              alert("[SW] Activating a service worker...")
                                   console.log( "[SW] Activating a service worker..." );
                                   break;
                               case "activated":
-                              alert("[SW] Successfully activated service worker.")
                                   console.log( "[SW] Successfully activated service worker." );
                                   break;
                               case "redundant":
-                              alert("[SW] Service worker has become redundant")
                                   console.log( "[SW] Service worker has become redundant" );
                                   break;
                           }
@@ -142,7 +130,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               } )
               // Service worker registration failed
                   .catch( function ( err ) {
-                    alert("[SW] Service worker registration failed: ")
                       console.error( "[SW] Service worker registration failed: ", err );
                   } );
           } );
