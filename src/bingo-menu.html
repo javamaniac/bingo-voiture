@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="bingo-state.html">
 <link rel="import" href="bingo-styles.html">
+<link rel="import" href="github-corners.html">
 
 
 <dom-module id="bingo-menu">
@@ -13,8 +14,14 @@
         padding: 10px;
       }
 
-      .icon-bingo {
-        width: 20%;
+      .icon-wrapper {
+        display: inline-block;
+        background: #666;
+        width: 20vw;
+        height: 20vw;
+      }
+      .icon-wrapper .icon-bingo {
+        width: 100%;
       }
 
       .titre {
@@ -113,9 +120,14 @@
       <source src="../sounds/beat.mp3" type="audio/mpeg">
     </audio>
 
+    <github-corners href="https://github.com/javamaniac/bingo-voiture"
+      style="margin: 0 0 0 -10px;" class="left" left="left"></github-corners>
+
     <div class="card unselectable">
       <h1>
-        <img class="icon-bingo" src="images/manifest/icon-144x144.png">
+        <div class="icon-wrapper">
+          <img class="icon-bingo" src="images/manifest/icon-144x144.png">
+        </div>
         <div class="titre">Bingo voiture</div>
       </h1>
       <div style="margin-bottom: 20px;" class="bouton bouton-droit">
@@ -161,6 +173,10 @@
         const state = this.getState();
 
         this.afficherVersion()
+
+        window.addEventListener( 'bingo-stopmusic', () => {
+          this.$.musique.pause()
+        })
       }
 
       goto(route) {
@@ -212,7 +228,7 @@
           me.set('version', 'Version ' + version)
           // console.log(this.responseText);
         };
-        oReq.open("GET", "../manifest.json");
+        oReq.open("GET", "../config.json");
         oReq.send();
       }
     }

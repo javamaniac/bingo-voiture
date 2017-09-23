@@ -1,5 +1,7 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "bingo-voiture",
+  "description": "Jeu de bingo pour les voyages en voiture",
+  "author": "Dominic Marcotte",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "eslint": "^3.19.0",

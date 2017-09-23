@@ -12,10 +12,11 @@
 
 module.exports = {
   staticFileGlobs: [
-    '/index.html',
+    'index.html',
     'images/**/*.*',
     'sounds/**.*',
     'manifest.json',
+    'config.json',
     'bower_components/webcomponentsjs/*',
     'node_modules/redux/dist/redux.min.js'
   ],
