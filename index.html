@@ -72,10 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * to indicate the path from which you'll be serving, including leading
       * and trailing slashes (e.g., `/my-app/`).
       */
-      window.Polymer = {
-        // rootPath: document.querySelector( 'base' ).href
-        rootPath: '/'
-      };
+      window.Polymer = {rootPath: '/'};
 
       // Load and register pre-caching Service Worker
       if ( 'serviceWorker' in navigator ) {
@@ -135,6 +132,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           } );
       }
 
+      document.addEventListener( 'visibilitychange', () => {
+        if (document.hidden) {
+          window.dispatchEvent(new CustomEvent('bingo-stopmusic'))
+        } else {
+          // alert('Bon retour!')
+        }
+      })      
+
       function loadScript(scriptSrc, onLoadCallback) {
         var script = document.createElement('script');
         // script.async = true;
@@ -193,6 +198,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   gtag('config', 'UA-105763285-1');
 
+/*
+Google analytiques custom 
+- appVersion
+- event
+- timingCategory
+- exDescription
+- expId
+*/
 
 
     window.addEventListener('location-changed', function(e) {
@@ -236,8 +249,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   })();
 </script>    
 
-
-  </head>
+</head>
   <body>
     <bingo-app></bingo-app>
     
@@ -245,6 +257,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Please enable JavaScript to view this website.
     </noscript>
     <!-- Built with love using Polymer Starter Kit -->
+    
+    <!-- <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style> -->
   </body>
 
   </html>
