@@ -3,13 +3,12 @@
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<!-- <link rel="import" href="bingo-modele.html"> -->
-<!-- <link rel="import" href="bingo-styles.html"> -->
+<link rel="import" href="bingo-modele.html">
+<link rel="import" href="bingo-styles.html">
 
 <dom-module id="bingo-immatriculations">
   <template>
-      <!-- include="bingo-styles" -->
-    <style>
+    <style include="bingo-styles">
        :host {
         display: block;
         height: 100vh;
@@ -102,7 +101,7 @@
   </template>
 
   <script>
-    class BingoImmatriculations extends Polymer.Element  {//BingoModele {
+    class BingoImmatriculations extends BingoModele {
       static get is() { return 'bingo-immatriculations'; }
 
       _getImmatriculation(ligne, colonne, cases) {
