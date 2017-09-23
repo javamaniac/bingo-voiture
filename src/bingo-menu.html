@@ -72,39 +72,40 @@
         animation-duration: 0.5s;
       }
 
+      /* https://css-tricks.com/myth-busting-css-animations-vs-javascript/ */
       @keyframes bouton-droit {
         from {
-          margin-left: 100vw;
+          transform: translate(100vw, 0);
         }
         to {
-          margin-left: 0;
+          transform: translate(0, 0);
         }
       }
 
       @keyframes bouton-gauche {
         from {
-          margin-left: -100vw;
+          transform: translate(-100vw, 0);
         }
         to {
-          margin-left: 0;
+          transform: translate(0, 0);
         }
       }
 
       @keyframes bouton-quitter-droit {
         from {
-          margin-left: 0;
+          transform: translate(0, 0);
         }
         to {
-          margin-left: 100vw;
+          transform: translate(100vw, 0);
         }
       }
 
       @keyframes bouton-quitter-gauche {
         from {
-          margin-left: 0;
+          transform: translate(0, 0);
         }
         to {
-          margin-left: -100vw;
+          transform: translate(-100vw, 0);
         }
       }
     </style>

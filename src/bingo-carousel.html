@@ -19,6 +19,7 @@
         /* transform: translateX(-50vw); */
         /* white-space: nowrap; */
         /* transform: translateX(-100vw); */
+
         transition: transform 500ms;
         /* word-spacing: unset; */
         /* word-wrap: normal; */
@@ -77,7 +78,7 @@
         if (niveau > 1) {
           translateX = ((niveau - 1) * -100) + "vw";
         }
-        this.$.carousel.style.transform = 'translateX(' + translateX + ')';
+        this.$.carousel.style.transform = 'translate(' + translateX + ')';
         const cmp = this.children[niveau - 1]
         cmp.setAttribute('actif', true)
 
