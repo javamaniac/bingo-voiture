@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -63,6 +64,8 @@
       <paper-icon-button on-tap="accueil" icon="bingo-icons:home"></paper-icon-button>
     </app-toolbar>
 
+    <div id="bingo" on-tap="fermerBingo"><div>Bingo!</div></div>
+
     <form>
       <div class="grid-box unselectable">
 
@@ -87,7 +90,7 @@
   </template>
 
   <script>
-    class BingoCouleurs extends ReduxMixin(BingoModele) {
+    class BingoCouleurs extends ReduxMixin(Polymer.GestureEventListeners(BingoModele)) {
       static get is() { return 'bingo-couleurs' }
 
       static get properties() {
