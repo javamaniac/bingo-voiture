@@ -20,9 +20,29 @@
           },
           bingoGagnant: {
             type: Object,
-            value: {}
+            value: {},
+            // observer: '_majNbBingo(bingoGagnant.*)'
+          },
+          nbBingo: {
+            type: Number,
+            value: 0
           }
         }
+      }
+
+      static get observers() {
+        return [
+          '_majNbBingo(bingoGagnant.*)'
+        ]
+      }
+
+      _majNbBingo(bingoGagnant) {
+        const nb = Object.keys(this.bingoGagnant).filter((l) => {
+          return this.bingoGagnant[l]
+        }).length
+        console.log('Nombre de Bingo', nb)
+
+        this.nbBingo = (nb > 1) ? nb : ''
       }
 
       connectedCallback() {
@@ -147,9 +167,9 @@
           if (!this.bingoGagnant.superBingo) {
             this.afficheBingo(true)
           }
-          this.bingoGagnant.superBingo = true
+          this.set('bingoGagnant.superBingo', true)
         } else {
-          this.bingoGagnant.superBingo = undefined
+          this.set('bingoGagnant.superBingo', undefined)
         }
       }
 
@@ -167,9 +187,9 @@
             if (!this.bingoGagnant['ligne' + indexLigne]) {
               this.afficheBingo(true)
             }
-            this.bingoGagnant['ligne' + indexLigne] = true
+            this.set('bingoGagnant.' + 'ligne' + indexLigne, true)
           } else {
-            this.bingoGagnant['ligne' + indexLigne] = undefined
+            this.set('bingoGagnant.' + 'ligne' + indexLigne, null)
           }
         })
       }
@@ -188,9 +208,9 @@
             if (!this.bingoGagnant['colonne' + indexColonne]) {
               this.afficheBingo(true)
             }
-            this.bingoGagnant['colonne' + indexColonne] = true
+            this.set('bingoGagnant.colonne' + indexColonne, true)
           } else {
-            this.bingoGagnant['colonne' + indexColonne] = undefined
+            this.set('bingoGagnant.colonne' + indexColonne, undefined)
           }
         })
       }
@@ -204,9 +224,9 @@
           if (!this.bingoGagnant.diagonale1) {
             this.afficheBingo(true)
           }
-          this.bingoGagnant.diagonale1 = true
+          this.set('bingoGagnant.diagonale1', true)
         } else {
-          this.bingoGagnant.diagonale1 = undefined
+          this.set('bingoGagnant.diagonale1', undefined)
         }
 
         if (this.getValeurCase(0, 4)
@@ -217,9 +237,9 @@
           if (!this.bingoGagnant.diagonale2) {
             this.afficheBingo(true)
           }
-          this.bingoGagnant.diagonale2 = true
+          this.set('bingoGagnant.diagonale2', true)
         } else {
-          this.bingoGagnant.diagonale2 = undefined
+          this.set('bingoGagnant.diagonale2', undefined)
         }
       }
 
