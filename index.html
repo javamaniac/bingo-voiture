@@ -276,20 +276,30 @@ Google analytiques custom
     max-width: 150px;
     max-height: 150px;
     }
-
+    .titre {
+      display: inline-block;
+      position: absolute;
+      margin: 10px 30px;
+      font-size: 7vw;
+      text-shadow: 5px 3px 19px #aaaaaa;
+}
     h1 {
       margin: 16px 0;
     color: #212121;
     font-size: 22px;
     }
+    .icon-wrapper .icon-bingo {
+    width: 100%;
+}
 
     </style>
-    <div class="card unselectable">
+    <div class="card unselectable" style="/*margin-top: -300px;*/">
         <h1>
           <div class="icon-wrapper">
-            &nbsp;
+              <img class="icon-bingo" src="images/manifest/icon-2x2.png">
+            <!-- &nbsp; -->
           </div>
-          <!-- <div class="titre">Bingo voiture</div> -->
+          <div class="titre">Bingo voiture</div>
         </h1>
         <div style="margin-bottom: 20px; height: 36px">
             <div class="bouton-menu">&nbsp;</div>
@@ -314,5 +324,7 @@ Google analytiques custom
   
   <link rel="import" href="src/bingo-app.html" async>
   <!-- <script src="https://www.google-analytics.com/analytics.js" async></script> -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105763285-1"></script>
+
+  <!-- TODO defer -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105763285-1"></script> -->
   
