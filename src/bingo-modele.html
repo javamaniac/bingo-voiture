@@ -17,6 +17,10 @@
           },
           colonnes: {
             value: ['b', 'i', 'n', 'g', 'o']
+          },
+          bingoGagnant: {
+            type: Object,
+            value: {}
           }
         }
       }
@@ -27,8 +31,8 @@
 
       _getCase(ligne, colonne, cases) {
         // if (this.cases) {
-          let index = ligne * 5 + colonne;
-          return this.cases[index]
+        let index = ligne * 5 + colonne;
+        return this.cases[index]
         // }
       }
 
@@ -64,51 +68,51 @@
       accueil() {
         history.back();
 
-//         const animKeyframes = [
-//           { transform: 'translateX(0%)' },
-//           {  transform: 'translateX(150%)' }
-//           // { opacity: 1 },
-//           // { opacity: 0 }
-//           // { 'margin-left': -200 },
-//           // { 'margin-left': 0 }
-//         ]
-//         const animationTiming = {
-//           duration: 70000, //milliseconds
-//           easing: 'ease-in-out', //'linear', a bezier curve, etc.
-//           delay: 10, //milliseconds
-//           iterations: 1, // Infinity or a number
-//           direction: 'alternate', //'normal', 'reverse', etc.
-//           fill: 'forwards' //'backwards', 'both', 'none', 'auto'
-//         }
-//         this.shadowRoot.querySelectorAll('.car-anim').forEach((car) => {
-//           car.animate(animKeyframes, animationTiming)
-//         })
+        //         const animKeyframes = [
+        //           { transform: 'translateX(0%)' },
+        //           {  transform: 'translateX(150%)' }
+        //           // { opacity: 1 },
+        //           // { opacity: 0 }
+        //           // { 'margin-left': -200 },
+        //           // { 'margin-left': 0 }
+        //         ]
+        //         const animationTiming = {
+        //           duration: 70000, //milliseconds
+        //           easing: 'ease-in-out', //'linear', a bezier curve, etc.
+        //           delay: 10, //milliseconds
+        //           iterations: 1, // Infinity or a number
+        //           direction: 'alternate', //'normal', 'reverse', etc.
+        //           fill: 'forwards' //'backwards', 'both', 'none', 'auto'
+        //         }
+        //         this.shadowRoot.querySelectorAll('.car-anim').forEach((car) => {
+        //           car.animate(animKeyframes, animationTiming)
+        //         })
 
-//         function whichTransitionEvent(){
-//     var t;
-//     var el = document.createElement('fakeelement');
-//     var transitions = {
-//       'transition':'transitionend',
-//       'OTransition':'oTransitionEnd',
-//       'MozTransition':'transitionend',
-//       'WebkitTransition':'webkitTransitionEnd'
-//     }
+        //         function whichTransitionEvent(){
+        //     var t;
+        //     var el = document.createElement('fakeelement');
+        //     var transitions = {
+        //       'transition':'transitionend',
+        //       'OTransition':'oTransitionEnd',
+        //       'MozTransition':'transitionend',
+        //       'WebkitTransition':'webkitTransitionEnd'
+        //     }
 
-//     for(t in transitions){
-//         if( el.style[t] !== undefined ){
-//             return transitions[t];
-//         }
-//     }
-// }
-// /* Listen for a transition! */
-// var transitionEvent = whichTransitionEvent();
-// transitionEvent && e.addEventListener(transitionEvent, function() {
-// 	console.log('Transition complete!  This is the callback, no library needed!');
-// });
+        //     for(t in transitions){
+        //         if( el.style[t] !== undefined ){
+        //             return transitions[t];
+        //         }
+        //     }
+        // }
+        // /* Listen for a transition! */
+        // var transitionEvent = whichTransitionEvent();
+        // transitionEvent && e.addEventListener(transitionEvent, function() {
+        // 	console.log('Transition complete!  This is the callback, no library needed!');
+        // });
 
         // var animations = document.getAnimations ? document.getAnimations() : document.timeline.getAnimations();
         // animations[0].onfinish = function () {
-          // this.goto('menu')
+        // this.goto('menu')
         // };
 
         // 
@@ -125,7 +129,7 @@
       }
 
       pop() {
-        this.dispatchEvent(new CustomEvent('bingo-pop', {bubbles: true, composed: true}))
+        this.dispatchEvent(new CustomEvent('bingo-pop', { bubbles: true, composed: true }))
 
         this.verifierBingo()
       }
@@ -140,13 +144,18 @@
       verifierSuperBingo() {
         const nbX = this.shadowRoot.querySelectorAll('.grid-box input[type=checkbox]:checked').lenght
         if (nbX === 25) {
-          this.afficheBingo(true)
+          if (!this.bingoGagnant.superBingo) {
+            this.afficheBingo(true)
+          }
+          this.bingoGagnant.superBingo = true
+        } else {
+          this.bingoGagnant.superBingo = undefined
         }
       }
 
       verificationDesLignes() {
-        const lignes = [0,1,2,3,4]
-        const colonnes = [0,1,2,3,4]
+        const lignes = [0, 1, 2, 3, 4]
+        const colonnes = [0, 1, 2, 3, 4]
         lignes.forEach((indexLigne) => {
           let nbX = 0
           colonnes.forEach((indexColonne) => {
@@ -155,14 +164,19 @@
             }
           })
           if (nbX === 5) {
-            this.afficheBingo(true)
+            if (!this.bingoGagnant['ligne' + indexLigne]) {
+              this.afficheBingo(true)
+            }
+            this.bingoGagnant['ligne' + indexLigne] = true
+          } else {
+            this.bingoGagnant['ligne' + indexLigne] = undefined
           }
         })
       }
 
       verificationDesColonnes() {
-        const colonnes = [0,1,2,3,4]
-        const lignes = [0,1,2,3,4]
+        const colonnes = [0, 1, 2, 3, 4]
+        const lignes = [0, 1, 2, 3, 4]
         colonnes.forEach((indexColonne) => {
           let nbX = 0
           lignes.forEach((indexLigne) => {
@@ -171,26 +185,42 @@
             }
           })
           if (nbX === 5) {
-            this.afficheBingo(true)
+            if (!this.bingoGagnant['colonne' + indexColonne]) {
+              this.afficheBingo(true)
+            }
+            this.bingoGagnant['colonne' + indexColonne] = true
+          } else {
+            this.bingoGagnant['colonne' + indexColonne] = undefined
           }
         })
       }
 
       verificationDesDiagonales() {
-        if (this.getValeurCase(0, 0) 
-        && this.getValeurCase(1, 1) 
-        && this.getValeurCase(2, 2) 
-        && this.getValeurCase(3, 3) 
-        && this.getValeurCase(4, 4)) {
-          this.afficheBingo(true)
-        } 
-        if (this.getValeurCase(0, 4) 
-        && this.getValeurCase(1, 3) 
-        && this.getValeurCase(2, 2) 
-        && this.getValeurCase(3, 1) 
-        && this.getValeurCase(4, 0)) {
-          this.afficheBingo(true)
-        } 
+        if (this.getValeurCase(0, 0)
+          && this.getValeurCase(1, 1)
+          && this.getValeurCase(2, 2)
+          && this.getValeurCase(3, 3)
+          && this.getValeurCase(4, 4)) {
+          if (!this.bingoGagnant.diagonale1) {
+            this.afficheBingo(true)
+          }
+          this.bingoGagnant.diagonale1 = true
+        } else {
+          this.bingoGagnant.diagonale1 = undefined
+        }
+
+        if (this.getValeurCase(0, 4)
+          && this.getValeurCase(1, 3)
+          && this.getValeurCase(2, 2)
+          && this.getValeurCase(3, 1)
+          && this.getValeurCase(4, 0)) {
+          if (!this.bingoGagnant.diagonale2) {
+            this.afficheBingo(true)
+          }
+          this.bingoGagnant.diagonale2 = true
+        } else {
+          this.bingoGagnant.diagonale2 = undefined
+        }
       }
 
       getValeurCase(indexLigne, indexColonne) {
@@ -202,7 +232,7 @@
         max = Math.floor(max)
         return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
       }
-      
+
       getTypes() {
         return []
       }
