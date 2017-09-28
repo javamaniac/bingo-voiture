@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="bingo-icons.html">
-<link rel="import" href="bingo-state.html">
+<!-- <link rel="import" href="bingo-state.html"> -->
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="github-corners.html">
 
@@ -165,7 +165,8 @@
   </template>
 
   <script>
-    class BingoMenu extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
+    // ReduxMixin
+    class BingoMenu extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() { return 'bingo-menu'; }
       static get properties() {
         return {
@@ -213,7 +214,7 @@
 
       connectedCallback() {
         super.connectedCallback();
-        const state = this.getState();
+        // const state = this.getState();
 
         this.afficherVersion()
 

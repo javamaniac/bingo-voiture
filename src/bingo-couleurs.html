@@ -95,7 +95,8 @@
   </template>
 
   <script>
-    class BingoCouleurs extends ReduxMixin(Polymer.GestureEventListeners(BingoModele)) {
+    // ReduxMixin
+    class BingoCouleurs extends Polymer.GestureEventListeners(BingoModele) {
       static get is() { return 'bingo-couleurs' }
 
       static get properties() {
