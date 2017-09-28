@@ -38,7 +38,13 @@
       <paper-icon-button on-tap="accueil" icon="bingo-icons:home"></paper-icon-button>
     </app-toolbar>
 
-    <div id="bingo" on-tap="fermerBingo"><div>Bingo!</div></div>
+    <div id="bingo" on-tap="fermerBingo">
+        <div>Bingo!
+          <template is="dom-if" if="[[nbBingo]]">
+            <sup style="font-size: 0.6em;">[[nbBingo]]</sup>
+          </template>
+        </div>
+      </div>
     
     <form>
       <div class="grid-box unselectable">
