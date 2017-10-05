@@ -96,10 +96,13 @@
 
   <script>
     // ReduxMixin
-    class BingoCouleurs extends Polymer.GestureEventListeners(BingoModele) {
-      static get is() { return 'bingo-couleurs' }
+    /**
+     * @mixins {BingoModele}
+     */
+    class BingoCouleurs extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+      static get is () { return 'bingo-couleurs' }
 
-      static get properties() {
+      static get properties () {
         return {
           lignes: {
             value: []
@@ -107,22 +110,22 @@
         }
       }
 
-      _getCouleur(ligne, colonne, cases) {
+      _getCouleur (ligne, colonne, cases) {
         // if (cases) {
-          return this._getCase(ligne, colonne, cases).couleur
+        return this._getCase(ligne, colonne, cases).couleur
         // }
       }
 
-      connectedCallback() {
-        super.connectedCallback();
+      connectedCallback () {
+        super.connectedCallback()
 
         setTimeout(x => {
-          this.set('lignes', [1, 2, 3, 4, 5]);
+          this.set('lignes', [1, 2, 3, 4, 5])
           this.$.vroum.play()
         }, 200)
       }
 
-      reset() {
+      reset () {
         this.$.vroum.play()
 
         let cars = this.shadowRoot.querySelectorAll('.car')
@@ -138,8 +141,8 @@
           car.classList.remove(ancienneClsAnim)
           car.classList.add(nouvClsAnim)
         })
-        super.reset();
-      }
+        super.reset()
+  }
 
       // createCases() {
       //   setTimeout(x => {
@@ -147,7 +150,7 @@
       //   }, 2000)
       // }
 
-      getTypes() {
+      getTypes () {
         let types = [
           {
             nom: 'rouge',
@@ -206,7 +209,7 @@
         }, this)
 
         if (liste.length !== 25) {
-          throw "Il n'y a pas 25 voitures! (" + liste.length + ")"
+          throw new Error("Il n'y a pas 25 voitures! (" + liste.length + ')')
         }
 
         return liste

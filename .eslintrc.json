@@ -1,21 +1,39 @@
 {
-  "extends": ["eslint:recommended", "google"],
-  "parserOptions": {
-    "ecmaVersion": 6
+
+  "debug": {
+    "extends": ["plugin:polymer/polymer-2"],
+    "plugins": [
+      "polymer"
+    ]
   },
-  "env": {
-    "browser": true
-  },
-  "plugins": [
-    "html"
-  ],
-  "rules": {
-    "brace-style": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }],
-    "no-var": "off",
-    "require-jsdoc": "off"
-  },
-  "globals": {
-    "Polymer": true
-  }
+  
+  
+    "extends": ["standard"],
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "settings": {
+      "ecmascript": 6
+    },
+    "plugins": [
+      "html"
+    ],
+    "rules": {
+      "brace-style": "off",
+      "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }],
+      "no-var": "off",
+      "require-jsdoc": "off"
+    },
+    "globals": {
+      "Polymer": true,
+      "Bingo": true,
+      "Temp": true,
+      "document": true,
+      "window": true
+    }
+
 }

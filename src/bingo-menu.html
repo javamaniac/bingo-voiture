@@ -6,7 +6,6 @@
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="github-corners.html">
 
-
 <dom-module id="bingo-menu">
   <template>
     <style include="bingo-styles">
@@ -167,8 +166,8 @@
   <script>
     // ReduxMixin
     class BingoMenu extends Polymer.GestureEventListeners(Polymer.Element) {
-      static get is() { return 'bingo-menu'; }
-      static get properties() {
+      static get is () { return 'bingo-menu' }
+      static get properties () {
         return {
           version: {
             value: ''
@@ -192,14 +191,14 @@
           //     }
           //   }
           // }
-        };
-      }
+        }
+  }
 
-      basculerMusique() {
+      basculerMusique () {
         this.activerMusique = !this.activerMusique
       }
 
-      computeEtatMusique() {  
+      computeEtatMusique () {
         const musique = this.$.musique
 
         if (this.activerMusique) {
@@ -212,9 +211,9 @@
         return (this.activerMusique) ? 'bingo-icons:musique' : 'bingo-icons:sans-musique'
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        // const state = this.getState();
+      connectedCallback () {
+        super.connectedCallback()
+    // const state = this.getState();
 
         this.afficherVersion()
 
@@ -223,7 +222,7 @@
         })
       }
 
-      goto(route) {
+      goto (route) {
         this.$.musique.pause()
         this.$.musique.currentTime = 0
         history.pushState({}, '', route)
@@ -234,20 +233,20 @@
         }))
       }
 
-      couleurs() {
+      couleurs () {
         this.goto('couleurs')
       }
-      immatriculation() {
+      immatriculation () {
         this.goto('immatriculations')
       }
-      signalisation() {
+      signalisation () {
         this.goto('signalisation')
       }
-      fabricants() {
+      fabricants () {
         this.goto('fabricants')
       }
 
-      quitterMenu(destination) {
+      quitterMenu (destination) {
         this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {
           let isPair = index % 2
           bouton.classList.remove('bouton-droit')
@@ -259,24 +258,23 @@
           }
         })
         setTimeout(() => {
-          window.location = destination;
+          window.location = destination
         }, 500)
+  }
 
-      }
-
-      afficherVersion() {
+      afficherVersion () {
         const me = this
-        const oReq = new XMLHttpRequest();
+        const oReq = new XMLHttpRequest()
         oReq.onload = function () {
           const version = JSON.parse(this.responseText).version
           me.set('version', 'Version ' + version)
           // console.log(this.responseText);
-        };
-        oReq.open("GET", "../config.json");
-        oReq.send();
-      }
+        }
+        oReq.open('GET', '../config.json')
+        oReq.send()
+  }
     }
 
-    window.customElements.define(BingoMenu.is, BingoMenu);
+    window.customElements.define(BingoMenu.is, BingoMenu)
   </script>
 </dom-module>

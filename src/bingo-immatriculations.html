@@ -110,19 +110,19 @@
   </template>
 
   <script>
-    class BingoImmatriculations extends Polymer.GestureEventListeners(BingoModele) {
-      static get is() { return 'bingo-immatriculations'; }
+    class BingoImmatriculations extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+      static get is () { return 'bingo-immatriculations' }
 
-      _getImmatriculation(ligne, colonne, cases) {
+      _getImmatriculation (ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).immatriculation
       }
 
-      connectedCallback() {
+      connectedCallback () {
         super.connectedCallback()
         this.$.vroum.play()
       }
 
-      getTypes() {
+      getTypes () {
         let types = [
           {
             immatriculation: 'J',
@@ -190,8 +190,8 @@
         let liste = []
 
         types.forEach(function (type) {
-          if (type.nombre == undefined) {
-            type.nombre = 1;
+          if (type.nombre === undefined) {
+            type.nombre = 1
           }
           for (let index = 0; index < type.nombre; index++) {
             liste.push(Object.assign({ random: Math.random() }, type))
@@ -200,9 +200,8 @@
 
         return liste
       }
+}
 
-    }
-
-    window.customElements.define(BingoImmatriculations.is, BingoImmatriculations);
+    window.customElements.define(BingoImmatriculations.is, BingoImmatriculations)
   </script>
 </dom-module>

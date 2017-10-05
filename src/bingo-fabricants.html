@@ -69,15 +69,15 @@
   </template>
 
   <script>
-    class BingoFabricants extends Polymer.GestureEventListeners(BingoModele) {
-      static get is() { return 'bingo-fabricants' }
+    class BingoFabricants extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+      static get is () { return 'bingo-fabricants' }
 
-      _getImage(ligne, colonne, cases) {
+      _getImage (ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).image
       }
 
-      getTypes() {
-        let dossier = 'images/logo-voitures/118x118/';
+      getTypes () {
+        let dossier = 'images/logo-voitures/118x118/'
         let types = [
           { image: dossier + 'Acura.png' },
           { image: dossier + 'Audi.png' },
@@ -110,14 +110,14 @@
         let liste = []
 
         types.forEach(function (type) {
-          type.nombre = type.nombre || 1;
+          type.nombre = type.nombre || 1
           for (let index = 0; index < type.nombre; index++) {
             liste.push(Object.assign({ random: Math.random() }, type))
           }
         }, this)
 
         if (liste.length !== 25) {
-          throw "Il n'y a pas 25 voitures! (" + liste.length + ")"
+          throw new Error("Il n'y a pas 25 voitures! (" + liste.length + ')')
         }
         return liste
       }

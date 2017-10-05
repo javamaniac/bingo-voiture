@@ -75,24 +75,24 @@
   </template>
 
   <script>
-    class BingoSignalisation extends Polymer.GestureEventListeners(BingoModele) {
-      static get is() { return 'bingo-signalisation' }
+    class BingoSignalisation extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+      static get is () { return 'bingo-signalisation' }
 
-      connectedCallback() {
-        super.connectedCallback();
+      connectedCallback () {
+        super.connectedCallback()
 
-        setTimeout(x => {          
+        setTimeout(x => {
           this.$.gridBox.classList.add('anim')
           // this.$.vroum.play()
         }, 300)
       }
 
-      _getImage(ligne, colonne, cases) {
+      _getImage (ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).image
       }
 
-      getTypes() {
-        let dossier = 'images/signalisation/115x115/';
+      getTypes () {
+        let dossier = 'images/signalisation/115x115/'
         let types = [
           { image: dossier + '4Stops.png' },
           { image: dossier + '65kmh.png' },
@@ -124,14 +124,14 @@
         let liste = []
 
         types.forEach(function (type) {
-          type.nombre = type.nombre || 1;
+          type.nombre = type.nombre || 1
           for (let index = 0; index < type.nombre; index++) {
             liste.push(Object.assign({ random: Math.random() }, type))
           }
         }, this)
 
         if (liste.length !== 25) {
-          throw "Il n'y a pas 25 voitures! (" + liste.length + ")"
+          throw new Error("Il n'y a pas 25 voitures! (" + liste.length + ')')
         }
         return liste
       }
