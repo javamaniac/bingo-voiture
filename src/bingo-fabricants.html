@@ -39,13 +39,13 @@
     </app-toolbar>
 
     <div id="bingo" on-tap="fermerBingo">
-        <div>Bingo!
-          <template is="dom-if" if="[[nbBingo]]">
-            <sup style="font-size: 0.6em;">[[nbBingo]]</sup>
-          </template>
-        </div>
+      <div>Bingo!
+        <template is="dom-if" if="[[nbBingo]]">
+          <sup style="font-size: 0.6em;">[[nbBingo]]</sup>
+        </template>
       </div>
-    
+    </div>
+
     <form>
       <div class="grid-box unselectable">
 
@@ -70,13 +70,13 @@
 
   <script>
     class BingoFabricants extends Polymer.GestureEventListeners(Bingo.BingoModele) {
-      static get is () { return 'bingo-fabricants' }
+      static get is() { return 'bingo-fabricants' }
 
-      _getImage (ligne, colonne, cases) {
+      _getImage(ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).image
       }
 
-      getTypes () {
+      getTypes() {
         let dossier = 'images/logo-voitures/118x118/'
         let types = [
           { image: dossier + 'Acura.png' },

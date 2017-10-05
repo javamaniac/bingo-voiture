@@ -34,7 +34,7 @@
           /* margin-left: 0; */
           transform: translate(0, 0);
         }
-      } 
+      }
 
       .car-anim2 {
         animation-name: car2;
@@ -82,7 +82,7 @@
                 <label class="case iconSvg" for$="case-[[l]]-[[c]]">
                   <iron-icon icon="bingo-icons:clear" class="x2"></iron-icon>
                   <iron-icon icon="bingo-icons:clear" class="x"></iron-icon>
-                  <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style="color: [[_getCouleur(l, c, cases)]]"></iron-icon>
+                  <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style$="color: [[_getCouleur(l, c, cases)]]"></iron-icon>
                 </label>
               </div>
             </template>
@@ -100,9 +100,9 @@
      * @mixins {BingoModele}
      */
     class BingoCouleurs extends Polymer.GestureEventListeners(Bingo.BingoModele) {
-      static get is () { return 'bingo-couleurs' }
+      static get is() { return 'bingo-couleurs' }
 
-      static get properties () {
+      static get properties() {
         return {
           lignes: {
             value: []
@@ -110,13 +110,13 @@
         }
       }
 
-      _getCouleur (ligne, colonne, cases) {
+      _getCouleur(ligne, colonne, cases) {
         // if (cases) {
         return this._getCase(ligne, colonne, cases).couleur
         // }
       }
 
-      connectedCallback () {
+      connectedCallback() {
         super.connectedCallback()
 
         setTimeout(x => {
@@ -125,7 +125,7 @@
         }, 200)
       }
 
-      reset () {
+      reset() {
         this.$.vroum.play()
 
         let cars = this.shadowRoot.querySelectorAll('.car')
@@ -142,7 +142,7 @@
           car.classList.add(nouvClsAnim)
         })
         super.reset()
-  }
+      }
 
       // createCases() {
       //   setTimeout(x => {
@@ -150,7 +150,7 @@
       //   }, 2000)
       // }
 
-      getTypes () {
+      getTypes() {
         let types = [
           {
             nom: 'rouge',

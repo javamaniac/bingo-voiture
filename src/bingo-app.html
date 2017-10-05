@@ -1,5 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<script>Polymer.setPassiveTouchGestures(true)</script>
+<script>
+  Polymer.setPassiveTouchGestures(true)
+</script>
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="bingo-carousel.html">
@@ -11,6 +13,7 @@
    * @namespace Bingo
    */
   window.Bingo = {}
+
 </script>
 
 <dom-module id="bingo-app">
@@ -79,9 +82,9 @@
           opacity: 1;
         }
       }
-
       /* patch pour FF */
-      bingo-carousel > *,
+
+      bingo-carousel>*,
       bingo-menu,
       #contenu {
         width: 100vw;
@@ -96,9 +99,8 @@
     </paper-toast>
 
     <audio id="pop">
-      
-          <source src="../sounds/pop.mp3" type="audio/mpeg">
-        </audio>
+      <source src="../sounds/pop.mp3" type="audio/mpeg">
+    </audio>
 
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
@@ -112,9 +114,9 @@
 
   <script>
     class BingoApp extends Polymer.LazyImportsMixin(Polymer.Element) {
-      static get is () { return 'bingo-app' }
-      
-      static get properties () {
+      static get is() { return 'bingo-app' }
+
+      static get properties() {
         return {
           page: {
             type: String,
@@ -127,63 +129,59 @@
           // Polymer.Element#rootPath
           rootPath: String
         }
-  }
+      }
 
-      ready () {
+      ready() {
         super.ready()
         this.addEventListener('bingo-pop', e => this._pop(e))
 
         window.addEventListener('majApplication', e => {
           this.$.toastMajApplication.opened = true
         })
-  }
+      }
 
-      static get observers () {
+      static get observers() {
         return [
           '_routePageChanged(routeData.page)'
         ]
-  }
+      }
 
-      _routePageChanged (page) {
+      _routePageChanged(page) {
         this.page = page || 'menu'
         this.dispatchEvent(new CustomEvent('change-page', {}))
       }
 
-      _pop () {
+      _pop() {
         this.$.pop.currentTime = 0
         this.$.pop.play()
       }
 
-      _pageChanged (page) {
+      _pageChanged(page) {
         if (page === 'index.html') {
           return
         }
-
-        let me = this
 
         if (page === 'menu') {
           this.$.carousel.niveau = 1
           this._insererElement('')
         } else {
-          me.majDom(page)
+          this.majDom(page)
           this.$.carousel.niveau = 2
         }
       }
 
-      majDom (page) {
+      majDom(page) {
         // if elem courant a un animConfig exit, joue!
         // const pageCour = this.shadowRoot.querySelector('bingo-' + page);
         // const p = this.shadowRoot.querySelector('bingo-menu')
 
         const cmp = 'bingo-' + page
 
-
-
-    // Load page import on demand. Show 404 page if fails
+        // Load page import on demand. Show 404 page if fails
         const resolvedPageUrl = this.resolveUrl(cmp + '.html')
 
         const me = this
-    // Chargement du composant et de ses dépendances
+        // Chargement du composant et de ses dépendances
         Polymer.importHref(
           resolvedPageUrl,
           // succès
@@ -201,29 +199,29 @@
             // En cas d'erreur de chargement
             console.warn("Erreur d'importation de " + resolvedPageUrl, e)
 
-        // Pour éviter une erreur de chargement circulaire
-        // if (application != 'page404') {
-        //   // Charger et afficher une page 404
-        //   me._chargerApplication('page404');
-        // }
+            // Pour éviter une erreur de chargement circulaire
+            // if (application != 'page404') {
+            //   // Charger et afficher une page 404
+            //   me._chargerApplication('page404');
+            // }
           }, // async
           true)
 
-  }
+      }
 
-      _insererElement (element) {
+      _insererElement(element) {
         const me = this
         Polymer.dom(me.$.contenu).innerHTML = element
 
-    // Variante
-    // injection dynamique de l'élément qui remplace l'élément précédent
-    //        this.$.contenu.innerHTML = '<' + nomElement + '></' + nomElement + '>';
-    // c.$.contenu.appendChild(item);
-  }
+        // Variante
+        // injection dynamique de l'élément qui remplace l'élément précédent
+        //        this.$.contenu.innerHTML = '<' + nomElement + '></' + nomElement + '>';
+        // c.$.contenu.appendChild(item);
+      }
 
-      _showPage404 () {
+      _showPage404() {
         this.page = 'view404'
-  }
+      }
     }
 
     window.customElements.define(BingoApp.is, BingoApp)

@@ -23,24 +23,24 @@
    * gesture events to nodes
    */
   Bingo.BingoModele = Polymer.dedupingMixin(superClass => {
-  /**
-     * @polymer
-     * @mixinClass
-     * @implements {Bingo_BingoModele}
-     */
+    /**
+       * @polymer
+       * @mixinClass
+       * @implements {Bingo_BingoModele}
+       */
     class BingoModele extends superClass {
-    // <dom-module id="bingo-modele">
+      // <dom-module id="bingo-modele">
       // <script>
       /**
        * @typeof {BingoModele}
        */
       // class BingoModele extends Polymer.Element {
       // static get is () { return 'bingo-modele' }
-      static get properties () {
+      static get properties() {
         return {
           /**
            * Cases
-           */ 
+           */
           cases: {
             type: Array,
             value: function () {
@@ -65,13 +65,13 @@
         }
       }
 
-      static get observers () {
+      static get observers() {
         return [
           '_majNbBingo(bingoGagnant.*)'
         ]
       }
 
-      _majNbBingo (bingoGagnant) {
+      _majNbBingo(bingoGagnant) {
         const nb = Object.keys(this.bingoGagnant).filter((l) => {
           return this.bingoGagnant[l]
         }).length
@@ -80,25 +80,25 @@
         this.nbBingo = (nb > 1) ? nb : ''
       }
 
-      connectedCallback () {
+      connectedCallback() {
         super.connectedCallback()
       }
 
-      _getCase (ligne, colonne, cases) {
+      _getCase(ligne, colonne, cases) {
         // if (this.cases) {
         let index = ligne * 5 + colonne
         return this.cases[index]
         // }
       }
 
-      reset () {
+      reset() {
         this.afficheBingo(false)
         this.shadowRoot.querySelector('form').reset()
         this.set('cases', this.createCases())
         // car-anim
       }
 
-      afficheBingo (affiche) {
+      afficheBingo(affiche) {
         const bingo = this.shadowRoot.querySelector('#bingo')
         if (affiche) {
           bingo.classList.add('visible')
@@ -107,11 +107,11 @@
         }
       }
 
-      fermerBingo () {
+      fermerBingo() {
         this.afficheBingo(false)
       }
 
-      goto (route) {
+      goto(route) {
         history.pushState({}, '', route)
         window.dispatchEvent(new CustomEvent('location-changed', {
           detail: {
@@ -120,11 +120,11 @@
         }))
       }
 
-      accueil () {
+      accueil() {
         history.back()
       }
 
-      createCases () {
+      createCases() {
         let cases = this.getTypes()
 
         cases.sort((caseX, caseY) => {
@@ -134,20 +134,20 @@
         return cases
       }
 
-      pop () {
+      pop() {
         this.dispatchEvent(new CustomEvent('bingo-pop', { bubbles: true, composed: true }))
 
         this.verifierBingo()
       }
 
-      verifierBingo () {
+      verifierBingo() {
         this.verificationDesLignes()
         this.verificationDesColonnes()
         this.verificationDesDiagonales()
         this.verifierSuperBingo()
       }
 
-      verifierSuperBingo () {
+      verifierSuperBingo() {
         const nbX = this.shadowRoot.querySelectorAll('.grid-box input[type=checkbox]:checked').lenght
         if (nbX === 25) {
           if (!this.bingoGagnant.superBingo) {
@@ -159,7 +159,7 @@
         }
       }
 
-      verificationDesLignes () {
+      verificationDesLignes() {
         const lignes = [0, 1, 2, 3, 4]
         const colonnes = [0, 1, 2, 3, 4]
         lignes.forEach((indexLigne) => {
@@ -180,7 +180,7 @@
         })
       }
 
-      verificationDesColonnes () {
+      verificationDesColonnes() {
         const colonnes = [0, 1, 2, 3, 4]
         const lignes = [0, 1, 2, 3, 4]
         colonnes.forEach((indexColonne) => {
@@ -201,7 +201,7 @@
         })
       }
 
-      verificationDesDiagonales () {
+      verificationDesDiagonales() {
         if (this.getValeurCase(0, 0) &&
           this.getValeurCase(1, 1) &&
           this.getValeurCase(2, 2) &&
@@ -229,22 +229,23 @@
         }
       }
 
-      getValeurCase (indexLigne, indexColonne) {
+      getValeurCase(indexLigne, indexColonne) {
         return this.shadowRoot.querySelector(`#case-${indexLigne}-${indexColonne}`).checked
       }
 
-      getRandomInt (min, max) {
+      getRandomInt(min, max) {
         min = Math.ceil(min)
         max = Math.floor(max)
         return Math.floor(Math.random() * (max - min)) + min // The maximum is exclusive and the minimum is inclusive
       }
 
-      getTypes () {
+      getTypes() {
         return []
       }
     }
   })
 
     // window.customElements.define(BingoModele.is, BingoModele)
+
 </script>
 <!-- </dom-module> -->

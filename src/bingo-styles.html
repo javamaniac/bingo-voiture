@@ -202,7 +202,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       #bingo {
         opacity: 0;
-        left: 200vw; /* Hors du cadre pour ne pas nuire aux clics */
+        left: 200vw;
+        /* Hors du cadre pour ne pas nuire aux clics */
         transition: opacity 0.5s ease-in;
         position: absolute;
         /* vertical-align: -webkit-baseline-middle; */
@@ -215,6 +216,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: flex;
         background: rgba(0, 0, 0, 0.33);
       }
+
       #bingo div {
         cursor: pointer;
         background: red;
@@ -239,6 +241,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         -o-transform: rotate(-10deg);
         margin-top: 25vh;
       }
+
       #bingo.visible {
         opacity: 1;
         left: 100vw;

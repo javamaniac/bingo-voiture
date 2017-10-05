@@ -130,7 +130,7 @@
         cursor: pointer;
       }
     </style>
-        
+
     <audio id="musique" loop>
       <source src="../sounds/beat.mp3" type="audio/mpeg">
     </audio>
@@ -166,8 +166,8 @@
   <script>
     // ReduxMixin
     class BingoMenu extends Polymer.GestureEventListeners(Polymer.Element) {
-      static get is () { return 'bingo-menu' }
-      static get properties () {
+      static get is() { return 'bingo-menu' }
+      static get properties() {
         return {
           version: {
             value: ''
@@ -192,13 +192,13 @@
           //   }
           // }
         }
-  }
+      }
 
-      basculerMusique () {
+      basculerMusique() {
         this.activerMusique = !this.activerMusique
       }
 
-      computeEtatMusique () {
+      computeEtatMusique() {
         const musique = this.$.musique
 
         if (this.activerMusique) {
@@ -211,9 +211,9 @@
         return (this.activerMusique) ? 'bingo-icons:musique' : 'bingo-icons:sans-musique'
       }
 
-      connectedCallback () {
+      connectedCallback() {
         super.connectedCallback()
-    // const state = this.getState();
+        // const state = this.getState();
 
         this.afficherVersion()
 
@@ -222,7 +222,7 @@
         })
       }
 
-      goto (route) {
+      goto(route) {
         this.$.musique.pause()
         this.$.musique.currentTime = 0
         history.pushState({}, '', route)
@@ -233,20 +233,20 @@
         }))
       }
 
-      couleurs () {
+      couleurs() {
         this.goto('couleurs')
       }
-      immatriculation () {
+      immatriculation() {
         this.goto('immatriculations')
       }
-      signalisation () {
+      signalisation() {
         this.goto('signalisation')
       }
-      fabricants () {
+      fabricants() {
         this.goto('fabricants')
       }
 
-      quitterMenu (destination) {
+      quitterMenu(destination) {
         this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {
           let isPair = index % 2
           bouton.classList.remove('bouton-droit')
@@ -260,9 +260,9 @@
         setTimeout(() => {
           window.location = destination
         }, 500)
-  }
+      }
 
-      afficherVersion () {
+      afficherVersion() {
         const me = this
         const oReq = new XMLHttpRequest()
         oReq.onload = function () {
@@ -272,7 +272,7 @@
         }
         oReq.open('GET', '../config.json')
         oReq.send()
-  }
+      }
     }
 
     window.customElements.define(BingoMenu.is, BingoMenu)

@@ -74,13 +74,13 @@
     </app-toolbar>
 
     <div id="bingo" on-tap="fermerBingo">
-        <div>Bingo!
-          <template is="dom-if" if="[[nbBingo]]">
-            <sup style="font-size: 0.6em;">[[nbBingo]]</sup>
-          </template>
-        </div>
+      <div>Bingo!
+        <template is="dom-if" if="[[nbBingo]]">
+          <sup style="font-size: 0.6em;">[[nbBingo]]</sup>
+        </template>
       </div>
-    
+    </div>
+
     <form>
       <div class="grid-box unselectable">
 
@@ -111,18 +111,18 @@
 
   <script>
     class BingoImmatriculations extends Polymer.GestureEventListeners(Bingo.BingoModele) {
-      static get is () { return 'bingo-immatriculations' }
+      static get is() { return 'bingo-immatriculations' }
 
-      _getImmatriculation (ligne, colonne, cases) {
+      _getImmatriculation(ligne, colonne, cases) {
         return this._getCase(ligne, colonne, cases).immatriculation
       }
 
-      connectedCallback () {
+      connectedCallback() {
         super.connectedCallback()
         this.$.vroum.play()
       }
 
-      getTypes () {
+      getTypes() {
         let types = [
           {
             immatriculation: 'J',
@@ -200,7 +200,7 @@
 
         return liste
       }
-}
+    }
 
     window.customElements.define(BingoImmatriculations.is, BingoImmatriculations)
   </script>
