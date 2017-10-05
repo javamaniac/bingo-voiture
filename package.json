@@ -4,9 +4,13 @@
   "author": "Dominic Marcotte",
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "babel-eslint": "^8.0.1",
     "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.0",
-    "eslint-plugin-html": "^2.0.0"
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-html": "^2.0.3",
+    "eslint-plugin-polymer": "^0.1.0",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
   },
   "scripts": {
     "build": "polymer build es6-unbundled",
@@ -14,9 +18,30 @@
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test:integration": "polymer build # test that psk builds without error with the CLI",
+    "standa": "standard 'src/**/*.html' | snazzy"
   },
   "dependencies": {
     "redux": "^3.7.2"
+  },
+  "standard": {
+    "plugins": [
+      "html"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "parser": "babel-eslint",
+    "ignore": [
+      "bower_components"
+    ],
+    "globals": [
+      "Polymer",
+      "myVar2"
+    ],
+    "filename": "**/*.html",
+    "x-workingDirectories": [
+      "src"
+    ]
   }
 }

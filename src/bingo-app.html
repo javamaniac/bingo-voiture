@@ -6,12 +6,14 @@
 <link rel="import" href="bingo-menu.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
+<script>
+  /**
+   * @namespace Bingo
+   */
+  window.Bingo = {}
+</script>
+
 <dom-module id="bingo-app">
-    <!-- <link rel="lazy-import" href="bingo-couleurs.html">
-    <link rel="lazy-import" href="bingo-immatriculations.html">
-    <link rel="lazy-import" href="bingo-signalisation.html">
-    <link rel="lazy-import" href="bingo-fabricants.html">
-    <link rel="lazy-import" href="bingo-view404.html"> -->
   <template>
     <style>
        :host {
@@ -94,8 +96,9 @@
     </paper-toast>
 
     <audio id="pop">
-      <source src="../sounds/pop.mp3" type="audio/mpeg">
-    </audio>
+      
+          <source src="../sounds/pop.mp3" type="audio/mpeg">
+        </audio>
 
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
@@ -108,120 +111,121 @@
   </template>
 
   <script>
-    class BingoApp extends Polymer.Element {
-      static get is() { return 'bingo-app'; }
-
-      static get properties() {
+    class BingoApp extends Polymer.LazyImportsMixin(Polymer.Element) {
+      static get is () { return 'bingo-app' }
+      
+      static get properties () {
         return {
           page: {
             type: String,
             reflectToAttribute: true,
-            observer: '_pageChanged',
+            observer: '_pageChanged'
           },
           routeData: Object,
           subroute: String,
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
-          rootPath: String,
-        };
-      }
+          rootPath: String
+        }
+  }
 
-      ready() {
+      ready () {
         super.ready()
-        this.addEventListener('bingo-pop', e => this._pop(e));
+        this.addEventListener('bingo-pop', e => this._pop(e))
 
         window.addEventListener('majApplication', e => {
-          this.$.toastMajApplication.opened = true;
+          this.$.toastMajApplication.opened = true
         })
+  }
 
-      }
-
-      static get observers() {
+      static get observers () {
         return [
           '_routePageChanged(routeData.page)'
-        ];
-      }
+        ]
+  }
 
-      _routePageChanged(page) {
-        this.page = page || 'menu';
+      _routePageChanged (page) {
+        this.page = page || 'menu'
         this.dispatchEvent(new CustomEvent('change-page', {}))
       }
 
-      _pop() {
+      _pop () {
         this.$.pop.currentTime = 0
         this.$.pop.play()
       }
 
-      _pageChanged(page) {
+      _pageChanged (page) {
         if (page === 'index.html') {
-          return;
+          return
         }
 
-        let me = this;
+        let me = this
 
-        if (page == "menu") {
-          this.$.carousel.niveau = 1;
-          this._insererElement("");
+        if (page === 'menu') {
+          this.$.carousel.niveau = 1
+          this._insererElement('')
         } else {
           me.majDom(page)
-          this.$.carousel.niveau = 2;
+          this.$.carousel.niveau = 2
         }
       }
 
-      majDom(page) {
+      majDom (page) {
         // if elem courant a un animConfig exit, joue!
         // const pageCour = this.shadowRoot.querySelector('bingo-' + page);
         // const p = this.shadowRoot.querySelector('bingo-menu')
 
-        const cmp = 'bingo-' + page;
+        const cmp = 'bingo-' + page
 
-        // Load page import on demand. Show 404 page if fails
-        const resolvedPageUrl = this.resolveUrl(cmp + '.html');
 
-        const me = this;
-        // Chargement du composant et de ses dépendances
+
+    // Load page import on demand. Show 404 page if fails
+        const resolvedPageUrl = this.resolveUrl(cmp + '.html')
+
+        const me = this
+    // Chargement du composant et de ses dépendances
         Polymer.importHref(
           resolvedPageUrl,
           // succès
           function (e) {
             // Ajouter le composant dans la page
             me._insererElement(
-              '<' + cmp + ' route="' + page + '" actif></' + cmp + '>');
+              '<' + cmp + ' route="' + page + '" actif></' + cmp + '>')
 
             const elem = me.shadowRoot.querySelector(cmp)
-            elem.classList.add('slideIn');
-            me.pageCourante = cmp;
+            elem.classList.add('slideIn')
+            me.pageCourante = cmp
           },
           // erreur
           function (e) {
             // En cas d'erreur de chargement
-            console.warn("Erreur d'importation de " + resolvedPageUrl, e);
+            console.warn("Erreur d'importation de " + resolvedPageUrl, e)
 
-            // Pour éviter une erreur de chargement circulaire
-            // if (application != 'page404') {
-            //   // Charger et afficher une page 404
-            //   me._chargerApplication('page404');
-            // }
+        // Pour éviter une erreur de chargement circulaire
+        // if (application != 'page404') {
+        //   // Charger et afficher une page 404
+        //   me._chargerApplication('page404');
+        // }
           }, // async
-          true);
+          true)
 
-      }
+  }
 
-      _insererElement(element) {
-        const me = this;
-        Polymer.dom(me.$.contenu).innerHTML = element;
+      _insererElement (element) {
+        const me = this
+        Polymer.dom(me.$.contenu).innerHTML = element
 
-        // Variante
-        // injection dynamique de l'élément qui remplace l'élément précédent
-        //        this.$.contenu.innerHTML = '<' + nomElement + '></' + nomElement + '>';
-        // c.$.contenu.appendChild(item);
-      }
+    // Variante
+    // injection dynamique de l'élément qui remplace l'élément précédent
+    //        this.$.contenu.innerHTML = '<' + nomElement + '></' + nomElement + '>';
+    // c.$.contenu.appendChild(item);
+  }
 
-      _showPage404() {
-        this.page = 'view404';
-      }
+      _showPage404 () {
+        this.page = 'view404'
+  }
     }
 
-    window.customElements.define(BingoApp.is, BingoApp);
+    window.customElements.define(BingoApp.is, BingoApp)
   </script>
 </dom-module>
