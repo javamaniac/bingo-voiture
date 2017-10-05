@@ -20,17 +20,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
     <!-- Import the element to test -->
-    <link rel="import" href="../src/my-view1.html">
+    <link rel="import" href="../src/bingo-app.html">
   </head>
   <body>
     <test-fixture id="BasicView">
       <template>
-        <my-view1></my-view1>
+        <bingo-app></bingo-app>
       </template>
     </test-fixture>
 
     <script>
-      suite('my-view1 tests', function() {
+      suite('bingo-app tests', function() {
         test('Number in circle should be 1', function() {
           var myView = fixture('BasicView');
           var circle = myView.shadowRoot.querySelector('.circle');
