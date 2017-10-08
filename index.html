@@ -10,15 +10,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="generator" content="Polymer Starter Kit">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>Bingo voiture</title>
-    <meta name="description" content="Jeu Bingo voiture">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Polymer Starter Kit">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <!--
+  <title>Bingo voiture</title>
+  <meta name="description" content="Jeu Bingo voiture">
+
+  <!--
       The `<base>` tag below is present to support two advanced deployment options:
       1) Differential serving. 2) Serving from a non-root path.
 
@@ -28,303 +29,309 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
     -->
-    <base href="/">
+  <base href="/">
 
-    <link rel="icon" href="images/favicon.ico">
+  <link rel="icon" href="images/favicon.ico">
 
-    <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="manifest.json">
+  <!-- See https://goo.gl/OOhYW5 -->
+  <link rel="manifest" href="manifest.json">
 
-    <!-- See https://goo.gl/qRE0vM -->
-    <meta name="theme-color" content="#3f51b5">
+  <!-- See https://goo.gl/qRE0vM -->
+  <meta name="theme-color" content="#3f51b5">
 
-    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Bingo voiture">
+  <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Bingo voiture">
 
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Bingo voiture">
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bingo voiture">
 
-    <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+  <!-- Homescreen icons -->
+  <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
 
-    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#3f51b5">
-    <meta name="msapplication-tap-highlight" content="no">
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#3f51b5">
+  <meta name="msapplication-tap-highlight" content="no">
 
-    <script>
-      /**
-      * [polymer-root-path]
-      *
-      * By default, we set `Polymer.rootPath` to the server root path (`/`).
-      * Leave this line unchanged if you intend to serve your app from the root
-      * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
-      *
-      * If you intend to serve your app from a non-root path (e.g., with URLs
-      * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
-      * to indicate the path from which you'll be serving, including leading
-      * and trailing slashes (e.g., `/my-app/`).
-      */
-      window.Polymer = {rootPath: '/'};
+  <script>
+    /**
+    * [polymer-root-path]
+    *
+    * By default, we set `Polymer.rootPath` to the server root path (`/`).
+    * Leave this line unchanged if you intend to serve your app from the root
+    * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
+    *
+    * If you intend to serve your app from a non-root path (e.g., with URLs
+    * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
+    * to indicate the path from which you'll be serving, including leading
+    * and trailing slashes (e.g., `/my-app/`).
+    */
+    window.Polymer = { rootPath: '/' };
 
-      // Load and register pre-caching Service Worker
-      if ( 'serviceWorker' in navigator ) {
-        window.addEventListener( 'load', () => {
-            navigator.serviceWorker.register( 'service-worker.js', {
-                scope: Polymer.rootPath,
-            } ).then( ( registration ) => {
-                console.log( '[SW] Scope', registration.scope );
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: Polymer.rootPath,
+        }).then((registration) => {
+          console.log('[SW] Scope', registration.scope);
 
-                const refreshApp = () => {
-                  // alert("L'application a été mise à jour.")
-                  document.location.reload()
+          const refreshApp = () => {
+            // alert("L'application a été mise à jour.")
+            document.location.reload()
 
-                    // let update = document.createElement( 'udes-sw-update' );
-                    // update.innerHTML = "L'application a été mise à jour.<br>" +
-                    //                    "Veuillez la <a href='#' style='cursor: pointer; color: #2D9D5F;' onclick='document.location.reload()'>rafraîchir</a>.";
-                    // document.body.appendChild( update );
+            // let update = document.createElement( 'udes-sw-update' );
+            // update.innerHTML = "L'application a été mise à jour.<br>" +
+            //                    "Veuillez la <a href='#' style='cursor: pointer; color: #2D9D5F;' onclick='document.location.reload()'>rafraîchir</a>.";
+            // document.body.appendChild( update );
 
-                    // let link = document.createElement( 'link' );
-                    // link.rel = 'import';
-                    // link.href = 'bower_components/udes-sw-update/udes-sw-update.html';
-                    // document.head.appendChild( link );
-                  };
+            // let link = document.createElement( 'link' );
+            // link.rel = 'import';
+            // link.href = 'bower_components/udes-sw-update/udes-sw-update.html';
+            // document.head.appendChild( link );
+          };
 
-                  registration.onupdatefound = ( event ) => {
-                      //Source http://www.electrode.io/docs/service_workers.html
-                      const installingWorker = registration.installing;
-                      installingWorker.onstatechange = function () {
-                          switch ( installingWorker.state ) {
-                              case "installing":
-                                  console.log( "[SW] Installing a new service worker..." );
-                                  break;
-                              case "installed":
-                                  if ( navigator.serviceWorker.controller ) {
-                                    window.dispatchEvent(new CustomEvent('majApplication'))
-                                  } else {
-                                      console.log( "[SW] Content is now available offline!" );
-                                  }
-                                  break;
-                              case "activating":
-                                  console.log( "[SW] Activating a service worker..." );
-                                  break;
-                              case "activated":
-                                  console.log( "[SW] Successfully activated service worker." );
-                                  break;
-                              case "redundant":
-                                  console.log( "[SW] Service worker has become redundant" );
-                                  break;
-                          }
-                      };
-                  };
-              } )
-              // Service worker registration failed
-                  .catch( function ( err ) {
-                      console.error( "[SW] Service worker registration failed: ", err );
-                  } );
-          } );
+          registration.onupdatefound = (event) => {
+            //Source http://www.electrode.io/docs/service_workers.html
+            const installingWorker = registration.installing;
+            installingWorker.onstatechange = function () {
+              switch (installingWorker.state) {
+                case "installing":
+                  console.log("[SW] Installing a new service worker...");
+                  break;
+                case "installed":
+                  if (navigator.serviceWorker.controller) {
+                    window.dispatchEvent(new CustomEvent('majApplication'))
+                  } else {
+                    console.log("[SW] Content is now available offline!");
+                  }
+                  break;
+                case "activating":
+                  console.log("[SW] Activating a service worker...");
+                  break;
+                case "activated":
+                  console.log("[SW] Successfully activated service worker.");
+                  break;
+                case "redundant":
+                  console.log("[SW] Service worker has become redundant");
+                  break;
+              }
+            };
+          };
+        })
+          // Service worker registration failed
+          .catch(function (err) {
+            console.error("[SW] Service worker registration failed: ", err);
+          });
+      });
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        window.dispatchEvent(new CustomEvent('bingo-stopmusic'))
+      } else {
+        // alert('Bon retour!')
       }
+    })
 
-      document.addEventListener( 'visibilitychange', () => {
-        if (document.hidden) {
-          window.dispatchEvent(new CustomEvent('bingo-stopmusic'))
-        } else {
-          // alert('Bon retour!')
-        }
-      })      
-
-      function loadScript(scriptSrc, onLoadCallback) {
-        var script = document.createElement('script');
-        // script.async = true;
-        script.src = scriptSrc;
-        script.onload = onLoadCallback;
-        document.head.appendChild(script);
+    function loadScript(scriptSrc, onLoadCallback) {
+      var script = document.createElement('script');
+      // script.async = true;
+      script.src = scriptSrc;
+      script.onload = onLoadCallback;
+      document.head.appendChild(script);
     }
     function loadHtml(htmlSrc, onLoadCallback) {
-        var link = document.createElement('link');
-        // script.async = true;
-        link.rel = "import";
-        link.href = htmlSrc;
-        link.onload = onLoadCallback;
-        document.head.appendChild(link);
+      var link = document.createElement('link');
+      // script.async = true;
+      link.rel = "import";
+      link.href = htmlSrc;
+      link.onload = onLoadCallback;
+      document.head.appendChild(link);
     }
 
       // window.onload = function() {
       //   loadScript('bower_components/webcomponentsjs/webcomponents-loader.js', function() {
       //     loadHtml('src/bingo-app.html')
       //   });        
-      // }      
-    </script>
+      // }    
 
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js" async></script>
+  </script>
 
-    <!-- Load your application shell -->
-    
+  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+  <script src="bower_components/webcomponentsjs/webcomponents-loader.js" async></script>
 
-    <!-- Add any global styles for body, document, etc. -->
-    <style>
-      body {
-        overflow: hidden;
-        margin: 0;
-        font-family: 'Roboto', 'Noto', sans-serif;
-        line-height: 1.5;
-        min-height: 100vh;
-        background-color: #666d92;
-      }
-    </style>
-
-<script>
-  // Google Analytics
-  (function() {
-    'use strict';
-
-    // if (location.hostname === 'localhost') return;
-
-    // window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-
-    // ga('create', 'UA-105763285-1', 'auto');
-    //<!-- Global Site Tag (gtag.js) - Google Analytics -->
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
-
-  gtag('config', 'UA-105763285-1');
-
-/*
-Google analytiques custom 
-- appVersion
-- event
-- timingCategory
-- exDescription
-- expId
-*/
+  <!-- Load your application shell -->
 
 
-    window.addEventListener('location-changed', function(e) {
-      gtag('event', 'page', {
-        route: e.detail.route
+  <!-- Add any global styles for body, document, etc. -->
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      background-color: #666d92;
+    }
+  </style>
+
+  <script>
+    // Google Analytics
+    (function () {
+      'use strict';
+
+      // if (location.hostname === 'localhost') return;
+
+      // window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+      // ga('create', 'UA-105763285-1', 'auto');
+      //<!-- Global Site Tag (gtag.js) - Google Analytics -->
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments) };
+      gtag('js', new Date());
+
+      gtag('config', 'UA-105763285-1');
+
+      /*
+      Google analytiques custom 
+      - appVersion
+      - event
+      - timingCategory
+      - exDescription
+      - expId
+      */
+
+
+      window.addEventListener('location-changed', function (e) {
+        gtag('event', 'page', {
+          route: e.detail.route
+        });
+        gtag('config', 'UA-105763285-1', {
+          'page_title': e.detail.route,
+          'page_location': location.href,
+          'page_path': location.pathname
+        });
+        // ga('set', 'page', location.pathname);
+        // ga('send', 'pageview');
       });
-      gtag('config', 'UA-105763285-1', {
-        'page_title': e.detail.route,
-        'page_location': location.href,
-        'page_path': location.pathname
-      });      
-      // ga('set', 'page', location.pathname);
-      // ga('send', 'pageview');
-    });
 
-    window.addEventListener('error', function(e) {
-      // debugger;
-      gtag('event', 'exception', {
-        'description': e.message,
-        'fatal': false   // set to true if the error is fatal
-      });      
-      // ga('send', 'exception', {
-      //   'exDescription': e.message,
-      //   'exFatal': false
-      // });
-    });
-    window.addEventListener('WebComponentsReady', function(e) {
-      // debugger;
-      if (window.performance) {
-        gtag('event', 'timing_complete', {
-          'name': 'WebComponentsReady',
-          'value': Math.round(performance.now()),
-          'event_category': 'JS Dependencies'
-        });        
-        // ga('send', 'timing', 
-        // 'JS Dependencies', 
-        // 'WebComponentsReady', 
-        // Math.round(performance.now()));
-      }
-    });
-  })();
-</script>    
+      window.addEventListener('error', function (e) {
+        // debugger;
+        gtag('event', 'exception', {
+          'description': e.message,
+          'fatal': false   // set to true if the error is fatal
+        });
+        // ga('send', 'exception', {
+        //   'exDescription': e.message,
+        //   'exFatal': false
+        // });
+      });
+      window.addEventListener('WebComponentsReady', function (e) {
+        // debugger;
+        if (window.performance) {
+          gtag('event', 'timing_complete', {
+            'name': 'WebComponentsReady',
+            'value': Math.round(performance.now()),
+            'event_category': 'JS Dependencies'
+          });
+          // ga('send', 'timing', 
+          // 'JS Dependencies', 
+          // 'WebComponentsReady', 
+          // Math.round(performance.now()));
+        }
+      });
+    })();
+  </script>
 
 </head>
-  <body>
-    <bingo-app></bingo-app>
-    
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-    <!-- Built with love using Polymer Starter Kit -->
-    
-    <!-- <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style> -->
 
-    <style>
+<body>
+  <bingo-app></bingo-app>
+
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+  <!-- Built with love using Polymer Starter Kit -->
+
+  <!-- <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style> -->
+
+  <style>
     .card {
       margin: calc(10px + 3%);
-    padding: 16px;
-    color: #757575;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      color: #757575;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
     }
+
     .icon-wrapper {
       display: inline-block;
-    width: 20vw;
-    height: 20vw;
-    max-width: 150px;
-    max-height: 150px;
+      width: 20vw;
+      height: 20vw;
+      max-width: 150px;
+      max-height: 150px;
     }
+
     .titre {
       display: inline-block;
       position: absolute;
       margin: 10px 30px;
       font-size: 7vw;
       text-shadow: 5px 3px 19px #aaaaaa;
-}
+      color: #2f415f;
+      font-weight: bold;
+    }
+
     h1 {
       margin: 16px 0;
-    color: #212121;
-    font-size: 22px;
+      color: #212121;
+      font-size: 22px;
     }
+
     .icon-wrapper .icon-bingo {
-    width: 100%;
-}
-
-    </style>
-    <div class="card unselectable" style="/*margin-top: -300px;*/">
-        <h1>
-          <div class="icon-wrapper">
-              <img class="icon-bingo" alt="Bingo" src="images/manifest/icon-2x2.png">
-            <!-- &nbsp; -->
-          </div>
-          <div class="titre">Bingo voiture</div>
-        </h1>
-        <div style="margin-bottom: 20px; height: 36px">
-            <div class="bouton-menu">&nbsp;</div>
-          </div>
-          <div style="margin-bottom: 20px; height: 36px">
-              <div class="bouton-menu">&nbsp;</div>
-            </div>
-            <div style="margin-bottom: 20px; height: 36px">
-                <div class="bouton-menu">&nbsp;</div>
-              </div>
-              <div style="margin-bottom: 20px; height: 36px">
-                  <div class="bouton-menu">&nbsp;</div>
-                </div>
-                            <div>&nbsp;</div>
+      width: 100%;
+    }
+  </style>
+  <div class="card unselectable" style="/*margin-top: -300px;*/">
+    <h1>
+      <div class="icon-wrapper">
+        <img class="icon-bingo" alt="Bingo" src="images/manifest/icon-2x2.png">
+        <!-- &nbsp; -->
       </div>
+      <div class="titre">Bingo voiture</div>
+    </h1>
+    <div style="margin-bottom: 20px; height: 36px">
+      <div class="bouton-menu">&nbsp;</div>
+    </div>
+    <div style="margin-bottom: 20px; height: 36px">
+      <div class="bouton-menu">&nbsp;</div>
+    </div>
+    <div style="margin-bottom: 20px; height: 36px">
+      <div class="bouton-menu">&nbsp;</div>
+    </div>
+    <div style="margin-bottom: 20px; height: 36px">
+      <div class="bouton-menu">&nbsp;</div>
+    </div>
+    <div>&nbsp;</div>
+  </div>
 
-  </body>
+</body>
 
-  </html>
-  
-  <script src="../node_modules/redux/dist/redux.min.js"></script>
-  
-  <link rel="import" href="src/bingo-app.html" async>
-  <!-- <script src="https://www.google-analytics.com/analytics.js" async></script> -->
+</html>
 
-  <!-- TODO defer -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105763285-1"></script> -->
-  
+<script src="../node_modules/redux/dist/redux.min.js"></script>
+
+<link rel="import" href="src/bingo-app.html" async>
+<!-- <script src="https://www.google-analytics.com/analytics.js" async></script> -->
+
+<!-- TODO defer -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105763285-1"></script> -->
