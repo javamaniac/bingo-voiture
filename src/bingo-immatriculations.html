@@ -110,7 +110,7 @@
   </template>
 
   <script>
-    class BingoImmatriculations extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+    class BingoImmatriculations extends Polymer.GestureEventListeners(Bingo.BingoModele(Polymer.Element)) {
       static get is() { return 'bingo-immatriculations' }
 
       _getImmatriculation(ligne, colonne, cases) {

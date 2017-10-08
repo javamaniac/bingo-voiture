@@ -69,7 +69,7 @@
   </template>
 
   <script>
-    class BingoFabricants extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+    class BingoFabricants extends Polymer.GestureEventListeners(Bingo.BingoModele(Polymer.Element)) {
       static get is() { return 'bingo-fabricants' }
 
       _getImage(ligne, colonne, cases) {

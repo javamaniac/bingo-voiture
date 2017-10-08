@@ -75,7 +75,7 @@
   </template>
 
   <script>
-    class BingoSignalisation extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+    class BingoSignalisation extends Polymer.GestureEventListeners(Bingo.BingoModele(Polymer.Element)) {
       static get is() { return 'bingo-signalisation' }
 
       connectedCallback() {

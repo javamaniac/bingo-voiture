@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/utils/mixin.html">
 
 <script>
   // (function() {
@@ -10,32 +11,25 @@
   window.Bingo = window.Bingo || {}
 
   /**
-  * @const {Bingo.BingoModele}
-  */
-  // const bingo = Bingo.BingoModele;
-  // window.Bingo = bingo
-
-  /**
    * @mixinFunction
    * @polymer
    * @memberof Bingo
    * @summary Element class mixin that provides API for adding Polymer's cross-platform
    * gesture events to nodes
    */
-  Bingo.BingoModele = Polymer.dedupingMixin(superClass => {
-    /**
-       * @polymer
-       * @mixinClass
-       * @implements {Bingo_BingoModele}
-       */
-    class BingoModele extends superClass {
-      // <dom-module id="bingo-modele">
-      // <script>
-      /**
-       * @typeof {BingoModele}
-       */
-      // class BingoModele extends Polymer.Element {
-      // static get is () { return 'bingo-modele' }
+   Bingo.BingoModele = function(superClass) {
+    return class extends superClass {
+      // Code that you want common to elements.
+      // If you're going to override a lifecycle method, remember that a) you
+      // might need to call super but b) it might not exist
+      connectedCallback() {
+        if (super.connectedCallback) {
+          super.connectedCallback();
+        }
+        /* ... */
+      }
+
+
       static get properties() {
         return {
           /**
@@ -78,10 +72,6 @@
         console.log('Nombre de Bingo', nb)
 
         this.nbBingo = (nb > 1) ? nb : ''
-      }
-
-      connectedCallback() {
-        super.connectedCallback()
       }
 
       _getCase(ligne, colonne, cases) {
@@ -243,9 +233,6 @@
         return []
       }
     }
-  })
-
-    // window.customElements.define(BingoModele.is, BingoModele)
+  }
 
 </script>
-<!-- </dom-module> -->

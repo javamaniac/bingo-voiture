@@ -99,7 +99,7 @@
     /**
      * @mixins {BingoModele}
      */
-    class BingoCouleurs extends Polymer.GestureEventListeners(Bingo.BingoModele) {
+    class BingoCouleurs extends Polymer.GestureEventListeners(Bingo.BingoModele(Polymer.Element)) {
       static get is() { return 'bingo-couleurs' }
 
       static get properties() {
