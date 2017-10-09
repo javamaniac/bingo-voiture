@@ -12,14 +12,12 @@
     "src/**/*",
     "images/**/*",
     "sounds/**/*",
-    "node_modules/**/*",
     "bower.json"
   ],
   "extraDependencies": [
     "manifest.json",
     "config.json",
-    "bower_components/webcomponentsjs/*.js",
-    "node_modules/redux/dist/redux.min.js"
+    "bower_components/webcomponentsjs/*.js"
   ],
   "lint": {
     "rules": ["polymer-2"]
