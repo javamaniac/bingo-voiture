@@ -27,6 +27,11 @@
           super.connectedCallback();
         }
         /* ... */
+
+        const me = this
+        this.addEventListener('bingo-pop2', function() {
+          me.pop()
+        })
       }
 
 
@@ -138,7 +143,7 @@
       }
 
       verifierSuperBingo() {
-        const nbX = this.shadowRoot.querySelectorAll('.grid-box input[type=checkbox]:checked').lenght
+        const nbX = this.shadowRoot.querySelectorAll('bingo-case[coche]').lenght
         if (nbX === 25) {
           if (!this.bingoGagnant.superBingo) {
             this.afficheBingo(true)
@@ -220,7 +225,7 @@
       }
 
       getValeurCase(indexLigne, indexColonne) {
-        return this.shadowRoot.querySelector(`#case-${indexLigne}-${indexColonne}`).checked
+        return this.shadowRoot.querySelector(`#case-${indexLigne}-${indexColonne}`).coche
       }
 
       getRandomInt(min, max) {

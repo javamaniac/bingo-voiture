@@ -6,7 +6,7 @@
 <link rel="import" href="bingo-modele.html">
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="bingo-icons.html">
-<!-- <link rel="import" href="bingo-state.html"> -->
+<link rel="import" href="bingo-case.html">
 
 <dom-module id="bingo-couleurs">
   <template>
@@ -57,12 +57,14 @@
       <source src="../sounds/vroom2.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Déplacer dans un cmp -->
     <app-toolbar>
       <div main-title>Couleurs</div>
       <paper-icon-button on-tap="reset" icon="bingo-icons:refresh"></paper-icon-button>
       <paper-icon-button on-tap="accueil" icon="bingo-icons:home"></paper-icon-button>
     </app-toolbar>
 
+    <!-- Déplacer dans un cmp -->
     <div id="bingo" on-tap="fermerBingo">
       <div>Bingo!
         <template is="dom-if" if="[[nbBingo]]">
@@ -77,14 +79,9 @@
         <template is="dom-repeat" items="[[lignes]]" as="ligne" index-as="l">
           <div class="grid-row">
             <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
-              <div class="grid-item">
-                <input on-change="pop" id="case-[[l]]-[[c]]" type="checkbox">
-                <label class="case iconSvg" for$="case-[[l]]-[[c]]">
-                  <iron-icon icon="bingo-icons:clear" class="x2"></iron-icon>
-                  <iron-icon icon="bingo-icons:clear" class="x"></iron-icon>
-                  <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style$="color: [[_getCouleur(l, c, cases)]]"></iron-icon>
-                </label>
-              </div>
+              <bingo-case id="case-[[l]]-[[c]]" class="grid-item" couleur="[[_getCouleur(l, c, cases)]]">
+                  <iron-icon icon="bingo-icons2:voiture1" class="car car-anim" style$="color: [[_getCouleur(l, c, cases)]]; flex:1;--iron-icon-height: 14vh;--iron-icon-width: 14vw;"></iron-icon>
+              </bingo-case>
             </template>
           </div>
         </template>
@@ -128,20 +125,9 @@
       reset() {
         this.$.vroum.play()
 
-        let cars = this.shadowRoot.querySelectorAll('.car')
-        let nouvClsAnim, ancienneClsAnim
-        if (cars[0].classList.contains('car-anim')) {
-          nouvClsAnim = 'car-anim2'
-          ancienneClsAnim = 'car-anim'
-        } else {
-          nouvClsAnim = 'car-anim'
-          ancienneClsAnim = 'car-anim2'
-        }
-        cars.forEach((car) => {
-          car.classList.remove(ancienneClsAnim)
-          car.classList.add(nouvClsAnim)
+        this.shadowRoot.querySelectorAll('bingo-case').forEach(caseCmp => {
+          caseCmp.reset()
         })
-        super.reset()
       }
 
       // createCases() {

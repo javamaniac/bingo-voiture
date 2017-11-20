@@ -79,47 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            perspective: 80px; */
       }
 
-      .x,
-      .x2 {
-        /* display: none; */
-        color: #842e2e;
-        width: 20%;
-        transition: opacity 0.5s;
-        opacity: 0;
-      }
-
-      input[type=checkbox]:checked~label .x,
-      input[type=checkbox]:checked~label .x2 {
-        /* display: inline-block; */
-        opacity: 1;
-      }
-
-      .car {
-        transition: opacity 0.5s;
-      }
-
-      input[type=checkbox]:checked~label .car {
-        /* display: none; */
-        opacity: 0.5;
-        /* -webkit-transform: rotateX(65deg);
-        transform: rotateX(65deg); */
-      }
-
-      input[type=checkbox] {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-        /* For mobile, it's typically better to position checkbox on top of clickable
-        area and turn opacity to 0 instead. */
-      }
-
-      iron-icon {
-        /* --iron-icon-height: 80%;
-        --iron-icon-width: 80%;  */
-        --iron-icon-height: 15vh;
-        --iron-icon-width: 15vw;
-      }
-
+      #bingo,
       *.unselectable {
         -moz-user-select: -moz-none;
         -khtml-user-select: none;
@@ -166,6 +126,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #c7c8da;
         /*height: 25vh;*/
         width: 20%;
+        height: calc(20vh - 12px);
         display: inline-block;
         border: 1px solid #dadada;
 
@@ -197,6 +158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-toolbar {
         color: #dadada;
         z-index: 200;
+        box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.5);
         /* Devant my-view */
       }
 

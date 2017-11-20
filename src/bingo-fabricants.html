@@ -7,11 +7,12 @@
 <link rel="import" href="bingo-modele.html">
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="bingo-icons.html">
+<link rel="import" href="bingo-case.html">
 
 <dom-module id="bingo-fabricants">
   <template>
     <style include="bingo-styles">
-       :host {
+      :host {
         display: block;
         height: 100vh;
         overflow: hidden;
@@ -52,14 +53,9 @@
         <template is="dom-repeat" items="[[lignes]]" as="ligne" index-as="l">
           <div class="grid-row">
             <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
-              <div class="grid-item">
-                <input on-change="pop" id="case-[[l]]-[[c]]" type="checkbox">
-                <label class="case" for$="case-[[l]]-[[c]]">
-                  <iron-icon icon="icons:clear" class="x2"></iron-icon>
-                  <iron-icon icon="icons:clear" class="x"></iron-icon>
-                  <img src="[[_getImage(l, c, cases)]]">
-                </label>
-              </div>
+              <bingo-case id="case-[[l]]-[[c]]" class="grid-item">
+                <img src="[[_getImage(l, c, cases)]]">
+              </bingo-case>
             </template>
           </div>
         </template>
