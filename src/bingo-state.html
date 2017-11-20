@@ -1,63 +1,143 @@
-<link rel="import" href="../bower_components/polymer-redux/polymer-redux.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/fortune-cookie/fortune-cookie.html">
 
-<script>
-  initialState = {
-    musique: true,
-    effetsSonores: true,
+<!-- <link rel="import" href="../polymer/lib/elements/dom-if.html"> -->
+<!-- <link rel="import" href="../polymer/lib/elements/dom-repeat.html"> -->
+<!-- <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html"> -->
 
-    // foo: 'foo',
-    // bar: 'bar',
-    // baz: 'baz',
-    // sub: {
-    //   path: {
-    //     qux: 'qux'
-    //   }
-    // }
-  };
-  const reducer = function (state, action) {
-    switch (action.type) {
-      case 'CHANGE_PREF_MUSIQUE':
-        const musique = (action.value !== undefined) ? action.value : !state.musique
-        return Object.assign({}, state, {
-          musique: musique
-        });
-      case 'CHANGE_PREF_EFFETSSONORES':
-        const effetsSonores = (action.value !== undefined) ? action.value : !state.effetsSonores
-        return Object.assign({}, state, {
-          effetsSonores: effetsSonores
-        });
-      // case 'FOO':
-      //       return Object.assign({}, state, {
-      //         foo: state.foo + ', foo'
-      //       });
-      //     case 'BAR':
-      //       return Object.assign({}, state, {
-      //         bar: state.bar + ', bar'
-      //       });
-      //     case 'BAZ':
-      //       return Object.assign({}, state, {
-      //         baz: state.baz + ', baz'
-      //       });
-      //     case 'QUX':
-      //       return Object.assign({}, state, {
-      //         sub: {
-      //           path: {
-      //             qux: state.sub.path.qux + ', qux'
-      //           }
-      //         }
-      //       });
-      default:
-        return state || initialState;
-    }
-  }
-  store = Redux.createStore(
-    reducer,
-    // Redux.applyMiddleware(ReduxThunk.default)
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
-  // ReduxMixin = PolymerRedux(store);
+<dom-module id="bingo-state">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
 
-  // window.bingo = {};
-  // window.bingo.store = store;  
-  ReduxMixin = PolymerRedux(store);
-</script>
+    <fortune-cookie 
+    auto-save 
+    id="cookie" 
+    name="bingoPrefs" 
+    value="{{preferences}}"
+    handle-value-as="object"
+    on-fortune-cookie-load-empty="_initPreferences">
+    </fortune-cookie>
+
+    <!-- <h3>Options</h3>
+    <p>
+      musique: [[preferences.musique]]
+    </p> -->
+
+  </template>
+  <script>
+    (function () {
+
+      let optionsInstance = null;
+
+      class BingoState extends Polymer.GestureEventListeners(Polymer.Element) {
+        static get is() { return 'bingo-state' }
+
+        static get properties() {
+          return {
+            preferences: {
+              type: Object,
+              // value: () => ({})
+            },
+            subscribers: {
+              type: Array,
+              value: () => []
+            },
+            preferencesParDefaut: {
+            type: Object,
+            value: {
+              musique: true,
+              debug: false
+            }
+          }
+          }
+        }
+
+        static get observers() {
+          return [
+            'preferencesChanged(preferences.*)'
+          ]
+        }
+
+        _initPreferences() {
+          this.preferences = this.preferencesParDefaut
+        }
+
+        constructor() {
+          super();
+
+          if (!optionsInstance) optionsInstance = this;
+
+          // this.addEventListener('fortune-cookie-load-empty', () => {
+          //     debugger
+          // })
+        }
+
+        register(subscriber) {
+          this.subscribers.push(subscriber);
+          subscriber.preferences = this.preferences;
+          subscriber.notifyPath('preferences');
+        }
+
+        unregister(subscriber) {
+          var i = this.subscribers.indexOf(subscriber);
+          if (i > -1) this.subscribers.splice(i, 1)
+        }
+
+        preferencesChanged(change) {
+          console.log('STATE changé :', change.path, change.value)
+          for (var i = 0; i < this.subscribers.length; i++) {
+            this.subscribers[i].notifyPath(change.path);
+          }
+          this.$.cookie.save()
+          // console.log('STATE cookie mis à jour', document.cookie)
+        }
+      }
+
+      window.customElements.define(BingoState.is, BingoState)
+
+      MixinState = (superClass) => {
+        return class extends superClass {
+          static get properties() {
+            return {
+              preferences: {
+                type: Object
+              }
+            }
+          }
+
+          static get observers() {
+            return [
+              'onPrefChange(preferences.*)'
+            ]
+          }
+
+          onPrefChange(pref) {
+            // console.log('Changement de preferences', this.nodeName)
+            const state = this.shadowRoot.querySelector('bingo-state')
+            if (state) {
+              state.set(pref.path, pref.value)
+              state.notifyPath('preferences.musique')
+            }
+            // this.dispatchEvent(new CustomEvent('preferences-changed', { bubbles: true, composed: true }))
+          }
+
+          connectedCallback() {
+            // if (!optionsInstance) optionsInstance = this;
+            super.connectedCallback()
+            optionsInstance.register(this)
+            this.state = optionsInstance
+          }
+
+          disconnectedCallback() {
+            super.disconnectedCallback();
+            optionsInstance.unregister(this);
+          }
+        }
+      }
+    }());
+  </script>
+</dom-module>

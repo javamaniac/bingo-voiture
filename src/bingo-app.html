@@ -8,6 +8,9 @@
 <link rel="import" href="bingo-menu.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
+<link rel="import" href="bingo-preferences.html">
+<link rel="import" href="bingo-state.html">
+
 <script>
   /**
    * @namespace Bingo
@@ -19,7 +22,7 @@
 <dom-module id="bingo-app">
   <template>
     <style>
-       :host {
+      :host {
         --app-primary-color: #2f415f;
         --app-secondary-color: black;
 
@@ -82,6 +85,7 @@
           opacity: 1;
         }
       }
+
       /* patch pour FF */
 
       bingo-carousel>*,
@@ -91,6 +95,12 @@
         box-sizing: border-box;
       }
     </style>
+
+    <bingo-state></bingo-state>
+
+    <bingo-preferences id="preferences" 
+      preferences="{{preferences}}" 
+      on-open-preferences="openPreferences"></bingo-preferences>
 
     <!-- <paper-toast id="toast" text="Hello world!" opened></paper-toast> -->
     <paper-toast id="toastMajApplication" text="Une nouvelle version est disponible." duration="0">
@@ -103,7 +113,10 @@
     </audio>
 
     <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+    <app-route route="{{route}}" 
+    pattern="[[rootPath]]:page" 
+    data="{{routeData}}" 
+    tail="{{subroute}}"></app-route>
 
     <bingo-carousel id="carousel" niveau="1">
       <bingo-menu></bingo-menu>
@@ -113,7 +126,7 @@
   </template>
 
   <script>
-    class BingoApp extends Polymer.Element {
+    class BingoApp extends MixinState(Polymer.Element) {
       static get is() { return 'bingo-app' }
 
       static get properties() {
@@ -127,8 +140,16 @@
           subroute: String,
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
-          rootPath: String
+          rootPath: String,
         }
+      }
+
+      connectedCallback() {
+        super.connectedCallback()
+        this.addEventListener('open-preferences', () => {
+          // FIXME ajouter un mask
+          this.$.preferences.open()
+        })
       }
 
       ready() {

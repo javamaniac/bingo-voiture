@@ -17,8 +17,7 @@ module.exports = {
     'sounds/**.*',
     'manifest.json',
     'config.json',
-    'bower_components/webcomponentsjs/*',
-    'node_modules/redux/dist/redux.min.js'
+    'bower_components/webcomponentsjs/*'
   ],
   navigateFallback: 'index.html',
 };

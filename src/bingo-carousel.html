@@ -2,9 +2,8 @@
 
 <dom-module id="bingo-carousel">
   <template>
-    <style>
+    <style style="display:none">
        :host {
-
         width: 100vw;
         height: 100vh;
         overflow: hidden;
@@ -30,13 +29,13 @@
         height: 100vh;
         /* background: yellow; */
         display: inline-flex;
-        white-space: nowrap;
+        /* white-space: nowrap; */
         /* display: table; */
       }
 
 
         /* ne fonctionne pas dans FF */
-       ::slotted(*) {
+        ::slotted(*) {
         width: 100vw;
         height: 100vh;
         display: block;
@@ -68,7 +67,7 @@
             observer: 'onChangeNiveau'
           }
         }
-  }
+      }
 
       onChangeNiveau (niveau) {
         let translateX = 0

@@ -2,9 +2,9 @@
 <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="bingo-icons.html">
-<!-- <link rel="import" href="bingo-state.html"> -->
 <link rel="import" href="bingo-styles.html">
 <link rel="import" href="github-corners.html">
+<link rel="import" href="bingo-state.html">
 
 <dom-module id="bingo-menu">
   <template>
@@ -129,6 +129,11 @@
         --iron-icon-width: 30px;
         cursor: pointer;
       }
+
+      .icons iron-icon {
+        display: block;
+        margin-bottom: 10px;
+      }
     </style>
 
     <audio id="musique" loop>
@@ -136,11 +141,12 @@
     </audio>
 
     <github-corners href="https://github.com/javamaniac/bingo-voiture" style="margin: 0 0 0 -10px;" class="left" left="left"></github-corners>
-
+    
     <div class="card unselectable">
       <div class="icons">
-        <iron-icon on-tap="basculerMusique" icon="[[iconMusique]]"></iron-icon>
+        <iron-icon on-tap="onSettings" icon="bingo-icons:settings"></iron-icon>
       </div>
+
       <h1>
         <div class="icon-wrapper">
           <img class="icon-bingo" src="images/manifest/icon-144x144.png">
@@ -164,51 +170,44 @@
   </template>
 
   <script>
-    // ReduxMixin
-    class BingoMenu extends Polymer.GestureEventListeners(Polymer.Element) {
+    class BingoMenu extends MixinState(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() { return 'bingo-menu' }
       static get properties() {
         return {
           version: {
             value: ''
           },
-          activerMusique: {
+          actif: {
             type: Boolean,
-            value: true
-          },
-          iconMusique: {
-            type: String,
-            computed: 'computeEtatMusique(activerMusique)'
+            observer: 'onActiveChanged'
           }
-          // animConfig: {
-          //   value: {
-          //     enter: () => {
-          //       debugger;
-          //     },
-          //     exit: () => {
-          //       debugger;
-          //       console.log("EXIT!!!");
-          //     }
-          //   }
-          // }
         }
       }
 
-      basculerMusique() {
-        this.activerMusique = !this.activerMusique
+      static get observers() {
+        return [
+          'onMusiqueChange(preferences.musique)'
+        ]
       }
 
-      computeEtatMusique() {
-        const musique = this.$.musique
-
-        if (this.activerMusique) {
-          musique.currentTime = 0
-          musique.play()
+      onMusiqueChange(musique) {
+        if (musique) {
+          this.$.musique.currentTime = 0
+          this.$.musique.play()
         } else {
-          musique.pause()
+          this.$.musique.pause()
         }
+      }
 
-        return (this.activerMusique) ? 'bingo-icons:musique' : 'bingo-icons:sans-musique'
+      onActiveChanged(actif) {
+        if (actif && this.preferences.musique) {
+          this.$.musique.currentTime = 0
+          this.$.musique.play()
+        }
+      }
+
+      onSettings() {
+        this.dispatchEvent(new CustomEvent('open-preferences', { bubbles: true, composed: true }))
       }
 
       connectedCallback() {
