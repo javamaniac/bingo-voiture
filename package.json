@@ -9,6 +9,7 @@
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-html": "^2.0.3",
     "eslint-plugin-polymer": "^0.1.0",
+    "puppeteer": "git://github.com/GoogleChrome/puppeteer.git#master",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },
