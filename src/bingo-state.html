@@ -1,10 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/fortune-cookie/fortune-cookie.html">
 
-<!-- <link rel="import" href="../polymer/lib/elements/dom-if.html"> -->
-<!-- <link rel="import" href="../polymer/lib/elements/dom-repeat.html"> -->
-<!-- <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html"> -->
-
 <dom-module id="bingo-state">
   <template>
     <style>
@@ -17,15 +13,10 @@
     auto-save 
     id="cookie" 
     name="bingoPrefs" 
-    value="{{preferences}}"
-    handle-value-as="object"
+    value="{{preferences}}" 
+    handle-value-as="object" 
     on-fortune-cookie-load-empty="_initPreferences">
     </fortune-cookie>
-
-    <!-- <h3>Options</h3>
-    <p>
-      musique: [[preferences.musique]]
-    </p> -->
 
   </template>
   <script>
@@ -40,19 +31,18 @@
           return {
             preferences: {
               type: Object,
-              // value: () => ({})
             },
             subscribers: {
               type: Array,
               value: () => []
             },
             preferencesParDefaut: {
-            type: Object,
-            value: {
-              musique: true,
-              debug: false
+              type: Object,
+              value: {
+                musique: true,
+                debug: false
+              }
             }
-          }
           }
         }
 
@@ -70,10 +60,6 @@
           super();
 
           if (!optionsInstance) optionsInstance = this;
-
-          // this.addEventListener('fortune-cookie-load-empty', () => {
-          //     debugger
-          // })
         }
 
         register(subscriber) {
@@ -99,6 +85,12 @@
 
       window.customElements.define(BingoState.is, BingoState)
 
+      /**
+      * `MixinState` enables a custom element to use declarative
+      * lazy imports
+      *
+      * @polymerMixin
+      */
       MixinState = (superClass) => {
         return class extends superClass {
           static get properties() {
@@ -122,11 +114,9 @@
               state.set(pref.path, pref.value)
               state.notifyPath('preferences.musique')
             }
-            // this.dispatchEvent(new CustomEvent('preferences-changed', { bubbles: true, composed: true }))
           }
 
           connectedCallback() {
-            // if (!optionsInstance) optionsInstance = this;
             super.connectedCallback()
             optionsInstance.register(this)
             this.state = optionsInstance
