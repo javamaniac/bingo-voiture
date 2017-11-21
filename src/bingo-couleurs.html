@@ -17,6 +17,9 @@
         overflow: hidden;
         box-sizing: border-box;
       }
+      .car {
+        align-self: center;
+      }
 
       .car-anim {
         animation-name: car;
@@ -80,7 +83,7 @@
           <div class="grid-row">
             <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
               <bingo-case id="case-[[l]]-[[c]]" class="grid-item" couleur="[[_getCouleur(l, c, cases)]]">
-                  <iron-icon icon="bingo-icons2:voiture1" class="car car-anim" style$="color: [[_getCouleur(l, c, cases)]]; flex:1;--iron-icon-height: 14vh;--iron-icon-width: 14vw;"></iron-icon>
+                <iron-icon icon="bingo-icons2:voiture1" class="car car-anim" style$="color: [[_getCouleur(l, c, cases)]]; flex:1;--iron-icon-height: 14vh;--iron-icon-width: 14vw;"></iron-icon>
               </bingo-case>
             </template>
           </div>
