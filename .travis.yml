@@ -15,8 +15,6 @@ install:
   - npm install -g polymer-cli
   - npm install
   - bower install
-before_script:
-  - polymer lint
 script:
   - xvfb-run polymer test -l chrome
   - xvfb-run polymer test -l firefox
