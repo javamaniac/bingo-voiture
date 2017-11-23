@@ -2,7 +2,6 @@ language: node_js
 sudo: false
 node_js: stable
 addons:
-  firefox: latest
   apt:
     sources:
       - google-chrome
@@ -17,5 +16,4 @@ install:
   - bower install
 script:
   - xvfb-run polymer test -l chrome
-  - xvfb-run polymer test -l firefox
 dist: trusty
