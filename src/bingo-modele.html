@@ -80,17 +80,21 @@
       }
 
       _getCase(ligne, colonne, cases) {
-        // if (this.cases) {
         let index = ligne * 5 + colonne
         return this.cases[index]
-        // }
       }
 
       reset() {
         this.afficheBingo(false)
         this.shadowRoot.querySelector('form').reset()
         this.set('cases', this.createCases())
-        // car-anim
+        this.animation()
+      }
+
+      /**
+       * @template
+       */
+      animation() {
       }
 
       afficheBingo(affiche) {

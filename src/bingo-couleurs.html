@@ -19,13 +19,13 @@
       }
       .car {
         align-self: center;
+        margin: 0 9%;
       }
 
       .car-anim {
         animation-name: car;
         animation-duration: 0.5s;
         /* animation-delay: 2.5s; */
-        margin: 0 9%;
       }
 
       @keyframes car {
@@ -95,7 +95,6 @@
   </template>
 
   <script>
-    // ReduxMixin
     /**
      * @mixins {BingoModele}
      */
@@ -110,10 +109,23 @@
         }
       }
 
+      animation() {
+        this.shadowRoot.querySelectorAll('iron-icon').forEach((car) => {
+          car.classList.remove('car-anim')
+        })
+        setTimeout(x => {
+          this.shadowRoot.querySelectorAll('iron-icon').forEach((car) => {
+            car.classList.add('car-anim')
+          })
+          this.$.vroum.pause()
+          this.$.vroum.currentTime = 0
+          this.$.vroum.play()
+        }, 200)
+        //wait
+      }
+
       _getCouleur(ligne, colonne, cases) {
-        // if (cases) {
         return this._getCase(ligne, colonne, cases).couleur
-        // }
       }
 
       connectedCallback() {
@@ -125,19 +137,10 @@
         }, 200)
       }
 
-      reset() {
-        this.$.vroum.play()
+      reset() {        
 
-        this.shadowRoot.querySelectorAll('bingo-case').forEach(caseCmp => {
-          caseCmp.reset()
-        })
+        super.reset()
       }
-
-      // createCases() {
-      //   setTimeout(x => {
-      //     super.createCases()
-      //   }, 2000)
-      // }
 
       getTypes() {
         let types = [
