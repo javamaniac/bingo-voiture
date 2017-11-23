@@ -31,10 +31,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script>
       suite('bingo-app tests', function() {
-        test('Number in circle should be 1', function() {
-          var myView = fixture('BasicView');
-          var circle = myView.shadowRoot.querySelector('.circle');
-          assert.equal(circle.textContent, '1');
+
+        const bingoApp = fixture('BasicView');
+
+        test('Le menu devrait être présent', function() {
+          const menu = bingoApp.shadowRoot.querySelector('bingo-menu')
+          assert.equal(menu.tagName, 'BINGO-MENU');
         });
       });
     </script>
