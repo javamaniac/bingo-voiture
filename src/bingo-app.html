@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="bingo-carousel.html">
-<link rel="import" href="bingo-menu.html">
+<link rel="import" href="pages/menu/bingo-menu.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
 <link rel="import" href="bingo-preferences.html">
@@ -208,7 +208,7 @@
         const cmp = 'bingo-' + page
 
         // Load page import on demand. Show 404 page if fails
-        const resolvedPageUrl = this.resolveUrl(cmp + '.html')
+        const resolvedPageUrl = this.resolveUrl(`pages/${page}/${cmp}.html`)
 
         const me = this
         // Chargement du composant et de ses dépendances
