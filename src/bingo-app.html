@@ -99,7 +99,7 @@
       a:active {
         color: #a8b9d4;
       }
-    </style>;
+    </style>
 
     <bingo-state></bingo-state>
 
@@ -136,6 +136,9 @@
 
       static get properties() {
         return {
+          route: {
+            observer: '_routeChanged'
+          },
           page: {
             type: String,
             reflectToAttribute: true,
@@ -150,6 +153,13 @@
           preferences: {
             type: Object
           }
+        }
+      }
+
+      _routeChanged(route) {
+        console.log('route:', route)
+        if (history.state && history.state.route) {
+          this._pageChanged(history.state.route)
         }
       }
 
@@ -190,7 +200,7 @@
         if (page === 'index.html') {
           return
         }
-
+        
         if (page === 'menu') {
           this.$.carousel.niveau = 1
           this._insererElement('')
