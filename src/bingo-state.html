@@ -96,7 +96,10 @@
           static get properties() {
             return {
               preferences: {
-                type: Object
+                type: Object,
+                value: function() {
+                  return {}
+                }
               }
             }
           }
