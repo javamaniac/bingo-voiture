@@ -25,6 +25,9 @@
 
       .icon-wrapper .icon-bingo {
         width: 100%;
+        /* FIX lighthouse best practice */
+        max-width: 144px;
+        max-height: 144px;
       }
 
       .titre {
@@ -180,7 +183,7 @@
           actif: {
             type: Boolean,
             observer: 'onActiveChanged'
-          }
+          },
         }
       }
 
@@ -193,16 +196,18 @@
       onMusiqueChange(musique) {
         if (musique) {
           this.$.musique.currentTime = 0
-          this.$.musique.play()
+          if (!this.playPromise) {
+            this.playPromise = this.$.musique.play()
+          }
         } else {
-          this.$.musique.pause()
+          this.pauseMusique()
         }
       }
 
       onActiveChanged(actif) {
         if (actif && this.preferences.musique) {
           this.$.musique.currentTime = 0
-          this.$.musique.play()
+          this.playPromise = this.$.musique.play()
         }
       }
 
@@ -217,19 +222,34 @@
         this.afficherVersion()
 
         window.addEventListener('bingo-stopmusic', () => {
-          this.$.musique.pause()
+          this.pauseMusique()
         })
       }
 
-      goto(route) {
-        this.$.musique.pause()
-        this.$.musique.currentTime = 0
-        history.pushState({}, '', route)
+      goto(route) {      
+        this.pauseMusique()
+        history.pushState({route: route}, '', route)
         window.dispatchEvent(new CustomEvent('location-changed', {
           detail: {
             route: route
           }
         }))
+      }
+
+      pauseMusique() {
+        if (this.playPromise !== undefined) {
+          this.playPromise.then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+            // We can now safely pause video...
+            this.$.musique.pause()
+            this.$.musique.currentTime = 0
+              })
+          .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+          });
+        }        
       }
 
       couleurs() {
