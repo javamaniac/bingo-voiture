@@ -2,10 +2,10 @@
   "entrypoint": "index.html",
   "shell": "src/bingo-app.html",
   "fragments": [
-    "src/bingo-couleurs.html",
-    "src/bingo-immatriculations.html",
-    "src/bingo-signalisation.html",
-    "src/bingo-fabricants.html",
+    "src/pages/couleurs/bingo-couleurs.html",
+    "src/pages/immatriculations/bingo-immatriculations.html",
+    "src/pages/signalisation/bingo-signalisation.html",
+    "src/pages/fabricants/bingo-fabricants.html",
     "src/bingo-view404.html"
   ],
   "sources": [
