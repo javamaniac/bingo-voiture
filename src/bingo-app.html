@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <script>
   Polymer.setPassiveTouchGestures(true)
+
 </script>
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
@@ -10,6 +11,12 @@
 
 <link rel="import" href="bingo-preferences.html">
 <link rel="import" href="bingo-state.html">
+
+<link rel="lazy-import" href="pages/couleurs/bingo-couleurs.html">
+<link rel="lazy-import" href="pages/immatriculations/bingo-immatriculations.html">
+<link rel="lazy-import" href="pages/signalisation/bingo-signalisation.html">
+<link rel="lazy-import" href="pages/fabricants/bingo-fabricants.html">
+<link rel="lazy-import" href="bingo-view404.html">
 
 <script>
   /**
@@ -94,16 +101,19 @@
         width: 100vw;
         box-sizing: border-box;
       }
+
       a:link,
-      a:visited,    
+      a:visited,
       a:active {
         color: #a8b9d4;
       }
+
     </style>
 
     <bingo-state></bingo-state>
 
-    <bingo-preferences id="preferences" 
+    <bingo-preferences 
+      id="preferences" 
       preferences="{{preferences}}" 
       on-open-preferences="openPreferences"></bingo-preferences>
 
@@ -118,11 +128,11 @@
     </audio>
 
     <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" 
-    pattern="[[rootPath]]:page" 
-    data="{{routeData}}" 
-    tail="{{subroute}}"></app-route>
-
+    <app-route 
+      route="{{route}}" 
+      pattern="[[rootPath]]:page" 
+      data="{{routeData}}" 
+      tail="{{subroute}}"></app-route>
     <bingo-carousel id="carousel" niveau="1">
       <bingo-menu></bingo-menu>
       <div id="contenu"></div>
@@ -132,7 +142,9 @@
 
   <script>
     class BingoApp extends MixinState(Polymer.Element) {
-      static get is() { return 'bingo-app' }
+      static get is() {
+        return 'bingo-app'
+      }
 
       static get properties() {
         return {
@@ -200,7 +212,7 @@
         if (page === 'index.html') {
           return
         }
-        
+
         if (page === 'menu') {
           this.$.carousel.niveau = 1
           this._insererElement('')
@@ -265,5 +277,6 @@
     }
 
     window.customElements.define(BingoApp.is, BingoApp)
+
   </script>
 </dom-module>
