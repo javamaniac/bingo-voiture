@@ -1,10 +1,10 @@
-import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../node_modules/@polymer/polymer/polymer-element.js"
 /**
  * @implements BingoModele
  */
-class BingoCarousel extends Element {
+class BingoCarousel extends PolymerElement {
   static get template() {
-    return `
+    return html`
     <style style="display:none">
        :host {
         width: 100vw;

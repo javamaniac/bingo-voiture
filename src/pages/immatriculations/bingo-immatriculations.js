@@ -1,4 +1,4 @@
-import { Element } from '../../../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../../../node_modules/@polymer/polymer/polymer-element.js"
 import { GestureEventListeners } from '../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import '../../../node_modules/@polymer/iron-icons/iron-icons.js';
 import '../../../node_modules/@polymer/iron-icons/maps-icons.js';
@@ -7,9 +7,9 @@ import '../../../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { BingoModele } from '../../bingo-modele.js';
 import '../../bingo-styles.js';
 import '../../bingo-case.js';
-class BingoImmatriculations extends GestureEventListeners(BingoModele(Element)) {
+class BingoImmatriculations extends GestureEventListeners(BingoModele(PolymerElement)) {
   static get template() {
-    return `
+    return html`
     <style include="bingo-styles">
       :host {
         display: block;

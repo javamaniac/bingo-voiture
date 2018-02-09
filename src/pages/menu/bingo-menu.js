@@ -1,13 +1,13 @@
-import { Element } from '../../../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../../../node_modules/@polymer/polymer/polymer-element.js"
 import { GestureEventListeners } from '../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import '../../../node_modules/@polymer/iron-icon/iron-icon.js';
 import '../../bingo-icons.js';
 import '../../bingo-styles.js';
 import '../../github-corners.js';
 import { MixinState } from '../../bingo-state.js';
-class BingoMenu extends MixinState(GestureEventListeners(Element)) {
+class BingoMenu extends MixinState(GestureEventListeners(PolymerElement)) {
   static get template() {
-    return `
+    return html`
     <style include="bingo-styles">
        :host {
         display: block;

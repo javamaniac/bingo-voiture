@@ -1,4 +1,4 @@
-import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../node_modules/@polymer/polymer/polymer-element.js"
 import '../node_modules/@polymer/paper-dialog/paper-dialog.js';
 import '../node_modules/@polymer/paper-button/paper-button.js';
 import '../node_modules/@polymer/paper-toggle-button/paper-toggle-button.js';
@@ -7,9 +7,9 @@ import { GestureEventListeners } from '../node_modules/@polymer/polymer/lib/mixi
 /* <link rel="import" href="../polymer/lib/elements/dom-if.html"> */
 /* <link rel="import" href="../polymer/lib/elements/dom-repeat.html"> */
 /* <link rel="import" href="../ower_components/polymer/lib/mixins/gesture-event-listeners.html"> */
-class BingoPreferences extends MixinState(GestureEventListeners(Element)) {
+class BingoPreferences extends MixinState(GestureEventListeners(PolymerElement)) {
   static get template() {
-    return `
+    return html`
     <style>
       :host {
         display: block;

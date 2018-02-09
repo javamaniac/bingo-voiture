@@ -1,14 +1,15 @@
-import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../node_modules/@polymer/polymer/polymer-element.js"
 import '../node_modules/@polymer/app-route/app-location.js';
 import '../node_modules/@polymer/app-route/app-route.js';
-import './bingo-carousel.js';
-import './pages/menu/bingo-menu.js';
 import '../node_modules/@polymer/paper-toast/paper-toast.js';
-import './bingo-preferences.js';
-import { MixinState } from './bingo-state.js';
 import { setPassiveTouchGestures } from '../node_modules/@polymer/polymer/lib/utils/settings.js';
 // // import { importHref } from '../node_modules/@polymer/polymer/lib/utils/import-href.js';
 import { dom } from '../node_modules/@polymer/polymer/lib/legacy/polymer.dom.js';
+
+import './bingo-carousel.js';
+import './pages/menu/bingo-menu.js';
+import './bingo-preferences.js';
+import { MixinState } from './bingo-state.js';
 
 // À rendre lazy
 import './pages/couleurs/bingo-couleurs.js';
@@ -19,9 +20,9 @@ import './bingo-view404.js';
 
 setPassiveTouchGestures(true)
 
-class BingoApp extends MixinState(Element) {
+class BingoApp extends MixinState(PolymerElement) {
   static get template() {
-    return `
+    return html`
     <style>
       :host {
         --app-primary-color: #2f415f;

@@ -1,4 +1,4 @@
-import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../node_modules/@polymer/polymer/polymer-element.js"
 /*
 Web component version of the Github corner ([http://tholman.com/github-corners/])
 
@@ -18,9 +18,9 @@ Example:
       href="https://github.com/javamaniac/bingo-voiture"></github-corners>
 
 */
-class GithubCorners extends Element {
+class GithubCorners extends PolymerElement {
   static get template() {
-    return `
+    return html`
     <style>
        :host {
         display: block;

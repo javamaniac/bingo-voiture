@@ -1,10 +1,10 @@
-import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+import {Element as PolymerElement, html} from "../node_modules/@polymer/polymer/polymer-element.js"
 import { GestureEventListeners } from '../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import '../node_modules/@polymer/iron-icons/iron-icons.js';
 import './bingo-icons.js';
-class BingoCase extends GestureEventListeners(Element) {
+class BingoCase extends GestureEventListeners(PolymerElement) {
   static get template() {
-    return `
+    return html`
     <style>
       :host {
         display: block;

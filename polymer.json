@@ -1,13 +1,5 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/bingo-app.html",
-  "fragments": [
-    "src/pages/couleurs/bingo-couleurs.html",
-    "src/pages/immatriculations/bingo-immatriculations.html",
-    "src/pages/signalisation/bingo-signalisation.html",
-    "src/pages/fabricants/bingo-fabricants.html",
-    "src/bingo-view404.html"
-  ],
   "sources": [
     "src/**/*",
     "images/**/*",
@@ -17,8 +9,13 @@
   "extraDependencies": [
     "manifest.json",
     "config.json",
-    "bower_components/webcomponentsjs/*.js"
+    "node_modules/@webcomponents/webcomponentsjs/*.js"
   ],
+  "builds": [
+    {
+      "preset": "es5-bundled"
+    }
+  ],  
   "lint": {
     "rules": ["polymer-2"]
   },
@@ -31,11 +28,28 @@
     },
     {
       "preset": "es6-unbundled"
-    }
-  ],
-  "builds": [
+    },
     {
-      "preset": "es5-bundled"
-    }
-  ]  
+      "name": "bundled-custom",
+      "bundle": {
+        "stripComments": true,
+        "inlineCss": false,
+        "sourcemaps": true
+      },
+      "addServiceWorker": true,
+      "insertPrefetchLinks": true,
+      "swPrecacheConfig": "sw-precache-config.js",
+      "addPushManifest": true,
+      "js": {
+        "compile": false,
+        "minify": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      }
+    }    
+  ]
 }

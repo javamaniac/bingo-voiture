@@ -17,18 +17,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <title>my-view1</title>
 
-  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../bower_components/web-component-tester/browser.js"></script>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../node_modules/web-component-tester/browser.js"></script>
   <!-- <script src="../bower_components/iron-test-helpers/mock-interactions.html"></script> -->
-  <link rel="import" href="../bower_components/iron-test-helpers/mock-interactions.html">
+  <!-- <script type="module" src="../node_modules/@polymer/iron-test-helpers/mock-interactions.js"></script> -->
   
   
   <!-- Import the element to test -->
-  <link rel="import" href="../src/bingo-app.html">
+  <script type="module" src="../src/bingo-app.js"></script>
 </head>
 
 <body>
-  <script>void(0)</script>
+  <script>
+// import '../../@polymer/iron-test-helpers/mock-interactions.js';
+// import '../src/bingo-app.js';
+void(0)
+</script>
   <test-fixture id="BasicView">
     <template>
       <!-- <div></div> -->
@@ -47,146 +51,149 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </script> -->
 
   <script>
-    /**
-     * @params {String[]} elements
-     * @params {Function} callback
-     */
-    function afterNextRenderAll(elements, callback) {
-      elements = [elements]
-      var renderedCount = 0;
-      function elementRendered() {
-        renderedCount++;
-        if (renderedCount === elements.length) {
-          callback();
-        }
-      }
-      elements.forEach(function (element) {
-        Polymer.RenderStatus.afterNextRender(element, elementRendered);
-      });
+// import '../../@polymer/iron-test-helpers/mock-interactions.js';
+// import '../src/bingo-app.js';
+// import { afterNextRender } from '../../@polymer/polymer/lib/utils/render-status.js';
+// import { Base } from '../../@polymer/polymer/polymer.js';
+/**
+ * @params {String[]} elements
+ * @params {Function} callback
+ */
+function afterNextRenderAll(elements, callback) {
+  elements = [elements]
+  var renderedCount = 0;
+  function elementRendered() {
+    renderedCount++;
+    if (renderedCount === elements.length) {
+      callback();
     }
+  }
+  elements.forEach(function (element) {
+    afterNextRender(element, elementRendered);
+  });
+}
 
-    // suite('bingo-app tests', function () {
-    //   let bingoApp, menu;
-    //   let routeDeBase;
+// suite('bingo-app tests', function () {
+//   let bingoApp, menu;
+//   let routeDeBase;
 
-    //   setup(function () {
-    //     bingoApp = fixture('BasicView')
-    //     routeDeBase = bingoApp.route.path
-    //     menu = bingoApp.shadowRoot.querySelector('bingo-menu')
-    //   });
-
-
-
-    //   test('Le menu devrait être présent', function (done) {
-    //     debugger
-    //     afterNextRenderAll(menu, () => {
-    //       Polymer.Base.async(function () {
-    //         try {
-    //           assert.equal(menu.tagName, 'BINGO-MENU');
-    //           // expect(button.elevation).to.be.eql(1);
-    //           done();
-    //         } catch (e) {
-    //           done(e);
-    //         }
-    //       }, 1);
-    //     })
-    //   });
-    //   // history.state === couleurs
+//   setup(function () {
+//     bingoApp = fixture('BasicView')
+//     routeDeBase = bingoApp.route.path
+//     menu = bingoApp.shadowRoot.querySelector('bingo-menu')
+//   });
 
 
 
+//   test('Le menu devrait être présent', function (done) {
+//     debugger
+//     afterNextRenderAll(menu, () => {
+//       Polymer.Base.async(function () {
+//         try {
+//           assert.equal(menu.tagName, 'BINGO-MENU');
+//           // expect(button.elevation).to.be.eql(1);
+//           done();
+//         } catch (e) {
+//           done(e);
+//         }
+//       }, 1);
+//     })
+//   });
+//   // history.state === couleurs
 
 
 
-    // });
 
-    suite('Tester les routes', () => {
+
+
+// });
+
+suite('Tester les routes', () => {
 debugger
-      const bingoApp = fixture('BasicView')
-      const routeDeBase = bingoApp.route.path
-      const menu = bingoApp.shadowRoot.querySelector('bingo-menu')
-      
-      setup(function () {})
-      
+  const bingoApp = fixture('BasicView')
+  const routeDeBase = bingoApp.route.path
+  const menu = bingoApp.shadowRoot.querySelector('bingo-menu')
+  
+  setup(function () {})
+  
 
-      test(`Couleurs devrait s'afficher si on clique sur le premier bouton`, function (done) {
-        debugger
-        const button = menu.shadowRoot.querySelector('.bouton-menu')
+  test(`Couleurs devrait s'afficher si on clique sur le premier bouton`, function (done) {
+    debugger
+    const button = menu.shadowRoot.querySelector('.bouton-menu')
 
-        afterNextRenderAll(button, () => {
+    afterNextRenderAll(button, () => {
 
-          Polymer.Base.async(function () {
-            try {
+      Base.async(function () {
+        try {
 
-              window.addEventListener('location-changed', function (e) {
-                console.log('location-changed')
+          window.addEventListener('location-changed', function (e) {
+            console.log('location-changed')
 
-                // afterNextRenderAll(['bingo-couleurs', 'bingo-case'], () => {
+            // afterNextRenderAll(['bingo-couleurs', 'bingo-case'], () => {
 
-                // })
-                window.setTimeout(() => {
-                Polymer.RenderStatus.afterNextRender('bingo-couleurs', () => {
+            // })
+            window.setTimeout(() => {
+            afterNextRender('bingo-couleurs', () => {
 debugger
-                  const couleurs = bingoApp.shadowRoot.querySelector('bingo-couleurs')
-                  const cases = couleurs.shadowRoot.querySelectorAll('bingo-case')
-                  debugger
-                  assert.equal(cases.length, 25);
-                  done()
-                })
-                }, 1000)
+              const couleurs = bingoApp.shadowRoot.querySelector('bingo-couleurs')
+              const cases = couleurs.shadowRoot.querySelectorAll('bingo-case')
+              debugger
+              assert.equal(cases.length, 25);
+              done()
+            })
+            }, 1000)
 
-              })
-              button.addEventListener('click', function () {
-                console.log('click');
-              });
-              MockInteractions.tap(button);
+          })
+          button.addEventListener('click', function () {
+            console.log('click');
+          });
+          MockInteractions.tap(button);
 
-            } catch (e) {
-              done(e);
-            }
-          }, 1);
-        })
-      });
+        } catch (e) {
+          done(e);
+        }
+      }, 1);
+    })
+  });
 
-      test(`En cliquant sur le bouton maison, on devrait retourner au menu`, function (done) {
+  test(`En cliquant sur le bouton maison, on devrait retourner au menu`, function (done) {
 
 
 debugger
 const couleurs = bingoApp.shadowRoot.querySelector('bingo-couleurs')
 
 
-        const button = menu.shadowRoot.querySelector('.bouton-menu')
+    const button = menu.shadowRoot.querySelector('.bouton-menu')
 
-        afterNextRenderAll(button, () => {
+    afterNextRenderAll(button, () => {
 
-          Polymer.Base.async(function () {
-            try {
+      Base.async(function () {
+        try {
 
-              window.addEventListener('location-changed', function (e) {
-                console.log('location-changed')
+          window.addEventListener('location-changed', function (e) {
+            console.log('location-changed')
 
-                window.setTimeout(() => {
-                  const couleurs = bingoApp.shadowRoot.querySelector('bingo-couleurs')
-                  const cases = couleurs.shadowRoot.querySelectorAll('bingo-case')
-                  assert.equal(cases.length, 25);
-                  done()
-                }, 1000)
+            window.setTimeout(() => {
+              const couleurs = bingoApp.shadowRoot.querySelector('bingo-couleurs')
+              const cases = couleurs.shadowRoot.querySelectorAll('bingo-case')
+              assert.equal(cases.length, 25);
+              done()
+            }, 1000)
 
-              })
-              button.addEventListener('click', function () {
-                console.log('click');
-              });
-              MockInteractions.tap(button);
+          })
+          button.addEventListener('click', function () {
+            console.log('click');
+          });
+          MockInteractions.tap(button);
 
-            } catch (e) {
-              done(e);
-            }
-          }, 1);
-        })
-      });
+        } catch (e) {
+          done(e);
+        }
+      }, 1);
     })
-    
-  </script>
+  });
+})
+</script>
 </body>
 
 </html>
