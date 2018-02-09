@@ -13,7 +13,6 @@ cache:
 install:
   - npm install -g polymer-cli
   - npm install
-  - bower install
 script:
   - xvfb-run polymer test -l chrome
 dist: trusty
