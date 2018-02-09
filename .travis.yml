@@ -14,5 +14,5 @@ install:
   - npm install -g polymer-cli
   - npm install
 script:
-  - xvfb-run polymer test -l chrome
+  - xvfb-run polymer test --npm -l chrome
 dist: trusty
