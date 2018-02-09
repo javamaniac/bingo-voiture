@@ -156,7 +156,7 @@
   </script>
 
   <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js" async></script>
+  <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" async=""></script>
 
   <!-- Load your application shell -->
 
@@ -173,73 +173,70 @@
     }
   </style>
 
-  <script>
-    // Google Analytics
-    (function () {
-      'use strict';
+  <script type="module">
+import '/src/bingo-app.js';
 
-      // if (location.hostname === 'localhost') return;
+// if (location.hostname === 'localhost') return;
 
-      // window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+// window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 
-      // ga('create', 'UA-105763285-1', 'auto');
-      //<!-- Global Site Tag (gtag.js) - Google Analytics -->
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments) };
-      gtag('js', new Date());
+// ga('create', 'UA-105763285-1', 'auto');
+//<!-- Global Site Tag (gtag.js) - Google Analytics -->
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments) }
+gtag('js', new Date());
 
-      gtag('config', 'UA-105763285-1');
+gtag('config', 'UA-105763285-1');
 
-      /*
-      Google analytiques custom 
-      - appVersion
-      - event
-      - timingCategory
-      - exDescription
-      - expId
-      */
+/*
+Google analytiques custom 
+- appVersion
+- event
+- timingCategory
+- exDescription
+- expId
+*/
 
 
-      window.addEventListener('location-changed', function (e) {
-        gtag('event', 'page', {
-          route: e.detail.route
-        });
-        gtag('config', 'UA-105763285-1', {
-          'page_title': e.detail.route,
-          'page_location': location.href,
-          'page_path': location.pathname
-        });
-        // ga('set', 'page', location.pathname);
-        // ga('send', 'pageview');
-      });
+window.addEventListener('location-changed', function (e) {
+  gtag('event', 'page', {
+    route: e.detail.route
+  });
+  gtag('config', 'UA-105763285-1', {
+    'page_title': e.detail.route,
+    'page_location': location.href,
+    'page_path': location.pathname
+  });
+  // ga('set', 'page', location.pathname);
+  // ga('send', 'pageview');
+});
 
-      window.addEventListener('error', function (e) {
-        // debugger;
-        gtag('event', 'exception', {
-          'description': e.message,
-          'fatal': false   // set to true if the error is fatal
-        });
-        // ga('send', 'exception', {
-        //   'exDescription': e.message,
-        //   'exFatal': false
-        // });
-      });
-      window.addEventListener('WebComponentsReady', function (e) {
-        // debugger;
-        if (window.performance) {
-          gtag('event', 'timing_complete', {
-            'name': 'WebComponentsReady',
-            'value': Math.round(performance.now()),
-            'event_category': 'JS Dependencies'
-          });
-          // ga('send', 'timing', 
-          // 'JS Dependencies', 
-          // 'WebComponentsReady', 
-          // Math.round(performance.now()));
-        }
-      });
-    })();
-  </script>
+window.addEventListener('error', function (e) {
+  // debugger;
+  gtag('event', 'exception', {
+    'description': e.message,
+    'fatal': false   // set to true if the error is fatal
+  });
+  // ga('send', 'exception', {
+  //   'exDescription': e.message,
+  //   'exFatal': false
+  // });
+});
+window.addEventListener('WebComponentsReady', function (e) {
+  // debugger;
+  if (window.performance) {
+    gtag('event', 'timing_complete', {
+      'name': 'WebComponentsReady',
+      'value': Math.round(performance.now()),
+      'event_category': 'JS Dependencies'
+    });
+    // ga('send', 'timing', 
+    // 'JS Dependencies', 
+    // 'WebComponentsReady', 
+    // Math.round(performance.now()));
+  }
+});
+</script>
 
 </head>
 
@@ -319,7 +316,7 @@
 
 </html>
 
-<link rel="import" href="src/bingo-app.html" async>
+<script type="module" src="/src/bingo-app.js"></script>
 <!-- <script src="https://www.google-analytics.com/analytics.js" async></script> -->
 
 <!-- TODO defer -->

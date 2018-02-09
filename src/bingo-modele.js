@@ -1,0 +1,229 @@
+import '../node_modules/@polymer/polymer/polymer-element.js';
+import '../node_modules/@polymer/polymer/lib/utils/mixin.js';
+
+export const BingoModele = function(superClass) {
+ return class extends superClass {
+   // Code that you want common to elements.
+   // If you're going to override a lifecycle method, remember that a) you
+   // might need to call super but b) it might not exist
+   connectedCallback() {
+     if (super.connectedCallback) {
+       super.connectedCallback();
+     }
+     /* ... */
+
+     const me = this
+     this.addEventListener('bingo-pop2', function() {
+       me.pop()
+     })
+   }
+
+
+   static get properties() {
+     return {
+       /**
+        * Cases
+        */
+       cases: {
+         type: Array,
+         value: function () {
+           return this.createCases()
+         }
+       },
+       lignes: {
+         value: [1, 2, 3, 4, 5]
+       },
+       colonnes: {
+         value: ['b', 'i', 'n', 'g', 'o']
+       },
+       bingoGagnant: {
+         type: Object,
+         value: {}
+         // observer: '_majNbBingo(bingoGagnant.*)'
+       },
+       nbBingo: {
+         type: Number,
+         value: 0
+       }
+     }
+   }
+
+   static get observers() {
+     return [
+       '_majNbBingo(bingoGagnant.*)'
+     ]
+   }
+
+   _majNbBingo(bingoGagnant) {
+     const nb = Object.keys(this.bingoGagnant).filter((l) => {
+       return this.bingoGagnant[l]
+     }).length
+     console.log('Nombre de Bingo', nb)
+
+     this.nbBingo = (nb > 1) ? nb : ''
+   }
+
+   _getCase(ligne, colonne, cases) {
+     let index = ligne * 5 + colonne
+     return this.cases[index]
+   }
+
+   reset() {
+     this.afficheBingo(false)
+     this.shadowRoot.querySelector('form').reset()
+     this.set('cases', this.createCases())
+     this.animation()
+   }
+
+   /**
+    * @template
+    */
+   animation() {
+   }
+
+   afficheBingo(affiche) {
+     const bingo = this.shadowRoot.querySelector('#bingo')
+     if (affiche) {
+       bingo.classList.add('visible')
+     } else {
+       bingo.classList.remove('visible')
+     }
+   }
+
+   fermerBingo() {
+     this.afficheBingo(false)
+   }
+
+   goto(route) {
+     history.pushState({}, '', route)
+     window.dispatchEvent(new CustomEvent('location-changed', {
+       detail: {
+         route: route
+       }
+     }))
+   }
+
+   accueil() {
+     history.back()
+   }
+
+   createCases() {
+     let cases = this.getTypes()
+
+     cases.sort((caseX, caseY) => {
+       return caseX.random - caseY.random
+     })
+
+     return cases
+   }
+
+   pop() {
+     this.dispatchEvent(new CustomEvent('bingo-pop', { bubbles: true, composed: true }))
+
+     this.verifierBingo()
+   }
+
+   verifierBingo() {
+     this.verificationDesLignes()
+     this.verificationDesColonnes()
+     this.verificationDesDiagonales()
+     this.verifierSuperBingo()
+   }
+
+   verifierSuperBingo() {
+     const nbX = this.shadowRoot.querySelectorAll('bingo-case[coche]').lenght
+     if (nbX === 25) {
+       if (!this.bingoGagnant.superBingo) {
+         this.afficheBingo(true)
+       }
+       this.set('bingoGagnant.superBingo', true)
+     } else {
+       this.set('bingoGagnant.superBingo', undefined)
+     }
+   }
+
+   verificationDesLignes() {
+     const lignes = [0, 1, 2, 3, 4]
+     const colonnes = [0, 1, 2, 3, 4]
+     lignes.forEach((indexLigne) => {
+       let nbX = 0
+       colonnes.forEach((indexColonne) => {
+         if (this.getValeurCase(indexLigne, indexColonne)) {
+           nbX++
+         }
+       })
+       if (nbX === 5) {
+         if (!this.bingoGagnant['ligne' + indexLigne]) {
+           this.afficheBingo(true)
+         }
+         this.set('bingoGagnant.' + 'ligne' + indexLigne, true)
+       } else {
+         this.set('bingoGagnant.' + 'ligne' + indexLigne, null)
+       }
+     })
+   }
+
+   verificationDesColonnes() {
+     const colonnes = [0, 1, 2, 3, 4]
+     const lignes = [0, 1, 2, 3, 4]
+     colonnes.forEach((indexColonne) => {
+       let nbX = 0
+       lignes.forEach((indexLigne) => {
+         if (this.getValeurCase(indexLigne, indexColonne)) {
+           nbX++
+         }
+       })
+       if (nbX === 5) {
+         if (!this.bingoGagnant['colonne' + indexColonne]) {
+           this.afficheBingo(true)
+         }
+         this.set('bingoGagnant.colonne' + indexColonne, true)
+       } else {
+         this.set('bingoGagnant.colonne' + indexColonne, undefined)
+       }
+     })
+   }
+
+   verificationDesDiagonales() {
+     if (this.getValeurCase(0, 0) &&
+       this.getValeurCase(1, 1) &&
+       this.getValeurCase(2, 2) &&
+       this.getValeurCase(3, 3) &&
+       this.getValeurCase(4, 4)) {
+       if (!this.bingoGagnant.diagonale1) {
+         this.afficheBingo(true)
+       }
+       this.set('bingoGagnant.diagonale1', true)
+     } else {
+       this.set('bingoGagnant.diagonale1', undefined)
+     }
+
+     if (this.getValeurCase(0, 4) &&
+       this.getValeurCase(1, 3) &&
+       this.getValeurCase(2, 2) &&
+       this.getValeurCase(3, 1) &&
+       this.getValeurCase(4, 0)) {
+       if (!this.bingoGagnant.diagonale2) {
+         this.afficheBingo(true)
+       }
+       this.set('bingoGagnant.diagonale2', true)
+     } else {
+       this.set('bingoGagnant.diagonale2', undefined)
+     }
+   }
+
+   getValeurCase(indexLigne, indexColonne) {
+     return this.shadowRoot.querySelector(`#case-${indexLigne}-${indexColonne}`).coche
+   }
+
+   getRandomInt(min, max) {
+     min = Math.ceil(min)
+     max = Math.floor(max)
+     return Math.floor(Math.random() * (max - min)) + min // The maximum is exclusive and the minimum is inclusive
+   }
+
+   getTypes() {
+     return []
+   }
+ }
+};

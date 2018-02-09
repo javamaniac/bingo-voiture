@@ -1,13 +1,13 @@
-<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
-<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bingo-icons.html">
-<link rel="import" href="../../bingo-styles.html">
-<link rel="import" href="../../github-corners.html">
-<link rel="import" href="../../bingo-state.html">
-
-<dom-module id="bingo-menu">
-  <template>
+import { Element } from '../../../node_modules/@polymer/polymer/polymer-element.js';
+import { GestureEventListeners } from '../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import '../../../node_modules/@polymer/iron-icon/iron-icon.js';
+import '../../bingo-icons.js';
+import '../../bingo-styles.js';
+import '../../github-corners.js';
+import { MixinState } from '../../bingo-state.js';
+class BingoMenu extends MixinState(GestureEventListeners(Element)) {
+  static get template() {
+    return `
     <style include="bingo-styles">
        :host {
         display: block;
@@ -139,12 +139,12 @@
       }
     </style>
 
-    <audio id="musique" loop>
+    <audio id="musique" loop="">
       <source src="../sounds/beat.mp3" type="audio/mpeg">
     </audio>
 
     <github-corners href="https://github.com/javamaniac/bingo-voiture" style="margin: 0 0 0 -10px;" class="left" left="left"></github-corners>
-    
+
     <div class="card unselectable">
       <div class="icons">
         <iron-icon on-tap="onSettings" icon="bingo-icons:settings"></iron-icon>
@@ -170,130 +170,127 @@
       </div>
       <div>[[version]]&nbsp;</div>
     </div>
-  </template>
+`;
+  }
 
-  <script>
-    class BingoMenu extends MixinState(Polymer.GestureEventListeners(Polymer.Element)) {
-      static get is() { return 'bingo-menu' }
-      static get properties() {
-        return {
-          version: {
-            value: ''
-          },
-          actif: {
-            type: Boolean,
-            observer: 'onActiveChanged'
-          },
-        }
-      }
-
-      static get observers() {
-        return [
-          'onMusiqueChange(preferences.musique)'
-        ]
-      }
-
-      onMusiqueChange(musique) {
-        if (musique) {
-          this.$.musique.currentTime = 0
-          if (!this.playPromise) {
-            this.playPromise = this.$.musique.play()
-          }
-        } else {
-          this.pauseMusique()
-        }
-      }
-
-      onActiveChanged(actif) {
-        if (actif && this.preferences.musique) {
-          this.$.musique.currentTime = 0
-          this.playPromise = this.$.musique.play()
-        }
-      }
-
-      onSettings() {
-        this.dispatchEvent(new CustomEvent('open-preferences', { bubbles: true, composed: true }))
-      }
-
-      connectedCallback() {
-        super.connectedCallback()
-        // const state = this.getState();
-
-        this.afficherVersion()
-
-        window.addEventListener('bingo-stopmusic', () => {
-          this.pauseMusique()
-        })
-      }
-
-      goto(route) {      
-        this.pauseMusique()
-        history.pushState({route: route}, '', route)
-        window.dispatchEvent(new CustomEvent('location-changed', {
-          detail: {
-            route: route
-          }
-        }))
-      }
-
-      pauseMusique() {
-        if (this.playPromise !== undefined) {
-          this.playPromise.then(_ => {
-            // Automatic playback started!
-            // Show playing UI.
-            // We can now safely pause video...
-            this.$.musique.pause()
-            this.$.musique.currentTime = 0
-              })
-          .catch(error => {
-            // Auto-play was prevented
-            // Show paused UI.
-          });
-        }        
-      }
-
-      couleurs() {
-        this.goto('couleurs')
-      }
-      immatriculation() {
-        this.goto('immatriculations')
-      }
-      signalisation() {
-        this.goto('signalisation')
-      }
-      fabricants() {
-        this.goto('fabricants')
-      }
-
-      quitterMenu(destination) {
-        this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {
-          let isPair = index % 2
-          bouton.classList.remove('bouton-droit')
-          bouton.classList.remove('bouton-gauche')
-          if (isPair) {
-            bouton.classList.add('bouton-quitter-droit')
-          } else {
-            bouton.classList.add('bouton-quitter-gauche')
-          }
-        })
-        setTimeout(() => {
-          window.location = destination
-        }, 500)
-      }
-
-      afficherVersion() {
-        const me = this
-        const oReq = new XMLHttpRequest()
-        oReq.onload = function () {
-          const version = JSON.parse(this.responseText).version
-          me.set('version', 'Version ' + version)
-          // console.log(this.responseText);
-        }
-        oReq.open('GET', '../config.json')
-        oReq.send()
-      }
+  static get is() { return 'bingo-menu' }
+  static get properties() {
+    return {
+      version: {
+        value: ''
+      },
+      actif: {
+        type: Boolean,
+        observer: 'onActiveChanged'
+      },
     }
+  }
 
-    window.customElements.define(BingoMenu.is, BingoMenu)
-  </script>
-</dom-module>
+  static get observers() {
+    return [
+      'onMusiqueChange(preferences.musique)'
+    ]
+  }
+
+  onMusiqueChange(musique) {
+    if (musique) {
+      this.$.musique.currentTime = 0
+      if (!this.playPromise) {
+        this.playPromise = this.$.musique.play()
+      }
+    } else {
+      this.pauseMusique()
+    }
+  }
+
+  onActiveChanged(actif) {
+    if (actif && this.preferences.musique) {
+      this.$.musique.currentTime = 0
+      this.playPromise = this.$.musique.play()
+    }
+  }
+
+  onSettings() {
+    this.dispatchEvent(new CustomEvent('open-preferences', { bubbles: true, composed: true }))
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    // const state = this.getState();
+
+    this.afficherVersion()
+
+    window.addEventListener('bingo-stopmusic', () => {
+      this.pauseMusique()
+    })
+  }
+
+  goto(route) {
+    this.pauseMusique()
+    history.pushState({route: route}, '', route)
+    window.dispatchEvent(new CustomEvent('location-changed', {
+      detail: {
+        route: route
+      }
+    }))
+  }
+
+  pauseMusique() {
+    if (this.playPromise !== undefined) {
+      this.playPromise.then(_ => {
+        // Automatic playback started!
+        // Show playing UI.
+        // We can now safely pause video...
+        this.$.musique.pause()
+        this.$.musique.currentTime = 0
+          })
+      .catch(error => {
+        // Auto-play was prevented
+        // Show paused UI.
+      });
+    }
+  }
+
+  couleurs() {
+    this.goto('couleurs')
+  }
+  immatriculation() {
+    this.goto('immatriculations')
+  }
+  signalisation() {
+    this.goto('signalisation')
+  }
+  fabricants() {
+    this.goto('fabricants')
+  }
+
+  quitterMenu(destination) {
+    this.shadowRoot.querySelectorAll('.bouton').forEach((bouton, index) => {
+      let isPair = index % 2
+      bouton.classList.remove('bouton-droit')
+      bouton.classList.remove('bouton-gauche')
+      if (isPair) {
+        bouton.classList.add('bouton-quitter-droit')
+      } else {
+        bouton.classList.add('bouton-quitter-gauche')
+      }
+    })
+    setTimeout(() => {
+      window.location = destination
+    }, 500)
+  }
+
+  afficherVersion() {
+    const me = this
+    const oReq = new XMLHttpRequest()
+    oReq.onload = function () {
+      const version = JSON.parse(this.responseText).version
+      me.set('version', 'Version ' + version)
+      // console.log(this.responseText);
+    }
+    oReq.open('GET', '../config.json')
+    oReq.send()
+  }
+}
+
+window.customElements.define(BingoMenu.is, BingoMenu)

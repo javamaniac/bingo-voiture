@@ -1,10 +1,10 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="bingo-icons.html">
-
-<dom-module id="bingo-case">
-  <template>
+import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+import { GestureEventListeners } from '../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import '../node_modules/@polymer/iron-icons/iron-icons.js';
+import './bingo-icons.js';
+class BingoCase extends GestureEventListeners(Element) {
+  static get template() {
+    return `
     <style>
       :host {
         display: block;
@@ -67,7 +67,7 @@
         align-items: stretch;
         /* flex: 1; */
       }
-      
+
       iron-icon {
         align-self: center;
       }
@@ -75,44 +75,41 @@
 
     <input on-change="pop" id="i" type="checkbox">
     <label class="case iconSvg" for="i">
-      <!-- <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style$="color: [[couleur]]"></iron-icon>
+      <!-- <iron-icon icon="bingo-icons2:voiture1" xicon="maps:directions-car" class="car car-anim" style\$="color: [[couleur]]"></iron-icon>
       -->
       <slot></slot>
       <iron-icon icon="bingo-icons:clear" class="x"></iron-icon>
     </label>
+`;
+  }
 
-  </template>
-  <script>
-    class BingoCase extends Polymer.GestureEventListeners(Polymer.Element) {
-      static get is() { return 'bingo-case' }
+  static get is() { return 'bingo-case' }
 
-      static get properties() {
-        return {
-          couleur: {
-            type: String
-          },
-          coche: {
-            value: false,
-            reflectToAttribute: true
-          }
-        }
-      }
-
-      connectedCallback() {
-        super.connectedCallback()
-      }
-
-      pop(ev) {
-        this.coche = ev.target.checked
-        this.dispatchEvent(new CustomEvent('bingo-pop2', { bubbles: true, composed: true }))
-      }
-
-      reset() {
-        this.$.i.checked = false
-        this.coche = false
+  static get properties() {
+    return {
+      couleur: {
+        type: String
+      },
+      coche: {
+        value: false,
+        reflectToAttribute: true
       }
     }
+  }
 
-    window.customElements.define(BingoCase.is, BingoCase)
-  </script>
-</dom-module>
+  connectedCallback() {
+    super.connectedCallback()
+  }
+
+  pop(ev) {
+    this.coche = ev.target.checked
+    this.dispatchEvent(new CustomEvent('bingo-pop2', { bubbles: true, composed: true }))
+  }
+
+  reset() {
+    this.$.i.checked = false
+    this.coche = false
+  }
+}
+
+window.customElements.define(BingoCase.is, BingoCase)

@@ -1,7 +1,10 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-
-<dom-module id="bingo-carousel">
-  <template>
+import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
+/**
+ * @implements BingoModele
+ */
+class BingoCarousel extends Element {
+  static get template() {
+    return `
     <style style="display:none">
        :host {
         width: 100vw;
@@ -50,48 +53,41 @@
       <slot></slot>
       <!-- </div> -->
     </div>
+`;
+  }
 
-  </template>
+  static get is () { return 'bingo-carousel' }
 
-  <script>
-    /**
-     * @implements BingoModele
-     */
-    class BingoCarousel extends Polymer.Element {
-      static get is () { return 'bingo-carousel' }
-
-      static get properties () {
-        return {
-          niveau: {
-            value: 1,
-            observer: 'onChangeNiveau'
-          }
-        }
+  static get properties () {
+    return {
+      niveau: {
+        value: 1,
+        observer: 'onChangeNiveau'
       }
+    }
+  }
 
-      onChangeNiveau (niveau) {
-        let translateX = 0
-    
-        for (let i = 0; i < this.children.length; i++) {
-        // for (let i in this.children) {
-          this.children[i].removeAttribute('actif')
-        }
+  onChangeNiveau (niveau) {
+    let translateX = 0
 
-        if (niveau > 1) {
-          translateX = ((niveau - 1) * -100) + 'vw'
-        }
-        this.$.carousel.style.transform = 'translate(' + translateX + ')'
-        const cmp = this.children[niveau - 1]
-        cmp.setAttribute('actif', true)
+    for (let i = 0; i < this.children.length; i++) {
+    // for (let i in this.children) {
+      this.children[i].removeAttribute('actif')
+    }
 
-        // this.$.carousel
-      }
+    if (niveau > 1) {
+      translateX = ((niveau - 1) * -100) + 'vw'
+    }
+    this.$.carousel.style.transform = 'translate(' + translateX + ')'
+    const cmp = this.children[niveau - 1]
+    cmp.setAttribute('actif', true)
 
-      ready () {
-        super.ready()
-      }
+    // this.$.carousel
+  }
+
+  ready () {
+    super.ready()
+  }
 }
 
-    window.customElements.define(BingoCarousel.is, BingoCarousel)
-  </script>
-</dom-module>
+window.customElements.define(BingoCarousel.is, BingoCarousel)

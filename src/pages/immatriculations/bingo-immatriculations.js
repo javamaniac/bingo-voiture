@@ -1,0 +1,200 @@
+import { Element } from '../../../node_modules/@polymer/polymer/polymer-element.js';
+import { GestureEventListeners } from '../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import '../../../node_modules/@polymer/iron-icons/iron-icons.js';
+import '../../../node_modules/@polymer/iron-icons/maps-icons.js';
+import '../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js';
+import '../../../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js';
+import { BingoModele } from '../../bingo-modele.js';
+import '../../bingo-styles.js';
+import '../../bingo-case.js';
+class BingoImmatriculations extends GestureEventListeners(BingoModele(Element)) {
+  static get template() {
+    return `
+    <style include="bingo-styles">
+      :host {
+        display: block;
+        height: 100vh;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .plaque-cont {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .plaque {
+        flex: 1;
+        border: 1px solid black;
+        margin: 10px;
+        border-radius: 4px;
+        background: white;
+        animation-name: plaque;
+        animation-duration: 1s;
+      }
+
+      @keyframes plaque {
+        /* 0%   {transform: rotateX(90deg);}
+        /* 25%  {transform: rotateX(-360deg);} */
+        /* 50%  {transform: rotateX(-270deg);} */
+        /* 100% {transform: rotateX(360deg);}  */
+        from {
+          transform: rotateX(90deg);
+        }
+        to {
+          transform: rotateX(360deg);
+        }
+      }
+
+
+      .plaque2 {
+        border: 2px solid #278aa9;
+        margin: 3px;
+        -webkit-text-fill-color: #a9afca;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #435256;
+        font-size: 1.5em;
+        line-height: 1.2em;
+        text-align: center;
+      }
+
+      .x,
+      .x2 {
+        /* patch pour la position du x puisque le prochain contenu est un div. */
+        /* margin-left: -7.5vw; */
+      }
+    </style>
+
+    <audio id="vroum">
+      <source src="../sounds/plaque2.mp3" type="audio/mpeg">
+    </audio>
+
+    <app-toolbar>
+      <div main-title="">Immatriculations</div>
+      <paper-icon-button on-tap="reset" icon="bingo-icons:refresh"></paper-icon-button>
+      <paper-icon-button on-tap="accueil" icon="bingo-icons:home"></paper-icon-button>
+    </app-toolbar>
+
+    <div id="bingo" on-tap="fermerBingo">
+      <div>Bingo!
+        <template is="dom-if" if="[[nbBingo]]">
+          <sup style="font-size: 0.6em;">[[nbBingo]]</sup>
+        </template>
+      </div>
+    </div>
+
+    <form>
+      <div class="grid-box unselectable">
+
+        <template is="dom-repeat" items="[[lignes]]" as="ligne" index-as="l">
+          <div class="grid-row">
+            <template is="dom-repeat" items="[[colonnes]]" as="colonne" index-as="c">
+              <bingo-case id="case-[[l]]-[[c]]" class="grid-item">
+                <div class="plaque-cont car">
+                  <div class="plaque">
+                    <div class="plaque2">[[_getImmatriculation(l, c, cases)]]</div>
+                  </div>
+                </div>
+              </bingo-case>
+            </template>
+          </div>
+        </template>
+
+      </div>
+    </form>
+`;
+  }
+
+  static get is() { return 'bingo-immatriculations' }
+
+  _getImmatriculation(ligne, colonne, cases) {
+    return this._getCase(ligne, colonne, cases).immatriculation
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    this.$.vroum.play()
+  }
+
+  getTypes() {
+    let types = [
+      {
+        immatriculation: 'J',
+        nombre: 2
+      },
+      {
+        immatriculation: 'K',
+        nombre: 2
+      },
+      {
+        immatriculation: 'M',
+        nombre: 2
+      },
+      {
+        immatriculation: 'Y',
+        nombre: 2
+      },
+      {
+        immatriculation: 'N',
+        nombre: 2
+      },
+      {
+        immatriculation: 'A',
+        nombre: 2
+      },
+      {
+        immatriculation: 'B',
+        nombre: 2
+      },
+      {
+        immatriculation: 'J',
+        nombre: 2
+      },
+      {
+        immatriculation: 'S',
+        nombre: 2
+      },
+      {
+        immatriculation: 'G',
+        nombre: 2
+      },
+
+      {
+        immatriculation: '1',
+        nombre: 1
+      },
+      {
+        immatriculation: '2',
+        nombre: 1
+      },
+      {
+        immatriculation: '3',
+        nombre: 1
+      },
+      {
+        immatriculation: '4',
+        nombre: 1
+      },
+      {
+        immatriculation: '5',
+        nombre: 1
+      }
+    ]
+
+    let liste = []
+
+    types.forEach(function (type) {
+      if (type.nombre === undefined) {
+        type.nombre = 1
+      }
+      for (let index = 0; index < type.nombre; index++) {
+        liste.push(Object.assign({ random: Math.random() }, type))
+      }
+    }, this)
+
+    return liste
+  }
+}
+
+window.customElements.define(BingoImmatriculations.is, BingoImmatriculations)

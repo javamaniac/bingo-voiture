@@ -1,49 +1,21 @@
 {
   "name": "bingo-voiture",
-  "description": "Jeu de bingo pour les voyages en voiture",
-  "author": "Dominic Marcotte",
-  "license": "BSD-3-Clause",
-  "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.1",
-    "eslint-plugin-html": "^2.0.3",
-    "eslint-plugin-polymer": "^0.1.0",
-    "polymer-cli": "^1.5.7",
-    "puppeteer": "git://github.com/GoogleChrome/puppeteer.git#master",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.3"
-  },
-  "scripts": {
-    "build": "polymer build es6-unbundled",
-    "deploy": "firebase deploy",
-    "lint": "npm run lint:javascript && polymer lint",
-    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI",
-    "standa": "standard 'src/**/*.html' | snazzy"
-  },
+  "flat": true,
+  "version": "0.1.0",
+  "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {
-    "redux": "^3.7.2"
+    "@polymer/app-layout": "^3.0.0-pre.1",
+    "@polymer/app-route": "^3.0.0-pre.1",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.1",
+    "@polymer/iron-selector": "^3.0.0-pre.1",
+    "@polymer/paper-icon-button": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0-pre.1",
+    "@polymer/iron-icons": "^3.0.0-pre.1",
+    "@polymer/paper-button": "^3.0.0-pre.1",
+    "@polymer/paper-toast": "^3.0.0-pre.1",
+    "@polymer/paper-dialog": "^3.0.0-pre.1",
+    "@polymer/paper-toggle-button": "^3.0.0-pre.1",
+    "@webcomponents/webcomponentsjs": "^1.0.0"
   },
-  "standard": {
-    "plugins": [
-      "html"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 6
-    },
-    "parser": "babel-eslint",
-    "ignore": [
-      "bower_components"
-    ],
-    "globals": [
-      "Polymer",
-      "myVar2"
-    ],
-    "filename": "**/*.html",
-    "x-workingDirectories": [
-      "src"
-    ]
-  }
+  "devDependencies": {}
 }
