@@ -26,9 +26,10 @@
     "@webcomponents/webcomponentsjs": "^1.1.0"
   },
   "devDependencies": {
-    "@polymer/iron-test-helpers": "0.0.3",
+    "@polymer/iron-test-helpers": "^3.0.0-pre.8",
+    "@polymer/test-fixture": "^3.0.0-pre.8",
+    "fs-extra": "4.0.2",
     "polymer-build": "^2.1.1",
-    "web-component-tester": "^6.5.0",
-    "fs-extra": "4.0.2"
+    "web-component-tester": "^6.5.0"
   }
 }
