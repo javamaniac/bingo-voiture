@@ -1,5 +1,5 @@
 module.exports = {
-  verbose: true,
+  verbose: false,
   sauce: false,
   suites: ['test/index.html'],
   plugins: {
