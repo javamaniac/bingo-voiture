@@ -13,5 +13,6 @@ cache:
 install:
   - npm install
 script:
-  - xvfb-run wct --npm -l chrome
+  - npm run pretest
+  - xvfb-run wct --npm
 dist: trusty
