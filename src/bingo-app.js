@@ -1,9 +1,8 @@
 import {Element as PolymerElement, html} from "../node_modules/@polymer/polymer/polymer-element.js"
 import '../node_modules/@polymer/app-route/app-location.js';
 import '../node_modules/@polymer/app-route/app-route.js';
-import '../node_modules/@polymer/paper-toast/paper-toast.js';
 import { setPassiveTouchGestures } from '../node_modules/@polymer/polymer/lib/utils/settings.js';
-// // import { importHref } from '../node_modules/@polymer/polymer/lib/utils/import-href.js';
+import { importHref } from '../node_modules/@polymer/polymer/lib/utils/import-href.js';
 import { dom } from '../node_modules/@polymer/polymer/lib/legacy/polymer.dom.js';
 
 import './bingo-carousel.js';
@@ -17,6 +16,8 @@ import './pages/immatriculations/bingo-immatriculations.js';
 import './pages/signalisation/bingo-signalisation.js';
 import './pages/fabricants/bingo-fabricants.js';
 import './bingo-view404.js';
+
+import '../node_modules/@polymer/paper-toast/paper-toast.js';
 
 setPassiveTouchGestures(true)
 
@@ -158,6 +159,8 @@ class BingoApp extends MixinState(PolymerElement) {
     console.log('route:', route)
     if (history.state && history.state.route) {
       this._pageChanged(history.state.route)
+    } else {
+      this._pageChanged('menu')
     }
   }
 
