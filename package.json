@@ -6,9 +6,9 @@
   "scripts": {
     "pretest": "yarn linkbower && yarn build",
     "test": "wct test --npm",
-    "lin:polymert": "polymer lint -i ./src/*",
-    "serve:polymer": "polymer test --npm",
-    "build:polymer": "polymer build",
+    "lint": "polymer lint -i ./src/*",
+    "serve": "polymer test --npm",
+    "build": "polymer build",
     "linkbower": "node scripts/link-bower.js"
   },
   "dependencies": {
