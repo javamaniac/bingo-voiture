@@ -2,13 +2,13 @@
   "name": "bingo-voiture",
   "flat": true,
   "version": "0.1.0",
-  "license": "https://polymer.github.io/LICENSE.txt",
+  "license": "UNLICENSED",
   "scripts": {
-    "lint": "polymer lint -i ./src/*",
-    "test": "polymer test --npm",
-    "serve": "polymer test --npm",
-    "build": "polymer build",
     "pretest": "yarn linkbower && yarn build",
+    "test": "wct test --npm",
+    "lin:polymert": "polymer lint -i ./src/*",
+    "serve:polymer": "polymer test --npm",
+    "build:polymer": "polymer build",
     "linkbower": "node scripts/link-bower.js"
   },
   "dependencies": {
