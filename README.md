@@ -1,7 +1,7 @@
 # bingo-voiture
 
-![Polymer 2 supported](https://img.shields.io/badge/Polymer%202-supported-blue.svg)
-[![Build status](https://travis-ci.org/javamaniac/bingo-voiture.svg?branch=master)](https://travis-ci.org/javamaniac/bingo-voiture)
+![Polymer 3 supported](https://img.shields.io/badge/Polymer%203-supported-blue.svg)
+[![Build status](https://travis-ci.org/javamaniac/bingo-voiture.svg?branch=Polymer-3.0)](https://travis-ci.org/javamaniac/bingo-voiture)
 
 Jeu de bingo pour les voyages en voiture.
 
