@@ -172,6 +172,8 @@
         console.log('route:', route)
         if (history.state && history.state.route) {
           this._pageChanged(history.state.route)
+        } else {
+          this._pageChanged('menu')
         }
       }
 
