@@ -1,9 +1,9 @@
 import {Element as PolymerElement, html} from "../../../node_modules/@polymer/polymer/polymer-element.js"
 import { GestureEventListeners } from '../../../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import '../../../node_modules/@polymer/iron-icon/iron-icon.js';
-import '../../bingo-icons.js';
-import '../../bingo-styles.js';
-import '../../github-corners.js';
+import '../../bingo-icons.js'; // bug avec Babel
+import '../../bingo-styles.js'; // bug avec Babel
+import '../../github-corners.js'; // bug avec Babel
 import { MixinState } from '../../bingo-state.js';
 class BingoMenu extends MixinState(GestureEventListeners(PolymerElement)) {
   static get template() {
