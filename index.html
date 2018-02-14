@@ -150,15 +150,17 @@
       // window.onload = function() {
       //   loadScript('bower_components/webcomponentsjs/webcomponents-loader.js', function() {
       //     loadHtml('src/bingo-app.html')
-      //   });        
-      // }    
+      //   });
+      // }
 
   </script>
 
   <!-- Load Custom Elements es5 adapter -->
-  <script src="bower_components/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <!-- <script src="bower_components/webcomponentsjs/custom-elements-es5-adapter.js"></script> -->
   <!-- Load polyfills; note that "loader" will load these async -->
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <script src="https://cdn.ravenjs.com/3.22.3/raven.min.js" crossorigin="anonymous"></script>
 
   <!-- Add any global styles for body, document, etc. -->
   <style>
@@ -173,9 +175,65 @@
   </style>
 
   <script>
+
+    window.addEventListener('error', e => {
+
+    Raven.setExtraContext({
+      // foo: e,
+    // message: e.message,
+    // filename: e.filename,
+    // lineno: e.lineno,
+    // colno: e.colno,
+    file: `${e.filename} ${e.lineno}:${e.colno}`
+     })
+    Raven.captureException(e);
+    Raven.showReportDialog();
+
+
+    //   Raven.captureException(e)
+    //   // fetch('/errors', {
+    //   //   method: 'POST',
+    //   //   body: `${eRaven.captureException(e).message} (in ${e.filename} ${e.lineno}:${e.colno})`,
+    //   // });
+    });
+
     // Google Analytics
     (function () {
       'use strict';
+
+      Raven.config(
+        'https://c0e6de3c451c4cb7a8fea2cbae345ec9@sentry.io/287921', {
+          // https://docs.sentry.io/clients/javascript/config/
+          release: 'not parse yet',
+          environment: 'dev',
+          // serverName: device.uuid
+          whitelistUrls: [/127.0.0.1/],
+          dataCallback: function(data) {
+            // do something to data
+            // debugger
+            return data
+          },
+          breadcrumbCallback: function(crumb) {
+            // debugger
+            if (crumb.type === 'http') {
+              return crumb;
+            }
+
+            return false;
+          },
+          maxMessageLength: 2000,
+          instrument: true
+        }
+      ).install()
+
+      const oReq = new XMLHttpRequest()
+      oReq.onload = function () {
+        const version = JSON.parse(this.responseText).version
+        Raven.setRelease(version)
+        // console.log(this.responseText);
+      }
+      oReq.open('GET', './config.json')
+      oReq.send()
 
       // if (location.hostname === 'localhost') return;
 
@@ -190,7 +248,7 @@
       gtag('config', 'UA-105763285-1');
 
       /*
-      Google analytiques custom 
+      Google analytiques custom
       - appVersion
       - event
       - timingCategory
@@ -231,9 +289,9 @@
             'value': Math.round(performance.now()),
             'event_category': 'JS Dependencies'
           });
-          // ga('send', 'timing', 
-          // 'JS Dependencies', 
-          // 'WebComponentsReady', 
+          // ga('send', 'timing',
+          // 'JS Dependencies',
+          // 'WebComponentsReady',
           // Math.round(performance.now()));
         }
       });
@@ -265,7 +323,7 @@
         <div class="bouton-menu">&nbsp;</div>
       </div>
       <div>&nbsp;</div>
-    </div>  
+    </div>
   </bingo-app>
 
   <noscript>
