@@ -86,7 +86,9 @@
 
       reset() {
         this.afficheBingo(false)
-        this.shadowRoot.querySelector('form').reset()
+        this.shadowRoot.querySelectorAll('bingo-case').forEach((bingoCase) => {
+          bingoCase.reset()
+        })
         this.set('cases', this.createCases())
         this.animation()
       }
