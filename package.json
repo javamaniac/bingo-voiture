@@ -15,9 +15,10 @@
     "standard": "^10.0.3"
   },
   "scripts": {
-    "build": "polymer build es6-unbundled",
+    "build": "polymer build",
     "deploy": "firebase deploy",
-    "lint": "npm run lint:javascript && polymer lint",
+    "lint": "polymer lint -i ./src/*",
+    "lint:all": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI",
