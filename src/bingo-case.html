@@ -67,7 +67,7 @@
         align-items: stretch;
         /* flex: 1; */
       }
-      
+
       iron-icon {
         align-self: center;
       }
@@ -94,7 +94,20 @@
           coche: {
             value: false,
             reflectToAttribute: true
-          }
+          },
+          /**
+       * The name of this element.
+       */
+      name: {
+        type: String
+      },
+      /**
+       * The value for this element.
+       */
+       value: {
+        notify: true,
+        type: String
+      },
         }
       }
 
@@ -104,7 +117,15 @@
 
       pop(ev) {
         this.coche = ev.target.checked
+        this.vibrate()
         this.dispatchEvent(new CustomEvent('bingo-pop2', { bubbles: true, composed: true }))
+      }
+
+      vibrate() {
+        const tempsMs = 200
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(tempsMs)
+        }
       }
 
       reset() {
