@@ -115,7 +115,7 @@
 
       connectedCallback() {
         super.connectedCallback()
-        this.$.vroum.play()
+        this.$.vroum.play().catch((e) => {})
       }
 
       getTypes() {
