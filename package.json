@@ -16,16 +16,18 @@
   },
   "scripts": {
     "build": "polymer build",
-    "deploy": "firebase deploy",
+    "pretest": "npm install",
+    "test": "wct",
     "lint": "polymer lint -i ./src/*",
     "lint:all": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI",
+    "deploy": "firebase deploy",
     "standa": "standard 'src/**/*.html' | snazzy"
   },
   "dependencies": {
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "web-component-tester": "^6.5.0"
   },
   "standard": {
     "plugins": [

@@ -12,9 +12,8 @@ cache:
   directories:
   - node_modules
 install:
-  - npm install -g polymer-cli
   - npm install
   - bower install
 script:
-  - xvfb-run polymer test -l chrome
+  - xvfb-run wct
 dist: trusty
