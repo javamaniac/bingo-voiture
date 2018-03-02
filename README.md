@@ -17,7 +17,7 @@ Fonctionne hors ligne (Progressive Web App)
 
 Voir une démo : https://bingo-voiture.firebaseapp.com
 
-<img src="docs/images/couleurs.png" alt="Couleurs" width="200" />
-<img src="docs/images/bingo.png" alt="CouCouleurs + Bingoleurs" width="200" />
-<img src="docs/images/fabriquants.png" alt="Fabriquants" width="200" />
-<img src="docs/images/signalisation.png" alt="Signalisation" width="200" />
+<img src="docs/images/couleurs.png" alt="Couleurs" width="200"
+/><img src="docs/images/bingo.png" alt="CouCouleurs + Bingoleurs" width="200"
+/><img src="docs/images/fabriquants.png" alt="Fabriquants" width="200"
+/><img src="docs/images/signalisation.png" alt="Signalisation" width="200" />
