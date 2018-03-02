@@ -11,13 +11,13 @@
 
 Jeu de bingo pour les voyages en voiture.
 
-![alt text](docs/images/pwa_diekus.svg "PWA")
+![alt text](docs/images/pwa_diekus.svg =250x "PWA" )
 
 Fonctionne hors ligne
 
 Voir une démo : https://bingo-voiture.firebaseapp.com
 
-![alt text](docs/images/couleurs.png "Couleurs")
+![alt text](docs/images/couleurs.png "Couleurs"){: width="200px"}
 ![alt text](docs/images/bingo.png "Couleurs + Bingo")
 ![alt text](docs/images/fabriquants.png "Fabriquants")
 ![alt text](docs/images/signalisation.png "Signalisation")
