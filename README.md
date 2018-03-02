@@ -3,25 +3,21 @@
 ![Polymer 2 supported](https://img.shields.io/badge/Polymer%202-supported-blue.svg)
 [![Build status](https://travis-ci.org/javamaniac/bingo-voiture.svg?branch=master)](https://travis-ci.org/javamaniac/bingo-voiture)
 
-![alt text](lighthouse_progressive_web_app.svg "lighthouse_progressive_web_app.svg")
-![alt text](lighthouse_performance.svg "lighthouse_performance")
-![alt text](lighthouse_best_practices.svg "lighthouse_best_practices")
-![alt text](lighthouse_accessibility.svg "lighthouse_accessibility")
-![alt text](lighthouse_seo.svg "lighthouse_seo")
+![alt text](docs/images/lighthouse_progressive_web_app.svg "lighthouse_progressive_web_app.svg")
+![alt text](docs/images/lighthouse_performance.svg "lighthouse_performance")
+![alt text](docs/images/lighthouse_best_practices.svg "lighthouse_best_practices")
+![alt text](docs/images/lighthouse_accessibility.svg "lighthouse_accessibility")
+![alt text](docs/images/lighthouse_seo.svg "lighthouse_seo")
 
 Jeu de bingo pour les voyages en voiture.
 
-<img src="docs/images/pwa_diekus.svg" alt="" width="200" />
-<img src="docs/images/couleurs.png" alt="" width="200" />
+<img src="docs/images/pwa_diekus.svg" alt="Logo Progressive Web App" width="50" />
 
-![alt text](docs/images/pwa_diekus.svg =250x "PWA" )
-
-Fonctionne hors ligne
+Fonctionne hors ligne (Progressive Web App)
 
 Voir une démo : https://bingo-voiture.firebaseapp.com
 
-![alt text](docs/images/couleurs.png "Couleurs"){: width="200px"}
-![alt text](docs/images/bingo.png "Couleurs + Bingo")
-![alt text](docs/images/fabriquants.png "Fabriquants")
-![alt text](docs/images/signalisation.png "Signalisation")
-
+<img src="docs/images/couleurs.png" alt="Couleurs" width="200" />
+<img src="docs/images/bingo.png" alt="CouCouleurs + Bingoleurs" width="200" />
+<img src="docs/images/fabriquants.png" alt="Fabriquants" width="200" />
+<img src="docs/images/signalisation.png" alt="Signalisation" width="200" />
