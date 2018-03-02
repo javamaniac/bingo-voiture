@@ -11,6 +11,8 @@
 
 Jeu de bingo pour les voyages en voiture.
 
+![alt text](docs/images/pwa_diekus.svg "PWA")
+
 Fonctionne hors ligne
 
 Voir une démo : https://bingo-voiture.firebaseapp.com
