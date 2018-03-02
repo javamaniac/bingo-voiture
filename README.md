@@ -11,6 +11,9 @@
 
 Jeu de bingo pour les voyages en voiture.
 
+<img src="docs/images/pwa_diekus.svg" alt="" width="200" />
+<img src="docs/images/couleurs.png" alt="" width="200" />
+
 ![alt text](docs/images/pwa_diekus.svg =250x "PWA" )
 
 Fonctionne hors ligne
