@@ -22,5 +22,6 @@ Voir une démo : https://bingo-voiture.firebaseapp.com
 /><img src="docs/images/fabriquants.png" alt="Fabriquants" width="200"
 /><img src="docs/images/signalisation.png" alt="Signalisation" width="200" />
 
-![BrowserStack](https://bstacksupport.zendesk.com/attachments/token/0p9ydFsQ814ymeJzkGeao32xZ/?name=browserstack-logo-600x315.png)
-Testé sur plusieurs platforme grâce à BrowserStack http://browserstack.com/
+<img src="https://bstacksupport.zendesk.com/attachments/token/0p9ydFsQ814ymeJzkGeao32xZ/?name=browserstack-logo-600x315.png" alt="BrowserStack" width="200" />
+
+Testé sur plusieurs platformes grâce à http://browserstack.com/
